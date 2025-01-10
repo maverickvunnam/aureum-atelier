@@ -1,7 +1,9 @@
 {
   "name": "aureum-atelier",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Luxury Home Builder Website",
+  "private": true,
+  "type":"module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,11 +13,6 @@
     "aos": "^2.3.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^4.5.5"
-  },
-  "main": "vite.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "vite": "^4.5.0"
+  }
 }
