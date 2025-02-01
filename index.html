@@ -1,12 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aureum Atelier</title>
-  </head>
-  <body>
-    <!-- Your content here -->
-    <script type="module" src="/src/js/main.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum Atelier | Modern Luxury Homes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        :root {
+            --primary: #0A1930;
+            --accent: #C0A875;
+            --light: #FAFAFA;
+            --text: #2C2C2C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        .nav {
+            position: fixed;
+            width: 100%;
+            padding: 25px 40px;
+            background: transparent;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .nav.scrolled {
+            background: var(--primary);
+            padding: 15px 40px;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: var(--light);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            color: var(--light);
+            background: var(--primary);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="#approach">Approach</a>
+                <a href="#building-science">Building Science</a>
+                <a href="#technology">Technology</a>
+                <a href="#contact">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Modern Luxury Living, Redefined</h1>
+            <p>Creating exceptional contemporary homes where innovative design meets intelligent living.</p>
+            <a href="#contact" class="button">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <section id="approach" class="section">
+        <h2 class="section-title" data-aos="fade-up">Our Approach</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Design Excellence</h3>
+                <p>Creating spaces that reflect your vision while incorporating cutting-edge building science.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Smart Integration</h3>
+                <p>Seamless technology integration for intuitive control and optimal performance.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Superior Performance</h3>
+                <p>Industry-leading construction techniques ensuring comfort and efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="building-science" class="section" style="background: var(--primary); color: var(--light);">
+        <h2 class="section-title" style="color: var(--light);" data-aos="fade-up">Building Science</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Advanced Wall Systems</h3>
+                <p>Optimized assemblies combining superior insulation with proper moisture management.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Air Quality</h3>
+                <p>Hospital-grade filtration systems ensuring the cleanest possible indoor environment.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Energy Performance</h3>
+                <p>Efficient systems and tight building envelopes for optimal energy usage.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background: var(--accent);">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title" style="color: var(--primary);" data-aos="fade-up">Begin Your Journey</h2>
+            <p style="margin-bottom: 30px;">Let's discuss your vision for the perfect home.</p>
+            <a href="#" class="button" style="background: var(--primary);">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
 </html>
