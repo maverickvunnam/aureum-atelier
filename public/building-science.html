@@ -798,51 +798,24 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Project Gallery -->
-            <h2 class="section-title" data-aos="fade-up">Project Showcase</h2>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0;">
-                <div data-aos="fade-up">
-                    <img src="/api/placeholder/400/300" alt="Project 1" style="width: 100%; height: auto;">
-                    <p style="margin-top: 10px; font-size: 0.9rem;"><strong>The Lakeside Residence</strong><br>6,500 sq ft modern home with 0.8 ACH50 and R-29 wall assembly</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <img src="/api/placeholder/400/300" alt="Project 2" style="width: 100%; height: auto;">
-                    <p style="margin-top: 10px; font-size: 0.9rem;"><strong>The Hillcrest Estate</strong><br>8,200 sq ft contemporary design with premium wall assembly</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <img src="/api/placeholder/400/300" alt="Project 3" style="width: 100%; height: auto;">
-                    <p style="margin-top: 10px; font-size: 0.9rem;"><strong>The Ridgeline Retreat</strong><br>7,400 sq ft mountain home with advanced climate response systems</p>
-                </div>
-            </div>
-            
-            <!-- Resources Section -->
+            <!-- Simplified Resources Section -->
             <h2 class="section-title" data-aos="fade-up">Further Resources</h2>
-            <div class="two-column">
-                <div>
-                    <p>We believe in educating our clients about building science principles that affect their investment:</p>
-                    <ul style="margin: 20px 0; padding-left: 20px;">
-                        <li>Detailed project-specific performance documentation</li>
-                        <li>Building science primers for homeowners</li>
-                        <li>Maintenance and operation guidelines</li>
-                        <li>Educational sessions during the design process</li>
-                    </ul>
-                    <p>Our transparent approach ensures you understand exactly how your home functions and the value of every performance feature we implement.</p>
-                </div>
-                <div data-aos="fade-left">
-                    <div style="background: #f5f5f5; padding: 30px; border-left: 3px solid var(--accent);">
-                        <h4 style="margin-bottom: 15px; color: var(--primary);">Request Our Building Science Guide</h4>
-                        <p style="margin-bottom: 15px;">Our comprehensive guide explains how building science principles translate to daily comfort, health, and efficiency in your luxury home.</p>
-                        <a href="#contact" style="display: inline-block; padding: 10px 20px; background: var(--primary); color: white; text-decoration: none;">Get the Guide</a>
-                    </div>
-                </div>
+            <div>
+                <p>We believe in educating our clients about building science principles that affect their investment:</p>
+                <ul style="margin: 20px 0; padding-left: 20px;">
+                    <li>Detailed project-specific performance documentation</li>
+                    <li>Building science primers for homeowners</li>
+                    <li>Maintenance and operation guidelines</li>
+                    <li>Educational sessions during the design process</li>
+                </ul>
+                <p>Our transparent approach ensures you understand exactly how your home functions and the value of every performance feature we implement.</p>
             </div>
             
             <!-- Call to Action -->
             <div style="text-align: center; margin: 80px 0 40px;" data-aos="fade-up">
                 <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; color: var(--primary);">Ready to Experience the Difference?</h2>
                 <p style="max-width: 700px; margin: 0 auto 30px;">Schedule a consultation to discuss how our building science approach can transform your vision for a luxury home into a reality that performs as beautifully as it looks.</p>
-                <a href="#contact" style="display: inline-block; padding: 15px 40px; background: var(--primary); color: white; text-decoration: none; font-size: 1.1rem;">Schedule a Consultation</a>
+                <a href="#" onclick="openConsultationForm(); return false;" style="display: inline-block; padding: 15px 40px; background: var(--primary); color: white; text-decoration: none; font-size: 1.1rem;">Schedule a Consultation</a>
             </div>
         </div>
     </div>
@@ -888,6 +861,89 @@
             duration: 1000,
             once: true
         });
+
+        function openConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+        
+        function closeConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Close the modal if user clicks outside the form
+        document.getElementById('consultation-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConsultationForm();
+            }
+        });
+        
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send this data to your server
+            // For now, we'll simulate a successful submission
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable the button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Simulate a delay
+            setTimeout(function() {
+                // Show success message
+                const modalContent = document.querySelector('#consultation-modal > div');
+                modalContent.innerHTML = `
+                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                        <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            }, 1500);
+        });
+
     </script>
+
+
+        <!-- Consultation Form Modal -->
+        <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
+                <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                
+                <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Consultation</h3>
+                <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal consultation.</p>
+                
+                <form id="consultation-form">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Name *</label>
+                        <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Email *</label>
+                        <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Phone</label>
+                        <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Message</label>
+                        <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                    
+                    <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
+                </form>
+            </div>
+        </div>                                  
+
 </body>
 </html>
