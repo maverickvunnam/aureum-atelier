@@ -1,151 +1,154 @@
-   <style>
-        :root {
-            --primary: #0A1930;
-            --accent: #C0A875;
-            --light: #FAFAFA;
-            --text: #2C2C2C;
-        }
+:root {
+    --primary: #0A1930;
+    --accent: #C0A875;
+    --light: #FAFAFA;
+    --text: #2C2C2C;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
 
-        body {
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--light);
-        }
+body {
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--light);
+}
 
-        .nav {
-            position: fixed;
-            width: 100%;
-            padding: 25px 40px;
-            background: transparent;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            mix-blend-mode: difference;
-        }
+.nav {
+    position: fixed;
+    width: 100%;
+    padding: 25px 40px;
+    background: transparent;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    mix-blend-mode: difference;
+}
 
-        .nav.scrolled {
-            background: var(--primary);
-            padding: 15px 40px;
-        }
+.nav.scrolled {
+    background: var(--primary);
+    padding: 15px 40px;
+}
 
-        .nav-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.nav-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .nav-logo {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-        }
+.nav-logo {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
 
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
+.nav-links a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
 
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                        url('/api/placeholder/1920/1080');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            color: var(--light);
-        }
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
+                url('/api/placeholder/1920/1080');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    color: var(--light);
+}
 
-        .hero-content {
-            max-width: 600px;
-        }
+.hero-content {
+    max-width: 600px;
+}
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
 
-        .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
 
-        .section {
-            padding: 100px 10%;
-        }
+.section {
+    padding: 100px 10%;
+}
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            color: var(--primary);
-        }
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    color: var(--primary);
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
 
-        .card {
-            background: white;
-            padding: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+.card {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
 
-        .button {
-            display: inline-block;
-            padding: 12px 30px;
-            text-decoration: none;
-            color: var(--light);
-            background: var(--primary);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
+.button {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    color: var(--light);
+    background: var(--primary);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
 
-        .button:hover {
-            background: var(--accent);
-        }
+.button:hover {
+    background: var(--accent);
+}
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section {
-                padding: 60px 5%;
-            }
-        }
-    </style>
+/* Add this to ensure internal pages have proper spacing */
+.page-content {
+    padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section {
+        padding: 60px 5%;
+    }
+}

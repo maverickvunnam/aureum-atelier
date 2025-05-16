@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building Science | Aureum Atelier</title>
- <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
+    <!-- Same navigation as index.html -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="#technology">Technology</a>
+                <a href="#contact">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page content -->
+    <div class="page-content">
+
+
     <div class="container">
         <h2 class="section-title">Building Science Excellence</h2>
         
@@ -206,23 +225,21 @@
                 </div>
             </div>
         </div>
-    </div>
+ </div>
 
     <script>
-        // Simple tab functionality
-        const tabs = document.querySelectorAll('.tab');
-        const contents = document.querySelectorAll('.tab-content');
-        
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and contents
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
-                tab.classList.add('active');
-                contents[index].classList.add('active');
-            });
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
     </script>
 </body>

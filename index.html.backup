@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum Atelier | Modern Luxury Homes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="/styles/main.css">
+ 
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="#approach">Approach</a>
+                <a href="#building-science">Building Science</a>
+                <a href="#technology">Technology</a>
+                <a href="#contact">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+<div class="page-content">
+    
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Modern Luxury Living, Redefined</h1>
+            <p>Creating exceptional contemporary homes where innovative design meets intelligent living.</p>
+            <a href="#contact" class="button">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <section id="approach" class="section">
+        <h2 class="section-title" data-aos="fade-up">Our Approach</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Design Excellence</h3>
+                <p>Creating spaces that reflect your vision while incorporating cutting-edge building science.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Smart Integration</h3>
+                <p>Seamless technology integration for intuitive control and optimal performance.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Superior Performance</h3>
+                <p>Industry-leading construction techniques ensuring comfort and efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="building-science" class="section" style="background: var(--primary); color: var(--light);">
+        <h2 class="section-title" style="color: var(--light);" data-aos="fade-up">Building Science</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Advanced Wall Systems</h3>
+                <p>Optimized assemblies combining superior insulation with proper moisture management.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Air Quality</h3>
+                <p>Hospital-grade filtration systems ensuring the cleanest possible indoor environment.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Energy Performance</h3>
+                <p>Efficient systems and tight building envelopes for optimal energy usage.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background: var(--accent);">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title" style="color: var(--primary);" data-aos="fade-up">Begin Your Journey</h2>
+            <p style="margin-bottom: 30px;">Let's discuss your vision for the perfect home.</p>
+            <a href="#" class="button" style="background: var(--primary);">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+
+    </div>
+
+</body>
+</html>
