@@ -1,0 +1,85 @@
+// api/contact-email.js - with email functionality
+import * as nodemailer from 'nodemailer';
+
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    try {
+      const { name, email, phone, message } = req.body;
+      
+      // Check environment variables
+      const emailConfig = {
+        userSet: !!process.env.GMAIL_USER,
+        passwordSet: !!process.env.GMAIL_APP_PASSWORD
+      };
+      
+      // Initialize email result
+      let emailResult = {
+        attempted: false,
+        success: false,
+        details: "Email sending not attempted"
+      };
+      
+      // Only try to send email if config is available
+      if (emailConfig.userSet && emailConfig.passwordSet) {
+        try {
+          emailResult.attempted = true;
+          
+          // Create transporter
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.GMAIL_USER,
+              pass: process.env.GMAIL_APP_PASSWORD
+            }
+          });
+          
+          // Define email content
+          const mailOptions = {
+            from: `"Aureum Atelier Website" <${process.env.GMAIL_USER}>`,
+            to: process.env.GMAIL_USER,
+            subject: `New Consultation Request from ${name}`,
+            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nMessage: ${message || 'No message provided'}`,
+            html: `
+              <h2>New Consultation Request</h2>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+              <p><strong>Message:</strong> ${message || 'No message provided'}</p>
+            `,
+            replyTo: email
+          };
+          
+          // Send email
+          const info = await transporter.sendMail(mailOptions);
+          
+          emailResult.success = true;
+          emailResult.details = "Email sent successfully";
+          emailResult.messageId = info.messageId;
+        } catch (emailError) {
+          emailResult.success = false;
+          emailResult.details = "Failed to send email";
+          emailResult.error = emailError.message;
+          emailResult.code = emailError.code || "UNKNOWN";
+        }
+      }
+      
+      // Return complete status
+      return res.status(200).json({
+        success: true,
+        formData: { name, email, phone, message },
+        email: emailResult,
+        config: emailConfig
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        error: error.message || 'Unknown error'
+      });
+    }
+  } else {
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed'
+    });
+  }
+}
