@@ -2,22 +2,28 @@ const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, email, phone, message } = req.body;
-    
-    // Create Gmail transporter
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER, // Your Gmail address
-        pass: process.env.GMAIL_APP_PASSWORD // Your Gmail app password
-      }
-    });
-    
     try {
-      // Send email
-      let info = await transporter.sendMail({
+      console.log('Received form submission');
+      const { name, email, phone, message } = req.body;
+      
+      console.log('Creating transporter with:', {
+        user: process.env.GMAIL_USER,
+        pass: '****' // Don't log the actual password
+      });
+      
+      // Create Gmail transporter
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASSWORD
+        }
+      });
+      
+      // Define email
+      const mailOptions = {
         from: `"Aureum Website" <${process.env.GMAIL_USER}>`,
-        to: process.env.GMAIL_USER, // Sending to yourself
+        to: process.env.GMAIL_USER,
         subject: `New Consultation Request from ${name}`,
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         html: `
@@ -27,14 +33,26 @@ export default async function handler(req, res) {
           <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
           <p><strong>Message:</strong> ${message || 'No message provided'}</p>
         `,
-        replyTo: email // So you can reply directly to the sender
+        replyTo: email
+      };
+      
+      console.log('Attempting to send email with options:', {
+        to: mailOptions.to,
+        subject: mailOptions.subject
       });
       
-      console.log('Message sent: %s', info.messageId);
+      // Send email
+      let info = await transporter.sendMail(mailOptions);
+      
+      console.log('Email sent successfully:', info.messageId);
       res.status(200).json({ success: true, messageId: info.messageId });
     } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ error: error.message });
+      console.error('Error details:', error);
+      res.status(500).json({ 
+        error: error.message,
+        stack: error.stack,
+        code: error.code
+      });
     }
   } else {
     res.status(405).json({ error: 'Method not allowed' });

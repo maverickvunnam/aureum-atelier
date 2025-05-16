@@ -862,51 +862,84 @@
             once: true
         });
 
-        function openConsultationForm() {
-            document.getElementById('consultation-modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    // Open/close modal functions
+    function openConsultationForm() {
+        document.getElementById('consultation-modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+    
+    function closeConsultationForm() {
+        document.getElementById('consultation-modal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+    
+    // Close when clicking outside form
+    document.getElementById('consultation-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeConsultationForm();
         }
+    });
+    
+    // Form submission handler - THIS IS THE PART THAT CALLS YOUR API
+    document.getElementById('consultation-form').addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        function closeConsultationForm() {
-            document.getElementById('consultation-modal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        }
+        const form = this;
+        const submitButton = form.querySelector('button[type="submit"]');
         
-        // Close the modal if user clicks outside the form
-        document.getElementById('consultation-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeConsultationForm();
-            }
+        // Disable button and show loading state
+        submitButton.disabled = true;
+        submitButton.innerHTML = 'Sending...';
+        
+        // Get form data
+        const formData = {
+            name: form.elements.name.value,
+            email: form.elements.email.value,
+            phone: form.elements.phone.value || 'Not provided',
+            message: form.elements.message.value || 'No message provided'
+        };
+        
+        console.log('Sending data to API:', formData);
+        
+        // Send the data to your API endpoint
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            console.log('API Response Status:', response.status);
+            return response.json().then(data => {
+                if (!response.ok) {
+                    console.error('API Error:', data);
+                    throw new Error(data.error || 'Network response was not ok');
+                }
+                return data;
+            });
+        })
+        .then(data => {
+            console.log('API Success:', data);
+            // Show success message
+            const modalContent = document.querySelector('#consultation-modal > div');
+            modalContent.innerHTML = `
+                <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                <div style="text-align: center; padding: 20px;">
+                    <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                    <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                    <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error('Submission Error:', error);
+            // Show error message
+            submitButton.disabled = false;
+            submitButton.innerHTML = 'Submit Request';
+            alert('There was an error sending your message. Please try again later.');
         });
-        
-        // Form submission handler
-        document.getElementById('consultation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // In a real implementation, you would send this data to your server
-            // For now, we'll simulate a successful submission
-            
-            const form = this;
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Disable the button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Sending...';
-            
-            // Simulate a delay
-            setTimeout(function() {
-                // Show success message
-                const modalContent = document.querySelector('#consultation-modal > div');
-                modalContent.innerHTML = `
-                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-                    <div style="text-align: center; padding: 20px;">
-                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
-                        <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
-                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
-                    </div>
-                `;
-            }, 1500);
-        });
+    });
 
     </script>
 
