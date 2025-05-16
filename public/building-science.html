@@ -903,11 +903,11 @@
         
         // Send the data to your API endpoint
         fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
         })
         .then(response => {
             console.log('API Response Status:', response.status);
@@ -978,82 +978,63 @@
             </div>
         </div>      
 
-<!-- Email Testing Section (For Development) -->
-<div style="margin: 80px 0; text-align: center; padding: 30px; background: #f5f5f5;">
-  <h3 style="margin-bottom: 20px; color: var(--primary);">Email System Testing</h3>
-  <p style="margin-bottom: 20px;">(This section is for development purposes and can be removed for production)</p>
-  
-  <button onclick="testEmail()" style="padding: 12px 24px; background: var(--primary); color: white; border: none; cursor: pointer; font-size: 1rem;">
-    Test Email System
+<!-- API Test Button -->
+<div style="margin: 60px 0; text-align: center; padding: 30px; background: #f5f5f5;">
+  <h3 style="margin-bottom: 20px;">API Test</h3>
+  <button onclick="testContactApi()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">
+    Test Contact API
   </button>
+  <div id="api-test-result" style="margin-top: 20px; padding: 15px; display: none;"></div>
   
-  <div id="test-result" style="margin-top: 20px; padding: 15px; display: none; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;"></div>
-</div>
-
-<script>
-  function testEmail() {
-    const resultDiv = document.getElementById('test-result');
-    resultDiv.style.display = 'block';
-    resultDiv.style.background = '#f5f5f5';
-    resultDiv.innerHTML = 'Testing email system... Please wait.';
-    
-    // Create a test email API route on-the-fly
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+  <script>
+    function testContactApi() {
+      const resultDiv = document.getElementById('api-test-result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = 'Testing API...';
+      resultDiv.style.background = '#f5f5f5';
+      
+      // Test data
+      const testData = {
         name: 'Test User',
         email: 'test@example.com',
-        phone: '555-555-5555',
-        message: 'This is a test message from the email system test button.'
-      }),
-    })
-    .then(response => {
-      resultDiv.innerHTML += `<br>Response status: ${response.status}`;
-      return response.json().catch(err => {
-        return { error: 'Could not parse JSON response' };
-      });
-    })
-    .then(data => {
-      console.log('Test result:', data);
+        phone: '123-456-7890',
+        message: 'This is a test message.'
+      };
       
-      resultDiv.innerHTML += '<br><br><strong>Response Data:</strong><br>';
-      
-      if (data.success) {
-        resultDiv.style.background = '#e6ffe6';
-        resultDiv.innerHTML += 'Email sent successfully! Check your inbox.<br>';
-        if (data.messageId) {
-          resultDiv.innerHTML += `Message ID: ${data.messageId}<br>`;
+      // Call the API
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(testData)
+      })
+      .then(response => {
+        resultDiv.innerHTML += `<br>Response status: ${response.status}`;
+        return response.json().catch(err => ({ error: 'Failed to parse JSON' }));
+      })
+      .then(data => {
+        console.log('API response:', data);
+        
+        if (data.success) {
+          resultDiv.style.background = '#e6ffe6';
+          resultDiv.innerHTML += '<br><br>Success! API is working correctly:';
+        } else {
+          resultDiv.style.background = '#ffe6e6';
+          resultDiv.innerHTML += '<br><br>Error in API response:';
         }
-      } else {
+        
+        resultDiv.innerHTML += `<pre style="background: #eee; padding: 10px; margin-top: 10px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
+      })
+      .catch(error => {
         resultDiv.style.background = '#ffe6e6';
-        resultDiv.innerHTML += `Error: ${data.error || 'Unknown error'}<br>`;
-      }
-      
-      // Add debug information
-      resultDiv.innerHTML += '<br><strong>Debug Info:</strong><br>';
-      resultDiv.innerHTML += `<pre style="overflow-x: auto; background: #eee; padding: 10px;">${JSON.stringify(data, null, 2)}</pre>`;
-      
-      // Environment variables check
-      resultDiv.innerHTML += '<br><strong>Environment Variables Check:</strong><br>';
-      if (data.debug && data.debug.envVars) {
-        const envVars = data.debug.envVars;
-        resultDiv.innerHTML += `GMAIL_USER set: ${envVars.userSet ? '✓' : '✗'}<br>`;
-        resultDiv.innerHTML += `GMAIL_APP_PASSWORD set: ${envVars.passwordSet ? '✓' : '✗'}<br>`;
-      } else {
-        resultDiv.innerHTML += 'Environment variables information not available<br>';
-      }
-    })
-    .catch(error => {
-      resultDiv.style.background = '#ffe6e6';
-      resultDiv.innerHTML += `<br><br>Error connecting to API: ${error.message}`;
-      console.error('Test error:', error);
-    });
-  }
-</script>
-                                    
+        resultDiv.innerHTML += `<br><br>Error: ${error.message}`;
+        console.error('API test error:', error);
+      });
+    }
+  </script>
+</div>
+
 
 </body>
 </html>
