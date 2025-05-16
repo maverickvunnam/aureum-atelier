@@ -22,14 +22,13 @@ body {
     position: fixed;
     width: 100%;
     padding: 25px 40px;
-    background: transparent;
+    background: var(--primary); /* Make it opaque with primary color */
     z-index: 1000;
     transition: all 0.3s ease;
-    mix-blend-mode: difference;
+    /* Removed the mix-blend-mode */
 }
 
 .nav.scrolled {
-    background: var(--primary);
     padding: 15px 40px;
 }
 
