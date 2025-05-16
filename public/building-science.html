@@ -351,7 +351,7 @@
                     <p style="margin-top: 20px;">Through precise control of temperature, humidity, air quality, and sound, we create homes that maintain perfect comfort conditions regardless of external weather extremes—whether it's a scorching summer day or the coldest winter night.</p>
                 </div>
                 <div class="image-container" data-aos="fade-left">
-                    <img src="/api/placeholder/600/400" alt="Thermal Imaging of Home">
+                    <img src="/images/building-science/thermal-imaging.jpg" alt="Thermal Imaging of Home">
                     <div class="caption">Thermal imaging reveals the superior performance of our building envelope systems</div>
                 </div>
             </div>
@@ -680,7 +680,7 @@
                     <p>Every Aureum Atelier home receives comprehensive performance documentation, giving you confidence that your home will perform as designed.</p>
                 </div>
                 <div class="image-container" data-aos="fade-left">
-                    <img src="/api/placeholder/600/400" alt="Blower Door Testing">
+                    <img src="/images/building-science/blower-door-test.jpg" alt="Blower Door Testing">
                     <div class="caption">Blower door testing verifies air barrier performance</div>
                 </div>
             </div>
@@ -900,18 +900,6 @@
       </div>
     </div> 
 
-<!-- API Test Button -->
-<div style="margin: 60px 0; text-align: center; padding: 30px; background: #f5f5f5;">
-  <h3 style="margin-bottom: 20px;">API Testing</h3>
-  <button onclick="testContactApi('contact-simple')" style="padding: 10px 20px; margin: 0 10px; background: var(--primary); color: white; border: none; cursor: pointer;">
-    Test Simple API
-  </button>
-  <button onclick="testContactApi('contact-email')" style="padding: 10px 20px; margin: 0 10px; background: var(--primary); color: white; border: none; cursor: pointer;">
-    Test Email API
-  </button>
-  <div id="api-test-result" style="margin-top: 20px; padding: 15px; display: none; text-align: left;"></div>
-</div>
-
 
 <script>
   // Open and close modal functions
@@ -998,64 +986,8 @@
   });
 </script>
 
-  <script>
-    function testContactApi(endpoint = 'contact') {
-      const resultDiv = document.getElementById('api-test-result');
-      resultDiv.style.display = 'block';
-      resultDiv.innerHTML = `Testing API endpoint: /api/${endpoint}...`;
-      resultDiv.style.background = '#f5f5f5';
-      
-      // Test data
-      const testData = {
-        name: 'Test User',
-        email: 'test@example.com',
-        phone: '123-456-7890',
-        message: 'This is a test message.'
-      };
-      
-      // Call the API
-      fetch(`/api/${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(testData)
-      })
-      .then(response => {
-        resultDiv.innerHTML += `<br>Response status: ${response.status}`;
-        return response.text().then(text => {
-          try {
-            // Try to parse the response as JSON
-            return JSON.parse(text);
-          } catch (e) {
-            // If parsing fails, return the raw text
-            resultDiv.innerHTML += `<br><br>Response is not valid JSON. Raw response:<br><pre>${text}</pre>`;
-            throw new Error('Invalid JSON response');
-          }
-        });
-      })
-      .then(data => {
-        console.log('API response:', data);
-        
-        if (data.success) {
-          resultDiv.style.background = '#e6ffe6';
-          resultDiv.innerHTML += '<br><br>Success! API is working correctly:';
-        } else {
-          resultDiv.style.background = '#ffe6e6';
-          resultDiv.innerHTML += '<br><br>Error in API response:';
-        }
-        
-        resultDiv.innerHTML += `<pre style="background: #eee; padding: 10px; margin-top: 10px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
-      })
-      .catch(error => {
-        resultDiv.style.background = '#ffe6e6';
-        resultDiv.innerHTML += `<br><br>Error: ${error.message}`;
-        console.error('API test error:', error);
-      });
-    }
-  </script>
+ 
 </div>
-
 
 </body>
 </html>
