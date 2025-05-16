@@ -136,7 +136,12 @@ body {
 
 /* Add this to ensure internal pages have proper spacing */
 .page-content {
-    padding-top: 80px;
+    padding-top: 100px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
