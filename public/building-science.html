@@ -987,51 +987,60 @@
   <div id="api-test-result" style="margin-top: 20px; padding: 15px; display: none;"></div>
   
   <script>
-    function testContactApi() {
-      const resultDiv = document.getElementById('api-test-result');
-      resultDiv.style.display = 'block';
-      resultDiv.innerHTML = 'Testing API...';
-      resultDiv.style.background = '#f5f5f5';
-      
-      // Test data
-      const testData = {
-        name: 'Test User',
-        email: 'test@example.com',
-        phone: '123-456-7890',
-        message: 'This is a test message.'
-      };
-      
-      // Call the API
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(testData)
-      })
-      .then(response => {
-        resultDiv.innerHTML += `<br>Response status: ${response.status}`;
-        return response.json().catch(err => ({ error: 'Failed to parse JSON' }));
-      })
-      .then(data => {
-        console.log('API response:', data);
-        
-        if (data.success) {
-          resultDiv.style.background = '#e6ffe6';
-          resultDiv.innerHTML += '<br><br>Success! API is working correctly:';
-        } else {
-          resultDiv.style.background = '#ffe6e6';
-          resultDiv.innerHTML += '<br><br>Error in API response:';
-        }
-        
-        resultDiv.innerHTML += `<pre style="background: #eee; padding: 10px; margin-top: 10px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
-      })
-      .catch(error => {
-        resultDiv.style.background = '#ffe6e6';
-        resultDiv.innerHTML += `<br><br>Error: ${error.message}`;
-        console.error('API test error:', error);
-      });
+function testContactApi() {
+  const resultDiv = document.getElementById('api-test-result');
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = 'Testing API...';
+  resultDiv.style.background = '#f5f5f5';
+  
+  // Test data
+  const testData = {
+    name: 'Test User',
+    email: 'test@example.com',
+    phone: '123-456-7890',
+    message: 'This is a test message.'
+  };
+  
+  // Call the API
+  fetch('/api/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(testData)
+  })
+  .then(response => {
+    resultDiv.innerHTML += `<br>Response status: ${response.status}`;
+    return response.text().then(text => {
+      try {
+        // Try to parse the response as JSON
+        return JSON.parse(text);
+      } catch (e) {
+        // If parsing fails, return the raw text
+        resultDiv.innerHTML += `<br><br>Response is not valid JSON. Raw response:<br><pre>${text}</pre>`;
+        throw new Error('Invalid JSON response');
+      }
+    });
+  })
+  .then(data => {
+    console.log('API response:', data);
+    
+    if (data.success) {
+      resultDiv.style.background = '#e6ffe6';
+      resultDiv.innerHTML += '<br><br>Success! API is working correctly:';
+    } else {
+      resultDiv.style.background = '#ffe6e6';
+      resultDiv.innerHTML += '<br><br>Error in API response:';
     }
+    
+    resultDiv.innerHTML += `<pre style="background: #eee; padding: 10px; margin-top: 10px; overflow-x: auto;">${JSON.stringify(data, null, 2)}</pre>`;
+  })
+  .catch(error => {
+    resultDiv.style.background = '#ffe6e6';
+    resultDiv.innerHTML += `<br><br>Error: ${error.message}`;
+    console.error('API test error:', error);
+  });
+}
   </script>
 </div>
 

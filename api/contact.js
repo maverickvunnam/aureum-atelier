@@ -6,19 +6,24 @@ export default async function handler(req, res) {
     try {
       const { name, email, phone, message } = req.body;
       
-      // Step 1: Verify environment variables are set
+      // Step A: Debug log
+      console.log('Request received:', { name, email, hasPhone: !!phone, hasMessage: !!message });
+      
+      // Step B: Verify environment variables are set
       const envCheck = {
-        gmailUser: !!process.env.GMAIL_USER,
-        gmailPass: !!process.env.GMAIL_APP_PASSWORD,
-        gmailUserSet: process.env.GMAIL_USER ? 'set' : 'not set',
-        gmailPassSet: process.env.GMAIL_APP_PASSWORD ? 'set' : 'not set',
+        gmailUser: typeof process.env.GMAIL_USER === 'string',
+        gmailPass: typeof process.env.GMAIL_APP_PASSWORD === 'string',
       };
       
-      // Step 2: Set up transporter (only if env vars are available)
-      let emailResult = { sent: false, error: null };
+      console.log('Environment check:', envCheck);
+      
+      // Step C: Email sending attempt
+      let emailResult = { sent: false, reason: 'Not attempted' };
       
       if (envCheck.gmailUser && envCheck.gmailPass) {
         try {
+          console.log('Setting up transporter');
+          
           // Create transporter
           const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -44,42 +49,55 @@ export default async function handler(req, res) {
             replyTo: email
           };
           
+          console.log('Attempting to send email');
+          
           // Send email
           const info = await transporter.sendMail(mailOptions);
           
+          console.log('Email sent:', info.messageId);
+          
           emailResult = {
             sent: true,
-            messageId: info.messageId,
-            response: info.response
+            messageId: info.messageId
           };
         } catch (emailError) {
+          console.error('Email error:', emailError);
+          
           emailResult = {
             sent: false,
+            reason: 'Email sending failed',
             error: emailError.message,
-            code: emailError.code,
-            responseCode: emailError.responseCode,
-            command: emailError.command
+            code: emailError.code || 'unknown'
           };
         }
+      } else {
+        emailResult.reason = 'Environment variables not configured';
       }
       
       // Return the result
       res.status(200).json({
         success: true,
-        received: { name, email, phone: phone || '(not provided)', message: message || '(not provided)' },
-        emailResult: emailResult,
-        envCheck: envCheck
+        formData: { name, email, phone, message },
+        email: emailResult,
+        env: {
+          userSet: envCheck.gmailUser,
+          passSet: envCheck.gmailPass
+        }
       });
     } catch (error) {
+      console.error('Handler error:', error);
+      
+      // Ensure we always return valid JSON
       res.status(500).json({ 
         success: false,
-        error: error.message
+        error: error.message || 'Unknown error',
+        type: error.constructor.name
       });
     }
   } else {
     res.status(405).json({ 
       success: false,
-      error: 'Method not allowed' 
+      error: 'Method not allowed'
     });
   }
 }
