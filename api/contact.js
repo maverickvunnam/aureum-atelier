@@ -1,59 +1,14 @@
-const nodemailer = require('nodemailer');
-
-export default async function handler(req, res) {
+// api/contact.js
+export default function handler(req, res) {
+  // Just a basic test response for now
   if (req.method === 'POST') {
-    try {
-      console.log('Received form submission');
-      const { name, email, phone, message } = req.body;
-      
-      console.log('Creating transporter with:', {
-        user: process.env.GMAIL_USER,
-        pass: '****' // Don't log the actual password
-      });
-      
-      // Create Gmail transporter
-      let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_APP_PASSWORD
-        }
-      });
-      
-      // Define email
-      const mailOptions = {
-        from: `"Aureum Website" <${process.env.GMAIL_USER}>`,
-        to: process.env.GMAIL_USER,
-        subject: `New Consultation Request from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
-        html: `
-          <h2>New Consultation Request</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-          <p><strong>Message:</strong> ${message || 'No message provided'}</p>
-        `,
-        replyTo: email
-      };
-      
-      console.log('Attempting to send email with options:', {
-        to: mailOptions.to,
-        subject: mailOptions.subject
-      });
-      
-      // Send email
-      let info = await transporter.sendMail(mailOptions);
-      
-      console.log('Email sent successfully:', info.messageId);
-      res.status(200).json({ success: true, messageId: info.messageId });
-    } catch (error) {
-      console.error('Error details:', error);
-      res.status(500).json({ 
-        error: error.message,
-        stack: error.stack,
-        code: error.code
-      });
-    }
+    const { name, email, phone, message } = req.body;
+    
+    res.status(200).json({
+      success: true,
+      receivedData: { name, email, phone, message },
+      message: "API endpoint is working, but email sending is disabled for testing"
+    });
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
