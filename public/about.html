@@ -3,189 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Aureum Atelier</title>
+    <title>About | Aureum Atelier</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <style>
-        :root {
-            --primary: #0A1930;
-            --accent: #C0A875;
-            --light: #FAFAFA;
-            --text: #2C2C2C;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 60px;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -15px;
-            width: 60px;
-            height: 2px;
-            background: var(--accent);
-        }
-
+        /* Additional styles specific to this page */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            margin-bottom: 60px;
         }
-
+        
         .about-content p {
             margin-bottom: 25px;
             line-height: 1.8;
         }
-
+        
         .values-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-top: 80px;
         }
-
+        
         .value-item {
             text-align: center;
             padding: 40px 20px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        .value-item h3 {
-            margin: 20px 0;
-            font-weight: 400;
-            color: var(--primary);
-        }
-
-        .icon-placeholder {
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            font-size: 24px;
-        }
-
-        .team-section {
-            margin-top: 100px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .team-member {
-            text-align: center;
-        }
-
-        .member-image {
-            width: 200px;
-            height: 200px;
-            background: #eee;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-
-        .member-name {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: var(--primary);
-        }
-
-        .member-title {
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
+        
         @media (max-width: 768px) {
-            .about-grid,
-            .values-grid {
+            .about-grid, .values-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="section-title">About Aureum Atelier</h2>
-        
-        <div class="about-grid">
-            <div class="about-content">
-                <p>Aureum Atelier was founded on a simple yet powerful idea: luxury homes should be as technologically advanced as they are beautiful. We bring together expertise in architecture, building science, and smart home technology to create residences that set new standards in both aesthetics and performance.</p>
-                
-                <p>Our team combines decades of experience in high-performance building with a passion for modern design. We believe that true luxury lies not just in what you can see, but in how your home performs, adapts, and endures.</p>
-                
-                <p>Every home we create is a unique collaboration between our expertise and your vision. We don't build houses; we craft environments where life unfolds beautifully and effortlessly.</p>
-            </div>
-            <div class="about-image">
-                <img src="/api/placeholder/600/400" alt="Luxury Home Interior" style="width: 100%; height: auto;">
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="/#technology">Technology</a>
+                <a href="/#contact">Connect</a>
             </div>
         </div>
-        
-        <div class="values-grid">
-            <div class="value-item">
-                <div class="icon-placeholder">P</div>
-                <h3>Precision</h3>
-                <p>Every detail matters. We approach each project with meticulous attention to both aesthetic and technical elements.</p>
-            </div>
-            <div class="value-item">
-                <div class="icon-placeholder">I</div>
-                <h3>Innovation</h3>
-                <p>We continuously explore new materials, techniques, and technologies to push the boundaries of what's possible.</p>
-            </div>
-            <div class="value-item">
-                <div class="icon-placeholder">E</div>
-                <h3>Excellence</h3>
-                <p>We hold ourselves to standards that exceed industry norms, creating homes that perform as beautifully as they look.</p>
-            </div>
-        </div>
-        
-        <div class="team-section">
-            <h2 class="section-title">Our Leadership Team</h2>
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-image"></div>
-                    <div class="member-name">Vinay Vunnam</div>
-                    <div class="member-title">Founder & Principal</div>
-                    <p>With backgrounds in both architecture and technology, Vinay leads our integrated approach to modern luxury homes.</p>
+    </nav>
+
+    <!-- Page content -->
+    <div class="page-content">
+        <div class="container section">
+            <h2 class="section-title">About Aureum Atelier - TEST !</h2>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <p>Aureum Atelier was founded on a simple yet powerful idea: luxury homes should be as technologically advanced as they are beautiful. We bring together expertise in architecture, building science, and smart home technology to create residences that set new standards in both aesthetics and performance.</p>
+                    
+                    <p>Our team combines decades of experience in high-performance building with a passion for modern design. We believe that true luxury lies not just in what you can see, but in how your home performs, adapts, and endures.</p>
+                    
+                    <p>Every home we create is a unique collaboration between our expertise and your vision. We don't build houses; we craft environments where life unfolds beautifully and effortlessly.</p>
                 </div>
-                <div class="team-member">
-                    <div class="member-image"></div>
-                    <div class="member-name">Additional Leader</div>
-                    <div class="member-title">Building Science Director</div>
-                    <p>Bringing 15+ years of high-performance building expertise to ensure every home meets our exceptional standards.</p>
+                <div>
+                    <img src="/api/placeholder/600/400" alt="Luxury Home Interior" style="width: 100%; height: auto;">
                 </div>
-                <div class="team-member">
-                    <div class="member-image"></div>
-                    <div class="member-name">Additional Leader</div>
-                    <div class="member-title">Technology Integration Director</div>
-                    <p>Specializing in seamless integration of smart home technologies for intuitive, responsive living environments.</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <h3>Precision</h3>
+                    <p>Every detail matters. We approach each project with meticulous attention to both aesthetic and technical elements.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Innovation</h3>
+                    <p>We continuously explore new materials, techniques, and technologies to push the boundaries of what's possible.</p>
+                </div>
+                <div class="value-item">
+                    <h3>Excellence</h3>
+                    <p>We hold ourselves to standards that exceed industry norms, creating homes that perform as beautifully as they look.</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 </body>
 </html>

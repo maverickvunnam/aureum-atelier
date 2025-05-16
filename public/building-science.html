@@ -4,40 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building Science | Aureum Atelier</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <style>
-        :root {
-            --primary: #0A1930;
-            --accent: #C0A875;
-            --light: #FAFAFA;
-            --text: #2C2C2C;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            color: var(--primary);
-        }
-
-        .intro-text {
-            max-width: 800px;
-            margin-bottom: 60px;
-            line-height: 1.8;
-        }
-
+        /* Additional styles specific to this page */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -49,7 +20,7 @@
             background: white;
             padding: 30px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .metric-value {
@@ -59,321 +30,88 @@
             font-weight: 300;
         }
 
-        .metric-label {
-            color: var(--primary);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .wall-assemblies {
-            margin-bottom: 80px;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .tab {
-            padding: 15px 30px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tab.active {
-            border-bottom-color: var(--accent);
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .tab-content {
-            display: none;
-            padding: 30px;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .assembly-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .layer-list {
-            list-style: none;
-        }
-
-        .layer-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-        }
-
         .performance-section {
             background: var(--primary);
             color: var(--light);
             padding: 80px 40px;
-            margin-bottom: 80px;
-        }
-
-        .performance-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .performance-item h3 {
-            color: var(--accent);
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        .performance-item ul {
-            list-style: none;
-        }
-
-        .performance-item li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .performance-item li:last-child {
-            border-bottom: none;
+            margin: 80px 0;
         }
 
         @media (max-width: 768px) {
-            .metrics-grid,
-            .assembly-details,
-            .performance-grid {
-                grid-template-columns: 1fr;
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="section-title">Building Science Excellence</h2>
-        
-        <p class="intro-text">At Aureum Atelier, we apply rigorous building science principles to every home we create. The result is a residence that not only looks exceptional but performs at the highest level in terms of comfort, efficiency, and durability.</p>
-        
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">0.6-1.0</div>
-                <div class="metric-label">ACH50<br>(Air Changes per Hour)</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">R-23+</div>
-                <div class="metric-label">Wall Assembly<br>Thermal Value</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">±2°F</div>
-                <div class="metric-label">Temperature<br>Consistency</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">MERV 13+</div>
-                <div class="metric-label">Air Filtration<br>Standard</div>
+    <!-- Navigation -->
+    <nav class="nav scrolled">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="/#technology">Technology</a>
+                <a href="/#contact">Connect</a>
             </div>
         </div>
-        
-        <div class="wall-assemblies">
+    </nav>
+
+    <!-- Page content -->
+    <div class="page-content">
+        <div class="container section">
+            <h2 class="section-title">Building Science Excellence - TEST</h2>
+            
+            <p style="max-width: 800px; margin-bottom: 60px; line-height: 1.8;">At Aureum Atelier, we apply rigorous building science principles to every home we create. The result is a residence that not only looks exceptional but performs at the highest level in terms of comfort, efficiency, and durability.</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">0.6-1.0</div>
+                    <div>ACH50<br>(Air Changes per Hour)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">R-23+</div>
+                    <div>Wall Assembly<br>Thermal Value</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">±2°F</div>
+                    <div>Temperature<br>Consistency</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">MERV 13+</div>
+                    <div>Air Filtration<br>Standard</div>
+                </div>
+            </div>
+            
             <h3 class="section-title" style="font-size: 2rem;">Wall Assembly Options</h3>
+            <!-- Add wall assembly content here from previous artifact -->
             
-            <div class="tabs">
-                <div class="tab active">Standard Assembly</div>
-                <div class="tab">Hybrid Assembly</div>
-                <div class="tab">Premium Assembly</div>
-            </div>
-            
-            <div class="tab-content active">
-                <div class="assembly-details">
-                    <div>
-                        <h4 style="margin-bottom: 20px; color: var(--primary);">Rock Wool Assembly</h4>
-                        <ul class="layer-list">
-                            <li>
-                                <span>Interior Gypsum Board (5/8")</span>
-                                <span>R-0.56</span>
-                            </li>
-                            <li>
-                                <span>2x6 Stud Wall with Rock Wool (5.5")</span>
-                                <span>R-22</span>
-                            </li>
-                            <li>
-                                <span>Exterior Sheathing (ZIP System)</span>
-                                <span>R-0.62</span>
-                            </li>
-                            <li>
-                                <span>Rain Screen Cavity (3/4")</span>
-                                <span>N/A</span>
-                            </li>
-                            <li>
-                                <span><strong>Total Assembly R-Value</strong></span>
-                                <span><strong>~R-23.18</strong></span>
-                            </li>
-                        </ul>
-                        
-                        <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                            Benefits: Fire resistance, excellent sound attenuation, moisture resistance, vapor permeability.
-                        </div>
+            <div class="performance-section">
+                <h3 class="section-title" style="color: var(--light); margin-bottom: 40px;">Performance Benefits</h3>
+                
+                <div class="grid" style="color: var(--light);">
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: var(--light);">
+                        <h3 style="color: var(--accent);">Energy Performance</h3>
+                        <p>30-40% reduced energy consumption with lower HVAC loads and enhanced thermal comfort throughout.</p>
                     </div>
-                    <div>
-                        <img src="/api/placeholder/500/300" alt="Rock Wool Assembly" style="width: 100%; height: auto;">
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: var(--light);">
+                        <h3 style="color: var(--accent);">Air Quality</h3>
+                        <p>Hospital-grade filtration standard with balanced ventilation and continuous fresh air exchange.</p>
                     </div>
-                </div>
-            </div>
-            
-            <div class="tab-content">
-                <div class="assembly-details">
-                    <div>
-                        <h4 style="margin-bottom: 20px; color: var(--primary);">Hybrid Spray Foam + Rock Wool</h4>
-                        <ul class="layer-list">
-                            <li>
-                                <span>Interior Gypsum Board (5/8")</span>
-                                <span>R-0.56</span>
-                            </li>
-                            <li>
-                                <span>2" Closed Cell Spray Foam</span>
-                                <span>R-14</span>
-                            </li>
-                            <li>
-                                <span>3.5" Rock Wool</span>
-                                <span>R-14</span>
-                            </li>
-                            <li>
-                                <span>Exterior Sheathing (ZIP System)</span>
-                                <span>R-0.62</span>
-                            </li>
-                            <li>
-                                <span>Rain Screen Cavity (3/4")</span>
-                                <span>N/A</span>
-                            </li>
-                            <li>
-                                <span><strong>Total Assembly R-Value</strong></span>
-                                <span><strong>~R-29.18</strong></span>
-                            </li>
-                        </ul>
-                        
-                        <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                            Benefits: Excellent air sealing, superior vapor control, better thermal performance.
-                        </div>
+                    <div class="card" style="background: rgba(255,255,255,0.1); color: var(--light);">
+                        <h3 style="color: var(--accent);">Durability</h3>
+                        <p>Proper moisture management and vapor control for enhanced building durability and longevity.</p>
                     </div>
-                    <div>
-                        <img src="/api/placeholder/500/300" alt="Hybrid Assembly" style="width: 100%; height: auto;">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content">
-                <div class="assembly-details">
-                    <div>
-                        <h4 style="margin-bottom: 20px; color: var(--primary);">Premium Wall Assembly</h4>
-                        <ul class="layer-list">
-                            <li>
-                                <span>Interior Gypsum Board (5/8")</span>
-                                <span>R-0.56</span>
-                            </li>
-                            <li>
-                                <span>2" Closed Cell Spray Foam</span>
-                                <span>R-14</span>
-                            </li>
-                            <li>
-                                <span>3.5" Rock Wool</span>
-                                <span>R-14</span>
-                            </li>
-                            <li>
-                                <span>Exterior Sheathing (ZIP System)</span>
-                                <span>R-0.62</span>
-                            </li>
-                            <li>
-                                <span>Continuous Exterior Insulation (2")</span>
-                                <span>R-8</span>
-                            </li>
-                            <li>
-                                <span>Rain Screen Cavity (3/4")</span>
-                                <span>N/A</span>
-                            </li>
-                            <li>
-                                <span><strong>Total Assembly R-Value</strong></span>
-                                <span><strong>~R-37.18</strong></span>
-                            </li>
-                        </ul>
-                        
-                        <div style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                            Benefits: Optimal thermal bridge mitigation, superior moisture management, maximum durability.
-                        </div>
-                    </div>
-                    <div>
-                        <img src="/api/placeholder/500/300" alt="Premium Assembly" style="width: 100%; height: auto;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="performance-section">
-            <h3 class="section-title" style="color: var(--light); margin-bottom: 40px;">Performance Benefits</h3>
-            
-            <div class="performance-grid">
-                <div class="performance-item">
-                    <h3>Energy Performance</h3>
-                    <ul>
-                        <li>30-40% reduced energy consumption</li>
-                        <li>Lower HVAC loads and equipment sizing</li>
-                        <li>Enhanced thermal comfort throughout</li>
-                        <li>Reduced environmental impact</li>
-                    </ul>
-                </div>
-                <div class="performance-item">
-                    <h3>Air Quality</h3>
-                    <ul>
-                        <li>Hospital-grade filtration standard</li>
-                        <li>Balanced ventilation with heat recovery</li>
-                        <li>Continuous fresh air exchange</li>
-                        <li>Reduced allergens and contaminants</li>
-                    </ul>
-                </div>
-                <div class="performance-item">
-                    <h3>Moisture Management</h3>
-                    <ul>
-                        <li>Proper vapor control by climate zone</li>
-                        <li>Ventilated rain screen for drying</li>
-                        <li>Detailed flashing at all penetrations</li>
-                        <li>Enhanced building durability</li>
-                    </ul>
-                </div>
-                <div class="performance-item">
-                    <h3>Sound Control</h3>
-                    <ul>
-                        <li>Reduced exterior noise transmission</li>
-                        <li>Better room-to-room privacy</li>
-                        <li>Quieter mechanical systems operation</li>
-                        <li>Enhanced acoustic comfort</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Simple tab functionality
-        const tabs = document.querySelectorAll('.tab');
-        const contents = document.querySelectorAll('.tab-content');
-        
-        tabs.forEach((tab, index) => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and contents
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
-                tab.classList.add('active');
-                contents[index].classList.add('active');
-            });
+        AOS.init({
+            duration: 1000,
+            once: true
         });
     </script>
 </body>
