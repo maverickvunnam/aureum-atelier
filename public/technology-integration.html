@@ -450,7 +450,7 @@
             width: 100%; 
             height: 100%; 
             background: rgba(0,0,0,0.7); 
-            z-index: 1000; 
+            z-index: 1001; 
             align-items: center; 
             justify-content: center;
         }
@@ -843,11 +843,11 @@
         <div class="cta-content" data-aos="fade-up">
             <h2>Ready to Create Your Intelligent Home?</h2>
             <p>Schedule a technology consultation to explore how intelligent systems can enhance your custom home experience.</p>
-            <a href="/contact.html" class="btn-primary">Schedule a Consultation</a>
+            <button onclick="openConsultationForm()" class="btn-primary">Schedule a Consultation</button>
         </div>
     </section>
 
-    <!-- Consultation Modal -->
+    <!-- Consultation Form Modal -->
     <div id="consultation-modal" class="consultation-modal">
         <div class="modal-content">
             <button onclick="closeConsultationForm()" class="close-button">&times;</button>
@@ -857,23 +857,23 @@
             
             <form id="consultation-form">
                 <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" name="name" class="form-control" required>
+                    <label>Name *</label>
+                    <input type="text" name="name" required class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <label>Email *</label>
+                    <input type="email" name="email" required class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone" class="form-control">
+                    <label>Phone</label>
+                    <input type="tel" name="phone" class="form-control">
                 </div>
                 
                 <div class="form-group">
-                    <label for="interest">Areas of Interest</label>
-                    <select id="interest" name="interest" class="form-control">
+                    <label>Areas of Interest</label>
+                    <select name="interest" class="form-control">
                         <option value="General">General Technology Consultation</option>
                         <option value="Climate">Climate & Comfort Systems</option>
                         <option value="Lighting">Architectural Lighting</option>
@@ -884,8 +884,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" class="form-control"></textarea>
+                    <label>Message</label>
+                    <textarea name="message" rows="4" class="form-control"></textarea>
                 </div>
                 
                 <button type="submit" class="submit-button">Submit Request</button>
@@ -895,13 +895,15 @@
 
     <script>
         // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
         });
 
         // Sticky navigation
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', function() {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
@@ -911,900 +913,22 @@
         });
         
         // FAQ Toggles
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                
-                // Toggle current item
-                item.classList.toggle('active');
-            });
-        });
-        
-        // Open and close consultation form
-        function openConsultationForm() {
-            document.getElementById('consultation-modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeConsultationForm() {
-            document.getElementById('consultation-modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Close when clicking outside form
-        document.getElementById('consultation-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeConsultationForm();
-            }
-        });
-        
-        // Form submission handler
-        document.getElementById('consultation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
             
-            const form = this;
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Sending...';
-            
-            // Get form data
-            const formData = {
-                name: form.elements.name.value,
-                email: form.elements.email.value,
-                phone: form.elements.phone.value || '',
-                interest: form.elements.interest.value,
-                message: form.elements.message.value || ''
-            };
-            
-            console.log('Submitting form data:', formData);
-            
-            // Send data to our working API endpoint
-            fetch('/api/contact-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                console.log('Form submission response status:', response.status);
-                if (response.ok) {
-                    return response.json().catch(() => {
-                        // If JSON parsing fails but HTTP status was OK, still treat as success
-                        return { success: true };
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
                     });
-                }
-                throw new Error('Network response was not ok.');
-            })
-            .then(data => {
-                console.log('Form submission result:', data);
-                
-                // Show success message
-                const modalContent = document.querySelector('.modal-content');
-                modalContent.innerHTML = `
-                    <button onclick="closeConsultationForm()" class="close-button">&times;</button>
-                    <div style="text-align: center; padding: 20px;">
-                        <h3 class="modal-title">Thank You!</h3>
-                        <p class="modal-description">Your technology consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
-                        <button onclick="closeConsultationForm()" class="submit-button">Close</button>
-                    </div>
-                `;
-            })
-            .catch(error => {
-                console.error('Form submission error:', error);
-                
-                // Show error message
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Request';
-                alert('There was an error sending your message. Please try again later or contact us directly.');
-            });
-        });
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technology Integration | Aureum Atelier</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <link rel="stylesheet" href="/styles/main.css">
-    <style>
-        /* Technology page-specific styles */
-        .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                        url('/images/tech-hero.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0 10%;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 650px;
-            color: var(--light);
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            line-height: 1.2;
-        }
-
-        .hero-content h1 span {
-            color: var(--accent);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .section {
-            padding: 100px 10%;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin-bottom: 60px;
-            line-height: 1.6;
-        }
-
-        .tech-overview {
-            background: var(--light);
-        }
-
-        .tech-vision {
-            background: var(--primary);
-            color: var(--light);
-        }
-
-        .grid-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .grid-content h3 {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .grid-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .grid-content ul {
-            margin-bottom: 30px;
-            padding-left: 20px;
-        }
-
-        .grid-content li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .grid-image {
-            width: 100%;
-            height: 100%;
-            min-height: 400px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 4px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .tech-categories {
-            background: var(--light);
-        }
-
-        .tech-card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .tech-card {
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-        }
-
-        .tech-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .tech-card-icon {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 25px;
-        }
-
-        .tech-card h3 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .tech-card p {
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .tech-card ul {
-            padding-left: 20px;
-        }
-
-        .tech-card li {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .tech-approach {
-            background: var(--light);
-            position: relative;
-        }
-
-        .tech-approach:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-        }
-
-        .process-timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 60px;
-            margin-bottom: 60px;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: -60px;
-            width: 2px;
-            background: var(--accent);
-        }
-
-        .timeline-item:last-child:before {
-            bottom: 0;
-        }
-
-        .timeline-number {
-            position: absolute;
-            left: -20px;
-            top: -10px;
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 500;
-            z-index: 2;
-        }
-
-        .timeline-content {
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            padding: 30px;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .cta-section {
-            background: linear-gradient(rgba(10, 25, 48, 0.9), rgba(10, 25, 48, 0.9)),
-                        url('/images/tech-cta-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            color: var(--light);
-            text-align: center;
-            padding: 100px 10%;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--accent);
-        }
-
-        .cta-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--accent);
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-weight: 500;
-            margin-right: 20px;
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: transparent;
-            color: var(--light);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            border: 1px solid var(--light);
-        }
-
-        .btn-primary:hover {
-            background: var(--light);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .faq-section {
-            background: var(--light);
-        }
-
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 25px;
-        }
-
-        .faq-question {
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin-bottom: 15px;
-            color: var(--primary);
-            cursor: pointer;
-            position: relative;
-            padding-right: 30px;
-        }
-
-        .faq-question:after {
-            content: '+';
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question:after {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            display: none;
-            line-height: 1.7;
-        }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-            
-            .section {
-                padding: 80px 5%;
-            }
-            
-            .grid-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .grid-image {
-                min-height: 300px;
-                order: -1;
-            }
-            
-            .tech-card-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline-item {
-                padding-left: 40px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-content">
-            <a href="/" class="nav-logo">AUREUM ATELIER</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/about.html">About</a>
-                <a href="/building-science.html">Building Science</a>
-                <a href="/technology-integration.html" class="active">Technology Integration</a>
-                <a href="#contact" onclick="openConsultationForm(); return false;">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content" data-aos="fade-up">
-            <h1>Intelligent <span>Living</span> Environments</h1>
-            <p>Seamlessly integrating advanced technology for homes that are not only beautiful, but anticipate and respond to your needs.</p>
-        </div>
-    </section>
-
-    <!-- Overview Section -->
-    <section class="section tech-overview">
-        <h2 class="section-title" data-aos="fade-up">Technology That Serves, Not Dominates</h2>
-        <p class="section-subtitle" data-aos="fade-up">At Aureum Atelier, we believe that the best technology is invisible yet transformative, enhancing your experience while remaining unobtrusive. Our approach to technology integration begins with understanding how you live and what matters most to you.</p>
-        
-        <div class="grid-section">
-            <div class="grid-content" data-aos="fade-right">
-                <h3>Beyond Gadgets</h3>
-                <p>While many builders treat technology as an afterthought—a collection of gadgets added near completion—we take a fundamentally different approach. Technology integration begins at the earliest design phase, where we consider:</p>
-                <ul>
-                    <li>Infrastructure planning that allows for future expansion</li>
-                    <li>Seamless integration with architectural elements</li>
-                    <li>Energy efficiency and environmental impact</li>
-                    <li>Reliability and serviceability over time</li>
-                </ul>
-                <p>This thoughtful approach ensures technology that enhances your living experience without becoming a distraction or maintenance burden.</p>
-            </div>
-            <div data-aos="fade-left">
-                <div class="grid-image" style="background-image: url('/images/tech-integration-1.jpg');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section class="section tech-vision">
-        <div class="grid-section">
-            <div data-aos="fade-right">
-                <div class="grid-image" style="background-image: url('/images/tech-integration-2.jpg');"></div>
-            </div>
-            <div class="grid-content" data-aos="fade-left">
-                <h3>Our Technology Vision</h3>
-                <p>We envision homes where technology creates a harmonious living environment that responds intuitively to your needs while maintaining the warmth and comfort essential to truly feeling at home.</p>
-                <p>Our technology integration is guided by three core principles:</p>
-                <ul>
-                    <li><strong>Simplicity:</strong> Systems that are sophisticated yet intuitive to use</li>
-                    <li><strong>Reliability:</strong> Components and infrastructure designed for longevity</li>
-                    <li><strong>Adaptability:</strong> Future-proof solutions that can evolve with emerging technologies</li>
-                </ul>
-                <p>The result is a home that feels magical in its responsiveness while remaining fundamentally human-centered.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Categories Section -->
-    <section class="section tech-categories">
-        <h2 class="section-title" data-aos="fade-up">Integrated Technology Systems</h2>
-        <p class="section-subtitle" data-aos="fade-up">Our comprehensive approach addresses every aspect of technology in your home, creating systems that work together seamlessly rather than as disconnected components.</p>
-        
-        <div class="tech-card-grid">
-            <div class="tech-card" data-aos="fade-up">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-climate.svg" alt="Climate Control Icon">
-                </div>
-                <h3>Climate & Comfort</h3>
-                <p>Advanced systems that maintain perfect temperature, humidity, and air quality throughout your home.</p>
-                <ul>
-                    <li>Multi-zone climate control</li>
-                    <li>Radiant floor heating</li>
-                    <li>Smart ventilation systems</li>
-                    <li>Air purification technology</li>
-                </ul>
-            </div>
-            
-            <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-lighting.svg" alt="Lighting Icon">
-                </div>
-                <h3>Architectural Lighting</h3>
-                <p>Lighting that enhances architectural features while adapting to your activities and preferences.</p>
-                <ul>
-                    <li>Circadian lighting systems</li>
-                    <li>Scene-based controls</li>
-                    <li>Automated natural light optimization</li>
-                    <li>Energy-efficient LED integration</li>
-                </ul>
-            </div>
-            
-            <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-security.svg" alt="Security Icon">
-                </div>
-                <h3>Security & Privacy</h3>
-                <p>Comprehensive protection that safeguards your family and property without feeling intrusive.</p>
-                <ul>
-                    <li>Discreet surveillance systems</li>
-                    <li>Advanced access control</li>
-                    <li>Perimeter monitoring</li>
-                    <li>Integrated alarm systems</li>
-                </ul>
-            </div>
-            
-            <div class="tech-card" data-aos="fade-up">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-entertainment.svg" alt="Entertainment Icon">
-                </div>
-                <h3>Entertainment Spaces</h3>
-                <p>Immersive audio and visual experiences that can be enjoyed throughout your home.</p>
-                <ul>
-                    <li>Multi-room audio systems</li>
-                    <li>Dedicated theater rooms</li>
-                    <li>Hidden display technology</li>
-                    <li>Outdoor entertainment zones</li>
-                </ul>
-            </div>
-            
-            <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-network.svg" alt="Network Icon">
-                </div>
-                <h3>Digital Infrastructure</h3>
-                <p>The foundation that enables all other systems to function reliably and securely.</p>
-                <ul>
-                    <li>Enterprise-grade networks</li>
-                    <li>Structured wiring systems</li>
-                    <li>Secure remote access</li>
-                    <li>Backup power systems</li>
-                </ul>
-            </div>
-            
-            <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="tech-card-icon">
-                    <img src="/images/icon-automation.svg" alt="Automation Icon">
-                </div>
-                <h3>Home Automation</h3>
-                <p>Intelligent systems that learn your preferences and automate routine tasks.</p>
-                <ul>
-                    <li>Voice and gesture control</li>
-                    <li>Scheduled routines</li>
-                    <li>Occupancy-based automation</li>
-                    <li>Mobile device integration</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Approach Section -->
-    <section class="section tech-approach">
-        <h2 class="section-title" data-aos="fade-up">Our Technology Integration Process</h2>
-        <p class="section-subtitle" data-aos="fade-up">We follow a comprehensive methodology to ensure your home's technology enhances your lifestyle without becoming a point of frustration.</p>
-        
-        <div class="process-timeline">
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">1</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Lifestyle Assessment</h3>
-                    <p>We begin by understanding how you live, your preferences, and your expectations. Through detailed conversations, we develop a clear picture of how technology should enhance your specific lifestyle.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">2</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Infrastructure Design</h3>
-                    <p>Working alongside architects and builders, we design the technological infrastructure that will support both current and future systems. This critical foundation includes power, connectivity, and control systems.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">3</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Systems Integration</h3>
-                    <p>Rather than standalone systems, we create a cohesive ecosystem where all technologies work together seamlessly. This integration ensures intuitive control and eliminates the complexity of managing multiple independent systems.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">4</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Personalization & Programming</h3>
-                    <p>We customize control interfaces and automation routines to match your specific preferences, creating a technology experience that feels natural and intuitive to you and your family.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">5</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Training & Handover</h3>
-                    <p>We provide comprehensive training on how to get the most from your home's technology, ensuring you feel comfortable and confident with all systems before project completion.</p>
-                </div>
-            </div>
-            
-            <div class="timeline-item" data-aos="fade-up">
-                <div class="timeline-number">6</div>
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Ongoing Support</h3>
-                    <p>Our relationship continues after you move in, with proactive monitoring, regular updates, and responsive support to ensure your home's technology continues to perform flawlessly year after year.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="section faq-section">
-        <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
-        
-        <div class="faq-container">
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">How future-proof are your technology solutions?</div>
-                <div class="faq-answer">
-                    <p>We design with flexibility and longevity in mind. Our infrastructure includes robust wiring pathways, excess capacity, and modular components that can be updated as technology evolves. We focus on open standards and scalable systems rather than proprietary solutions that may become obsolete. This approach ensures your home can adapt to emerging technologies without major renovations.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">Will I need an IT professional to maintain these systems?</div>
-                <div class="faq-answer">
-                    <p>Our systems are designed to be reliable and low-maintenance. While they incorporate sophisticated technology, the user experience is intuitive and straightforward. Additionally, we offer ongoing support packages that include remote monitoring, regular updates, and priority service. Most clients find this provides all the support they need without requiring specialized knowledge.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">How visible is the technology in an Aureum Atelier home?</div>
-                <div class="faq-answer">
-                    <p>Our philosophy is that technology should be felt, not seen. We work closely with architects and interior designers to discreetly integrate technology into the aesthetic of your home. Speakers can be flush-mounted and color-matched to walls, displays can be concealed when not in use, and control interfaces can be minimized in favor of automation and voice control. The result is a home where technology enhances the experience without dominating the visual landscape.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">Can I integrate existing technology products I already own or prefer?</div>
-                <div class="faq-answer">
-                    <p>Absolutely. We take an open-architecture approach that allows us to integrate a wide range of products and platforms. During our planning process, we'll discuss your preferences and existing technology investments to ensure they can be incorporated seamlessly into the overall system. Our focus is on creating the right solution for you, not promoting specific brands or products.</p>
-                </div>
-            </div>
-            
-            <div class="faq-item" data-aos="fade-up">
-                <div class="faq-question">How do you address privacy and cybersecurity concerns?</div>
-                <div class="faq-answer">
-                    <p>We take security and privacy extremely seriously. Our approach includes network segmentation to isolate critical systems, enterprise-grade firewalls and security protocols, secure remote access systems, and regular security updates. We also provide clear documentation on the data practices of installed systems and can configure them to maximize privacy. During the planning phase, we'll discuss your specific privacy concerns and tailor our approach accordingly.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="cta-content" data-aos="fade-up">
-            <h2>Ready to Create Your Intelligent Home?</h2>
-            <p>Schedule a technology consultation to explore how intelligent systems can enhance your custom home experience.</p>
-            <a href="#" onclick="openConsultationForm(); return false;" class="btn-primary">Schedule a Consultation</a>
-        </div>
-    </section>
-
-    <!-- Consultation Form Modal -->
-    <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
-      <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
-        <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-        
-        <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Technology Consultation</h3>
-        <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal technology integration consultation.</p>
-        
-        <form id="consultation-form">
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Name *</label>
-            <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Email *</label>
-            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Phone</label>
-            <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Areas of Interest</label>
-            <select name="interest" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-              <option value="General">General Technology Consultation</option>
-              <option value="Climate">Climate & Comfort Systems</option>
-              <option value="Lighting">Architectural Lighting</option>
-              <option value="Security">Security & Privacy</option>
-              <option value="Entertainment">Home Entertainment</option>
-              <option value="Automation">Smart Home Automation</option>
-            </select>
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Message</label>
-            <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
-          </div>
-          
-          <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
-        </form>
-      </div>
-    </div>
-
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-        // Sticky navigation
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-        
-        // FAQ Toggles
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-            
-        // Form submission handler
-        document.getElementById('consultation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Sending...';
-            
-            // Get form data
-            const formData = {
-                name: form.elements.name.value,
-                email: form.elements.email.value,
-                phone: form.elements.phone.value || '',
-                interest: form.elements.interest.value,
-                message: form.elements.message.value || ''
-            };
-            
-            console.log('Submitting form data:', formData);
-            
-            // Send data to our working API endpoint
-            fetch('/api/contact-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => {
-                console.log('Form submission response status:', response.status);
-                return response.json().catch(err => {
-                    console.error('Error parsing response:', err);
-                    return { success: false, error: 'Invalid response' };
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
                 });
-            })
-            .then(data => {
-                console.log('Form submission result:', data);
-                
-                // Show success message
-                const modalContent = document.querySelector('#consultation-modal > div');
-                modalContent.innerHTML = `
-                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-                    <div style="text-align: center; padding: 20px;">
-                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
-                        <p style="margin-bottom: 20px;">Your technology consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
-                        <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
-                            ${data.email && data.email.success 
-                              ? 'Your message has been sent to our team.' 
-                              : 'Your information has been recorded. Our team will reach out soon.'}
-                        </p>
-                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
-                    </div>
-                `;
-            })
-            .catch(error => {
-                console.error('Form submission error:', error);
-                
-                // Show error message
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Request';
-                alert('There was an error sending your message. Please try again later.');
-            });
-        });
-    </script>
-    
-    <!-- Footer would go here -->
-    
-</body>
-</html>
-                
-                // Toggle current item
-                item.classList.toggle('active');
             });
         });
         
@@ -1820,56 +944,69 @@
         }
         
         // Close when clicking outside form
-        document.getElementById('consultation-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeConsultationForm();
-            }
-        });
-        
-        // Form submission handler
-        document.getElementById('consultation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Sending...';
-            
-            // Get form data
-            const formData = {
-                name: form.elements.name.value,
-                email: form.elements.email.value,
-                phone: form.elements.phone.value || '',
-                interest: form.elements.interest.value,
-                message: form.elements.message.value || ''
-            };
-            
-            // Send to API
-            fetch('/api/contact-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show success message
-                const modalContent = document.querySelector('#consultation-modal > div');
-                modalContent.innerHTML = `
-                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-                    <div style="text-align: center; padding: 20px;">
-                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
-                        <p style="margin-bottom: 20px;">Your technology consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
-                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
-                    </div>
-                `;
-            })
-            .catch(error => {
-                // Show error message
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Request';
-                alert('There was an error sending your message. Please try again later.');
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('consultation-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeConsultationForm();
+                }
             });
+            
+            // Form submission handler
+            document.getElementById('consultation-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const form = this;
+                const submitButton = form.querySelector('button[type="submit"]');
+                
+                // Disable button and show loading state
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Sending...';
+                
+                // Get form data
+                const formData = {
+                    name: form.elements.name.value,
+                    email: form.elements.email.value,
+                    phone: form.elements.phone.value || '',
+                    interest: form.elements.interest.value,
+                    message: form.elements.message.value || ''
+                };
+                
+                // Send to API endpoint (Gmail compatible)
+                fetch('/api/contact-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    return response.json().catch(err => {
+                        console.error('Error parsing response:', err);
+                        return { success: false, error: 'Invalid response' };
+                    });
+                })
+                .then(data => {
+                    // Show success message
+                    const modalContent = document.querySelector('.modal-content');
+                    modalContent.innerHTML = `
+                        <button onclick="closeConsultationForm()" class="close-button">&times;</button>
+                        <div style="text-align: center; padding: 20px;">
+                            <h3 class="modal-title">Thank You!</h3>
+                            <p class="modal-description">Your technology consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                            <button onclick="closeConsultationForm()" class="submit-button">Close</button>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Form submission error:', error);
+                    
+                    // Show error message
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Submit Request';
+                    alert('There was an error sending your message. Please try again later.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
