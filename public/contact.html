@@ -814,20 +814,48 @@
             
             console.log('Submitting form data:', formData);
             
-            // Send to API
+            // Simplified message to include in request body for email
+            const messageWithDetails = `
+Project Details:
+- Type: ${formData.projectType}
+- Location: ${formData.projectLocation}
+- Timeline: ${formData.projectTimeline}
+- Budget: ${formData.budgetRange}
+- Interests: ${formData.interests.join(', ') || 'None specified'}
+- Referral Source: ${formData.referralSource}
+
+Message:
+${formData.message}
+            `;
+            
+            // Create the actual API request data object
+            const apiRequestData = {
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                message: messageWithDetails
+            };
+            
+            console.log('API request data:', apiRequestData);
+            
+            // Send to API with simplified data object
             fetch('/api/contact-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(apiRequestData)
             })
             .then(response => {
                 console.log('Form submission response status:', response.status);
-                return response.json().catch(err => {
-                    console.error('Error parsing response:', err);
-                    return { success: false, error: 'Invalid response' };
-                });
+                // Consider any HTTP status in the 200 range a success
+                if (response.ok) {
+                    return response.json().catch(() => {
+                        // If JSON parsing fails but HTTP status was OK, still treat as success
+                        return { success: true };
+                    });
+                }
+                throw new Error('Network response was not ok.');
             })
             .then(data => {
                 console.log('Form submission result:', data);
@@ -837,11 +865,34 @@
                 formMessage.style.display = 'block';
                 formMessage.innerHTML = `
                     <strong>Thank you!</strong> Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.
-                    ${data.email && data.email.success 
-                      ? '<p>Your message has been sent to our team.</p>' 
-                      : '<p>Your information has been recorded. Our team will reach out soon.</p>'
-                    }
-                `;<!DOCTYPE html>
+                `;
+                
+                // Reset form
+                form.reset();
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                
+                // Scroll to message
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            })
+            .catch(error => {
+                console.error('Form submission error:', error);
+                
+                // Show error message - simplify this for users
+                formMessage.className = 'form-message error';
+                formMessage.style.display = 'block';
+                formMessage.innerHTML = `
+                    <strong>We're sorry!</strong> There was a problem submitting the form. Please call us directly at 
+                    <a href="tel:+12035550123">(203) 555-0123</a> or email us at
+                    <a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a>.
+                `;
+                
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                
+                // Scroll to message
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1648,32 +1699,6 @@
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
                 formMessage.innerHTML = `<strong>Thank you!</strong> Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.`;
-                
-                // Reset form
-                form.reset();
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Request';
-                
-                // Scroll to message
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            })
-            .catch(error => {
-                console.error('Form submission error:', error);
-                
-                // Show error message
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                formMessage.innerHTML = `
-                    <strong>Error:</strong> There was a problem sending your request. Please try again later or contact us directly at 
-                    <a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a>.
-                `;
-                
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Request';
-                
-                // Scroll to message
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            });
         });
     </script>
     
