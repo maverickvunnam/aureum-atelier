@@ -43,19 +43,25 @@
         }
 
         .about-section {
-            padding: 40px 10%;
+            padding: 30px 10%;
            /* background: var(--light);*/
         }
         
         .about-section:last-of-type {
-            padding-bottom: 40px; /* Reduced from likely 100px or 120px */
+            padding-bottom: 30px; /* Reduced from likely 100px or 120px */
+        }
+
+        /* First paragraph after heading */
+        .about-content p:first-child,
+        .about-section > p:first-of-type {
+            margin-top: 0;
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin: 60px 0;
+            gap: 40px;
+            margin: 30px 0;
             align-items: center;
         }
         
@@ -73,7 +79,7 @@
             line-height: 1.5;
             color: var(--primary);
             font-weight: 300;
-            margin: 50px 0;
+            margin: 30px 0;
             max-width: 800px;
             text-align: center;
             margin-left: auto;
@@ -81,7 +87,7 @@
         }
         
         .philosophy-section {
-            padding: 40px 10%;
+            padding: 30px 10%;
             background: var(--primary);
             color: var(--light); 
         }
@@ -94,7 +100,7 @@
         }
         
         .philosophy-item {
-            padding: 40px;
+            padding: 30px;
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
         }
@@ -106,6 +112,11 @@
             font-size: 1.5rem;
         }
         
+        /* If there's AOS animation adding to the gap */
+        [data-aos="fade-up"] {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 768px) {
             .about-grid,
             .philosophy-grid {
