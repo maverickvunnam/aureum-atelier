@@ -6,6 +6,849 @@
     <title>Contact & Consultation | Aureum Atelier</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* Base styles */
+        :root {
+            --primary: #0a1930;
+            --accent: #d4af37;
+            --light: #ffffff;
+            --dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 20px 10%;
+            background-color: transparent;
+        }
+        
+        .nav.scrolled {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 12px 10%;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--accent);
+        }
+        
+        .nav-links a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        /* Contact page-specific styles */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(10, 25, 48, 0.8), rgba(10, 25, 48, 0.8)),
+                        url('/images/contact-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 10%;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            color: var(--light);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            background: var(--light);
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .contact-method {
+            margin-bottom: 25px;
+        }
+
+        .contact-method h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .contact-method p {
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .contact-method a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-method a:hover {
+            color: var(--accent);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .contact-form-container {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 5px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .process-section {
+            background: var(--primary);
+            color: var(--light);
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .process-section .section-title,
+        .process-section .section-subtitle {
+            color: var(--light);
+            text-align: center;
+        }
+
+        .process-section .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -15px;
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .step-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .form-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .faq-section {
+            background: var(--light);
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 25px;
+        }
+
+        .faq-question {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--primary);
+            cursor: pointer;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .faq-question:after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question:after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            display: none;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .section {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="/technology-integration.html">Technology Integration</a>
+                <a href="/contact.html" class="active">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Begin Your <span>Journey</span></h1>
+            <p>Let's start a conversation about creating your extraordinary custom home.</p>
+        </div>
+    </section>
+
+    <!-- Consultation Process Section -->
+    <section class="section process-section">
+        <h2 class="section-title" data-aos="fade-up">Our Consultation Process</h2>
+        <p class="section-subtitle" data-aos="fade-up">We've designed a thoughtful process to understand your vision and determine how we can best bring it to life.</p>
+        
+        <div class="process-steps">
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Initial Consultation</h3>
+                <p class="step-description">A comprehensive discussion about your vision, requirements, and aspirations for your custom home.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Site Evaluation</h3>
+                <p class="step-description">Assessment of your property to understand its unique characteristics and opportunities.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Concept Development</h3>
+                <p class="step-description">Creating initial concepts and options based on your requirements and site conditions.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Proposal & Planning</h3>
+                <p class="step-description">Detailed proposal outlining scope, approach, timeline, and investment for your custom home.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section">
+        <div class="contact-grid">
+            <div class="contact-info" data-aos="fade-right">
+                <h3>Get in Touch</h3>
+                
+                <div class="contact-method">
+                    <h4>Phone</h4>
+                    <p><a href="tel:+12035550123">(203) 555-0123</a></p>
+                    <p>Monday-Friday: 9am-6pm EST</p>
+                </div>
+                
+                <div class="contact-method">
+                    <h4>Email</h4>
+                    <p><a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a></p>
+                    <p>We respond to all inquiries within 24 hours</p>
+                </div>
+                
+                <div class="contact-method">
+                    <h4>Office</h4>
+                    <p>123 Design Avenue, Suite 300</p>
+                    <p>Livingston, NJ 07039</p>
+                    <p>By appointment only</p>
+                </div>
+                
+                <div class="contact-social">
+                    <a href="#" class="social-icon">
+                        <img src="/images/icon-instagram.svg" alt="Instagram" width="20" height="20">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="/images/icon-linkedin.svg" alt="LinkedIn" width="20" height="20">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="/images/icon-houzz.svg" alt="Houzz" width="20" height="20">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="contact-form-container" data-aos="fade-left">
+                <h3 class="form-title">Schedule a Consultation</h3>
+                
+                <div id="form-message" class="form-message"></div>
+                
+                <form id="consultation-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectLocation">Project Location *</label>
+                        <input type="text" id="projectLocation" name="projectLocation" class="form-control" placeholder="City, State" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Project Type *</label>
+                        <div class="checkbox-container">
+                            <input type="radio" id="newConstruction" name="projectType" value="New Construction" required>
+                            <label for="newConstruction">New Construction</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="radio" id="renovation" name="projectType" value="Major Renovation">
+                            <label for="renovation">Major Renovation</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="radio" id="addition" name="projectType" value="Addition">
+                            <label for="addition">Addition</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="radio" id="otherProject" name="projectType" value="Other">
+                            <label for="otherProject">Other</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Areas of Interest (Select all that apply)</label>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="sustainableDesign" name="interests[]" value="Sustainable Design">
+                            <label for="sustainableDesign">Sustainable Design</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="smartHome" name="interests[]" value="Smart Home Technology">
+                            <label for="smartHome">Smart Home Technology</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="energyEfficiency" name="interests[]" value="Energy Efficiency">
+                            <label for="energyEfficiency">Energy Efficiency</label>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="luxuryFinishes" name="interests[]" value="Luxury Finishes">
+                            <label for="luxuryFinishes">Luxury Finishes</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectTimeline">Anticipated Timeline *</label>
+                        <select id="projectTimeline" name="projectTimeline" class="form-control" required>
+                            <option value="" disabled selected>Select timeline</option>
+                            <option value="Immediately">Ready to start immediately</option>
+                            <option value="1-3 months">1-3 months</option>
+                            <option value="3-6 months">3-6 months</option>
+                            <option value="6-12 months">6-12 months</option>
+                            <option value="12+ months">More than 12 months</option>
+                            <option value="Just exploring">Just exploring</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budgetRange">Budget Range</label>
+                        <select id="budgetRange" name="budgetRange" class="form-control">
+                            <option value="" disabled selected>Select approximate budget</option>
+                            <option value="Under $1M">Under $1 million</option>
+                            <option value="$1M-$2M">$1-2 million</option>
+                            <option value="$2M-$5M">$2-5 million</option>
+                            <option value="$5M-$10M">$5-10 million</option>
+                            <option value="Over $10M">Over $10 million</option>
+                            <option value="Not determined">Not yet determined</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Tell us about your vision</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Describe your project goals, specific requirements, or questions you have..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How did you hear about us?</label>
+                        <select id="referralSource" name="referralSource" class="form-control">
+                            <option value="" disabled selected>Select option</option>
+                            <option value="Referral">Personal Referral</option>
+                            <option value="Online Search">Online Search</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Publication">Publication/Magazine</option>
+                            <option value="Architecture Professional">Architect/Designer</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">What information should I prepare for the initial consultation?</div>
+                <div class="faq-answer">
+                    <p>To make the most of our initial consultation, we recommend gathering the following information beforehand:</p>
+                    <ul>
+                        <li>Property information (address, survey if available)</li>
+                        <li>Images or examples of homes or styles you admire</li>
+                        <li>A list of your must-have features and spaces</li>
+                        <li>Preliminary budget considerations</li>
+                        <li>Your anticipated timeline</li>
+                    </ul>
+                    <p>Don't worry if you don't have everything prepared—the consultation is designed to help clarify your vision and requirements.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">How long does the custom home process typically take?</div>
+                <div class="faq-answer">
+                    <p>The timeline for a custom home project varies based on complexity, size, and site conditions, but generally follows this pattern:</p>
+                    <ul>
+                        <li>Design and Planning: 3-6 months</li>
+                        <li>Permitting: 1-3 months</li>
+                        <li>Construction: 12-18 months</li>
+                    </ul>
+                    <p>During our consultation process, we'll provide a more detailed timeline specific to your project after understanding your requirements.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">Do you work in locations outside of New Jersey?</div>
+                <div class="faq-answer">
+                    <p>Yes, we work on select projects throughout the Northeast, including New York, Connecticut, Pennsylvania, and select areas in Massachusetts and Rhode Island. For exceptional projects, we may consider opportunities beyond these areas. During our consultation, we can discuss the logistics and approach for your specific location.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">What makes Aureum Atelier different from other luxury builders?</div>
+                <div class="faq-answer">
+                    <p>Aureum Atelier distinguishes itself through:</p>
+                    <ul>
+                        <li>Our integrated approach to design, building science, and technology</li>
+                        <li>Commitment to both aesthetic excellence and technical performance</li>
+                        <li>Limited project volume to ensure exceptional attention to detail</li>
+                        <li>Advanced building science methodologies for homes that are as healthy and efficient as they are beautiful</li>
+                        <li>Transparent process and communication throughout the project lifecycle</li>
+                    </ul>
+                    <p>We believe that true luxury lies in the integration of art and science to create homes that perform as beautifully as they look.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up">
+                <div class="faq-question">Can you work with my architect or designer?</div>
+                <div class="faq-answer">
+                    <p>Absolutely. We regularly collaborate with leading architects and designers. Our expertise in building science and technology integration complements their design vision, resulting in homes that are both breathtaking and high-performing. During our consultation, we can discuss the collaborative approach that would work best for your project and existing team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Sticky navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ Toggles
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Open and close modal functions
+        function openConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('form-message');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Get form data - collect all fields
+            const formData = {
+                name: form.elements.firstName.value + ' ' + form.elements.lastName.value,
+                email: form.elements.email.value,
+                phone: form.elements.phone.value || '',
+                projectLocation: form.elements.projectLocation.value || '',
+                projectType: form.querySelector('input[name="projectType"]:checked')?.value || '',
+                interests: Array.from(form.querySelectorAll('input[name="interests[]"]:checked')).map(el => el.value),
+                projectTimeline: form.elements.projectTimeline.value || '',
+                budgetRange: form.elements.budgetRange.value || '',
+                referralSource: form.elements.referralSource.value || '',
+                message: form.elements.message.value || ''
+            };
+            
+            console.log('Submitting form data:', formData);
+            
+            // Send to API
+            fetch('/api/contact-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                console.log('Form submission response status:', response.status);
+                return response.json().catch(err => {
+                    console.error('Error parsing response:', err);
+                    return { success: false, error: 'Invalid response' };
+                });
+            })
+            .then(data => {
+                console.log('Form submission result:', data);
+                
+                // Show success message
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                formMessage.innerHTML = `
+                    <strong>Thank you!</strong> Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.
+                    ${data.email && data.email.success 
+                      ? '<p>Your message has been sent to our team.</p>' 
+                      : '<p>Your information has been recorded. Our team will reach out soon.</p>'
+                    }
+                `;<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Consultation | Aureum Atelier</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
     <style>
         /* Contact page-specific styles */
@@ -815,10 +1658,15 @@
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
             })
             .catch(error => {
+                console.error('Form submission error:', error);
+                
                 // Show error message
                 formMessage.className = 'form-message error';
                 formMessage.style.display = 'block';
-                formMessage.innerHTML = `<strong>Error:</strong> There was a problem sending your request. Please try again later or contact us directly at <a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a>.`;
+                formMessage.innerHTML = `
+                    <strong>Error:</strong> There was a problem sending your request. Please try again later or contact us directly at 
+                    <a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a>.
+                `;
                 
                 submitButton.disabled = false;
                 submitButton.innerHTML = 'Submit Request';
