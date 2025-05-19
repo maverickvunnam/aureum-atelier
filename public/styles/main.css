@@ -1,8 +1,9 @@
+
 :root {
-    --primary: #0A1930;
-    --accent: #C0A875;
-    --light: #FAFAFA;
-    --text: #2C2C2C;
+    --primary: #0a1930; /* Keep the same, just standardizing case */
+    --accent: #d4af37; /* Change from #C0A875 to match technology page */
+    --light: #ffffff; /* Change from #FAFAFA to match technology page */
+    --text: #333333; /* Change from #2C2C2C to match technology page */
 }
 
 * {
@@ -44,7 +45,7 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 30px; /* Change from 40px to 30px for tighter spacing */
 }
 
 .nav-links a {
