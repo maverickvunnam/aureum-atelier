@@ -129,6 +129,8 @@
         .feature-section {
             background: var(--primary);
             color: var(--light);
+            position: relative;
+            overflow: hidden;
         }
 
         .feature-grid {
@@ -150,17 +152,91 @@
             line-height: 1.8;
         }
 
-        .feature-image {
+        /* Dynamic image gallery */
+        .dynamic-gallery {
             position: relative;
-            height: 100%;
-            min-height: 400px;
+            height: 500px;
+            width: 100%;
+            overflow: hidden;
         }
 
-        .feature-image img {
+        .gallery-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .gallery-item {
+            position: absolute;
+            width: 60%;
+            height: 80%;
+            transition: all 1s ease;
+            opacity: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item.active {
+            opacity: 1;
+            z-index: 3;
+            transform: translateX(0) scale(1);
+        }
+
+        .gallery-item.prev {
+            opacity: 0.7;
+            z-index: 2;
+            transform: translateX(-50%) scale(0.8);
+        }
+
+        .gallery-item.next {
+            opacity: 0.7;
+            z-index: 1;
+            transform: translateX(50%) scale(0.8);
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--light);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            z-index: 10;
         }
 
         .process-section {
@@ -256,6 +332,14 @@
             .section {
                 padding: 80px 5%;
             }
+            
+            .dynamic-gallery {
+                height: 400px;
+            }
+            
+            .gallery-item {
+                width: 80%;
+            }
         }
     </style>
 </head>
@@ -324,8 +408,27 @@
                 <p>Unlike typical builders who focus primarily on finishes and fixtures, we understand that true luxury lies as much in what you don't see as what you do. The meticulously sealed building envelope, the perfectly balanced ventilation system, the whisper-quiet mechanical operation — these invisible elements are the true mark of exceptional quality.</p>
                 <a href="/about.html" class="btn-secondary">Learn More About Us</a>
             </div>
-            <div class="feature-image" data-aos="fade-left">
-                <img src="/images/feature-craftsmanship.jpg" alt="Luxury Craftsmanship">
+            <div data-aos="fade-left">
+                <!-- Dynamic Image Gallery -->
+                <div class="dynamic-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-item" data-index="0">
+                            <img src="/images/craftsmanship-1.jpg" alt="Craftsmanship Detail 1">
+                        </div>
+                        <div class="gallery-item" data-index="1">
+                            <img src="/images/craftsmanship-2.jpg" alt="Craftsmanship Detail 2">
+                        </div>
+                        <div class="gallery-item" data-index="2">
+                            <img src="/images/craftsmanship-3.jpg" alt="Craftsmanship Detail 3">
+                        </div>
+                    </div>
+                    <div class="gallery-caption" id="gallery-caption">Scandinavian-inspired craftsmanship with meticulous attention to detail</div>
+                    <div class="gallery-controls">
+                        <div class="gallery-dot" data-index="0"></div>
+                        <div class="gallery-dot" data-index="1"></div>
+                        <div class="gallery-dot" data-index="2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -416,6 +519,64 @@
                 nav.classList.remove('scrolled');
             }
         });
+        
+        // Dynamic Gallery
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryDots = document.querySelectorAll('.gallery-dot');
+        const galleryCaption = document.getElementById('gallery-caption');
+        let currentIndex = 0;
+        const captions = [
+            "Scandinavian-inspired craftsmanship with meticulous attention to detail",
+            "Seamless integration of premium materials for modern luxury living",
+            "Precision joinery showcasing our commitment to excellence"
+        ];
+        
+        // Initialize gallery
+        function initGallery() {
+            updateGallery();
+            
+            // Set up automatic rotation
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                updateGallery();
+            }, 5000);
+            
+            // Add click events to dots
+            galleryDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-index'));
+                    updateGallery();
+                });
+            });
+        }
+        
+        // Update gallery state
+        function updateGallery() {
+            galleryItems.forEach((item, index) => {
+                // Remove all classes
+                item.classList.remove('active', 'prev', 'next');
+                
+                // Set appropriate class
+                if (index === currentIndex) {
+                    item.classList.add('active');
+                } else if (index === (currentIndex - 1 + galleryItems.length) % galleryItems.length) {
+                    item.classList.add('prev');
+                } else if (index === (currentIndex + 1) % galleryItems.length) {
+                    item.classList.add('next');
+                }
+            });
+            
+            // Update dots
+            galleryDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Update caption
+            galleryCaption.textContent = captions[currentIndex];
+        }
+        
+        // Initialize once DOM is loaded
+        document.addEventListener('DOMContentLoaded', initGallery);
         
         // Consultation Form Functions
         function openConsultationForm() {
