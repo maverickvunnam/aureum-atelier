@@ -7,6 +7,106 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        .hero-banner {
+            height: 50vh;
+            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
+                        url('/images/about-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: var(--light);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+        
+        .about-section {
+            padding: 100px 10%;
+            background: var(--light);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin: 60px 0;
+            align-items: center;
+        }
+        
+        .about-content p {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .highlight-text {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            color: var(--primary);
+            font-weight: 300;
+            margin: 50px 0;
+            max-width: 800px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .philosophy-section {
+            padding: 100px 10%;
+            background: var(--primary);
+            color: var(--light);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .philosophy-item {
+            padding: 40px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .philosophy-item h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-grid,
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .highlight-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -16,52 +116,214 @@
             <div class="nav-links">
                 <a href="/about.html">About</a>
                 <a href="/building-science.html">Building Science</a>
-                <a href="#approach">Approach</a>
                 <a href="/#technology">Technology</a>
                 <a href="/#contact">Connect</a>
             </div>
         </div>
     </nav>
 
-    <!-- Page content -->
-    <div class="page-content">
-        <div class="container section">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Crafting Extraordinary Residences</h1>
+            <p>Redefining luxury through uncompromising standards and visionary design</p>
+        </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="about-section">
+        <div data-aos="fade-up">
             <h2 class="section-title">About Aureum Atelier</h2>
             
             <div class="about-grid">
                 <div class="about-content">
-                    <p>Aureum Atelier was founded on a simple yet powerful idea: luxury homes should be as technologically advanced as they are beautiful. We bring together expertise in architecture, building science, and smart home technology to create residences that set new standards in both aesthetics and performance.</p>
+                    <p>Aureum Atelier was founded on a singular vision: to create homes that transcend conventional luxury and redefine what's possible in residential construction. We are not a production builder with a luxury division, nor are we simply custom builders operating at a higher price point. We are artisans of architecture, engineers of experience, and guardians of quality.</p>
                     
-                    <p>Our team combines decades of experience in high-performance building with a passion for modern design. We believe that true luxury lies not just in what you can see, but in how your home performs, adapts, and endures.</p>
-                    
-                    <p>Every home we create is a unique collaboration between our expertise and your vision. We don't build houses; we craft environments where life unfolds beautifully and effortlessly.</p>
+                    <p>Our name reflects our ethos — "Aureum" signifying the golden standard to which we hold our work, and "Atelier" representing our approach as a workshop of master craftspeople collaborating on each project as a unique masterpiece. This synthesis of old-world craftsmanship with cutting-edge technology and building science is what sets us apart in an industry often content with the ordinary.</p>
                 </div>
-                <div>
-                    <img src="/api/placeholder/600/400" alt="Luxury Home Interior" style="width: 100%; height: auto;">
+                <div data-aos="fade-left">
+                    <img src="/images/about-craftsmanship.jpg" alt="Craftsmanship Detail" style="width: 100%; height: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 </div>
             </div>
             
-            <div class="values-grid">
-                <div class="value-item">
-                    <h3>Precision</h3>
-                    <p>Every detail matters. We approach each project with meticulous attention to both aesthetic and technical elements.</p>
+            <div class="highlight-text" data-aos="fade-up">
+                "We don't simply build homes — we craft living environments where architecture, technology, and human experience converge in perfect harmony."
+            </div>
+            
+            <div class="about-grid">
+                <div data-aos="fade-right">
+                    <img src="/images/about-design.jpg" alt="Design Process" style="width: 100%; height: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 </div>
-                <div class="value-item">
-                    <h3>Innovation</h3>
-                    <p>We continuously explore new materials, techniques, and technologies to push the boundaries of what's possible.</p>
+                <div class="about-content">
+                    <p>What distinguishes an Aureum Atelier residence begins long before construction. Our integrated approach brings together architects, engineers, building scientists, and craftspeople from the earliest design phases. This collaborative model ensures that every aspect of your home — from the grand architectural statement to the smallest functional detail — is considered holistically.</p>
+                    
+                    <p>We approach each project with the understanding that a truly exceptional home must excel in three dimensions: aesthetic beauty that inspires, functional performance that enhances daily life, and structural integrity that stands the test of time. It is this three-dimensional excellence that defines luxury in the modern era.</p>
                 </div>
-                <div class="value-item">
-                    <h3>Excellence</h3>
-                    <p>We hold ourselves to standards that exceed industry norms, creating homes that perform as beautifully as they look.</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <p>Unlike typical builders who focus primarily on finishes and fixtures, we understand that true luxury lies as much in what you don't see as what you do. The meticulously sealed building envelope, the perfectly balanced ventilation system, the whisper-quiet mechanical operation — these invisible elements are the true mark of exceptional quality.</p>
+                    
+                    <p>Our clients are individuals who value substance as much as style. They understand that genuine luxury isn't just about appearances, but about creating environments that function flawlessly, promote wellbeing, and provide a sanctuary from the world. They appreciate the difference that comes from working with a team that refuses to cut corners or accept "industry standard" as good enough.</p>
+                    
+                    <p>While we embrace modern technology and innovative materials, we remain grounded in timeless principles of quality and craftsmanship. We believe that the most sophisticated technology should be seamlessly integrated, enhancing your experience without calling attention to itself. This philosophy extends to every aspect of our work — from the structural systems to the smart home integration.</p>
+                </div>
+                <div data-aos="fade-left">
+                    <img src="/images/about-detail.jpg" alt="Architectural Detail" style="width: 100%; height: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+            
+            <div class="about-grid">
+                <div data-aos="fade-right">
+                    <img src="/images/about-process.jpg" alt="Construction Process" style="width: 100%; height: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                </div>
+                <div class="about-content">
+                    <p>Our process is as distinct as our results. We intentionally limit the number of projects we undertake each year to ensure that every home receives the full attention and resources it deserves. This selective approach allows us to maintain the highest standards of quality control and client service throughout the building journey.</p>
+                    
+                    <p>Each Aureum Atelier residence is built not just for today, but for generations to come. We design and construct with longevity in mind, using materials and methods that stand the test of time. This commitment to durability extends beyond the physical structure to encompass adaptable systems and future-ready infrastructure that will accommodate evolving technologies and lifestyle needs.</p>
+                    
+                    <p>For those who recognize that where and how you live profoundly impacts every aspect of life, an Aureum Atelier home represents the pinnacle of residential design and construction. It is for those who expect more than the conventional luxury home — who seek a residence that reflects their own commitment to excellence, attention to detail, and appreciation for the extraordinary.</p>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Philosophy Section -->
+    <div class="philosophy-section">
+        <div data-aos="fade-up">
+            <h2 class="section-title" style="color: var(--light);">Our Philosophy</h2>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-item" data-aos="fade-up">
+                    <h3>Uncompromising Quality</h3>
+                    <p>We uphold a standard of excellence that goes beyond conventional luxury building. Every material, connection, and finish is selected and executed with precision and purpose. We refuse to compromise on quality, even in places that will never be seen.</p>
+                </div>
+                <div class="philosophy-item" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Technical Mastery</h3>
+                    <p>We combine time-honored craftsmanship with advanced building science and technological innovation. This synthesis creates homes that not only look exceptional but perform at the highest levels of efficiency, comfort, and durability.</p>
+                </div>
+                <div class="philosophy-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Human-Centered Design</h3>
+                    <p>Our ultimate measure of success is how you experience your home. We design and build environments that adapt to human needs, enhance wellbeing, and create a seamless backdrop for life's most meaningful moments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="about-section" style="text-align: center; padding-bottom: 120px;">
+        <div data-aos="fade-up">
+            <h2 class="section-title">Begin Your Journey</h2>
+            <p style="max-width: 700px; margin: 0 auto 40px;">We invite you to experience the Aureum Atelier difference. Schedule a consultation to discuss your vision for an extraordinary home.</p>
+            <a href="#" onclick="openConsultationForm(); return false;" class="button">Schedule a Consultation</a>
+        </div>
+    </div>
+
+    <!-- Consultation Form Modal -->
+    <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+      <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
+        <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        
+        <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Consultation</h3>
+        <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal consultation.</p>
+        
+        <form id="consultation-form">
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Name *</label>
+            <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Email *</label>
+            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Phone</label>
+            <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Message</label>
+            <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
+          </div>
+          
+          <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
+        </form>
+      </div>
     </div>
 
     <script>
         AOS.init({
             duration: 1000,
             once: true
+        });
+        
+        // Consultation Form Functions
+        function openConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close when clicking outside form
+        document.getElementById('consultation-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConsultationForm();
+            }
+        });
+        
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Get form data
+            const formData = {
+                name: form.elements.name.value,
+                email: form.elements.email.value,
+                phone: form.elements.phone.value || '',
+                message: form.elements.message.value || ''
+            };
+            
+            // Send to API
+            fetch('/api/contact-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success message
+                const modalContent = document.querySelector('#consultation-modal > div');
+                modalContent.innerHTML = `
+                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                        <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // Show error message
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                alert('There was an error sending your message. Please try again later.');
+            });
         });
     </script>
 </body>
