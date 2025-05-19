@@ -62,6 +62,7 @@
             object-fit: cover; /* Maintain aspect ratio while covering area */
             width: 100%; /* Ensure it fills the container width */
         }
+
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -91,6 +92,12 @@
             margin-right: auto;
         }
         
+        /* Special treatment for detail and process images - allow them to be taller */
+        img[src*="about-detail"], 
+        img[src*="about-process"] {
+            max-height: 550px; /* Allow more height for these specific images */
+        }
+
         .philosophy-section {
             padding: 30px 10%;
             background: var(--primary);
