@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureum Atelier | Luxury Custom Homes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
+                        url('/images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: var(--light);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/building-science.html">Building Science</a>
+                <a href="#technology">Technology</a>
+                <a href="#contact">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Modern Luxury Living, Redefined</h1>
+            <p>Creating exceptional contemporary homes where innovative design meets intelligent living.</p>
+            <a href="#" onclick="openConsultationForm(); return false;" class="button">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <section id="approach" class="section">
+        <h2 class="section-title" data-aos="fade-up">Our Approach</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Design Excellence</h3>
+                <p>Every home we create is a unique masterpiece, tailored to your lifestyle and vision while incorporating cutting-edge building science.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Smart Integration</h3>
+                <p>Advanced home automation seamlessly integrated with sophisticated building systems for unparalleled comfort and efficiency.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Building Science</h3>
+                <p>Industry-leading construction techniques ensure superior performance, durability, and energy efficiency in every home.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background: var(--primary); color: var(--light);">
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title" style="color: var(--light);" data-aos="fade-up">Begin Your Journey</h2>
+            <p style="margin-bottom: 30px;">Let's discuss your vision for the perfect home.</p>
+            <a href="#" onclick="openConsultationForm(); return false;" class="button" style="background: var(--accent);">Schedule a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Consultation Form Modal -->
+    <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+      <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
+        <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+        
+        <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Consultation</h3>
+        <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal consultation.</p>
+        
+        <form id="consultation-form">
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Name *</label>
+            <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Email *</label>
+            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Phone</label>
+            <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Message</label>
+            <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
+          </div>
+          
+          <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Consultation Form Functions
+        function openConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close when clicking outside form
+        document.getElementById('consultation-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConsultationForm();
+            }
+        });
+        
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Get form data
+            const formData = {
+                name: form.elements.name.value,
+                email: form.elements.email.value,
+                phone: form.elements.phone.value || '',
+                message: form.elements.message.value || ''
+            };
+            
+            // Send to API
+            fetch('/api/contact-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success message
+                const modalContent = document.querySelector('#consultation-modal > div');
+                modalContent.innerHTML = `
+                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                        <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // Show error message
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                alert('There was an error sending your message. Please try again later.');
+            });
+        });
+    </script>
+</body>
+</html>

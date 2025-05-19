@@ -22,14 +22,9 @@ body {
     position: fixed;
     width: 100%;
     padding: 25px 40px;
-    background: var(--primary); /* Make it opaque with primary color */
+    background: var(--primary);
     z-index: 1000;
     transition: all 0.3s ease;
-    /* Removed the mix-blend-mode */
-}
-
-.nav.scrolled {
-    padding: 15px 40px;
 }
 
 .nav-content {
@@ -57,35 +52,6 @@ body {
     text-decoration: none;
     font-size: 0.9rem;
     letter-spacing: 1px;
-}
-
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                url('/api/placeholder/1920/1080');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
-    color: var(--light);
-}
-
-.hero-content {
-    max-width: 600px;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    font-weight: 300;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    opacity: 0.9;
 }
 
 .section {
@@ -133,87 +99,8 @@ body {
     background: var(--accent);
 }
 
-/* Add this to ensure internal pages have proper spacing */
 .page-content {
     padding-top: 100px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.intro-text {
-    max-width: 800px;
-    margin-bottom: 60px;
-    line-height: 1.8;
-}
-
-
-/* About page styles */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    margin-bottom: 60px;
-}
-
-.about-content p {
-    margin-bottom: 25px;
-    line-height: 1.8;
-}
-
-.values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 80px;
-}
-
-.value-item {
-    text-align: center;
-    padding: 40px 20px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Building Science page styles */
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-bottom: 80px;
-}
-
-.metric-card {
-    background: white;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.metric-value {
-    font-size: 2.5rem;
-    color: var(--accent);
-    margin-bottom: 15px;
-    font-weight: 300;
-}
-
-.performance-section {
-    background: var(--primary);
-    color: var(--light);
-    padding: 80px 40px;
-    margin: 80px 0;
-}
-
-.performance-card {
-    background: rgba(255,255,255,0.1);
-    color: var(--light);
-}
-
-.performance-card h3 {
-    color: var(--accent);
 }
 
 @media (max-width: 768px) {
