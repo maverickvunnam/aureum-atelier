@@ -130,19 +130,19 @@
 
         /* Section styles */
         .section {
-            padding: 40px 10%; /* Reduced from 80px to match about.html */
+            padding: 80px 10%;
         }
 
         .section-title {
             font-size: 2.5rem;
             font-weight: 300;
-            margin-bottom: 30px; /* Increased from 20px to match about.html */
+            margin-bottom: 20px;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
             max-width: 800px;
-            margin-bottom: 30px; /* Reduced from 40px to match about.html */
+            margin-bottom: 40px;
             line-height: 1.6;
         }
 
@@ -158,9 +158,8 @@
         .grid-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px; /* Reduced from 60px to match about.html */
-            margin: 30px 0; /* Added to match about.html */
-            align-items: flex-start; /* Changed from center to flex-start to match about.html */
+            gap: 60px;
+            align-items: center;
         }
 
         .grid-content h3 {
@@ -193,7 +192,6 @@
             background-position: center;
             border-radius: 4px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            object-fit: cover; /* Added to match about.html */
         }
 
         .tech-categories {
@@ -283,7 +281,7 @@
         .timeline-item {
             position: relative;
             padding-left: 60px;
-            margin-bottom: 40px; /* Reduced from 60px to match about.html spacing */
+            margin-bottom: 60px;
         }
 
         .timeline-item:last-child {
@@ -295,7 +293,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            bottom: -40px; /* Reduced from -60px to match new margin */
+            bottom: -60px;
             width: 2px;
             background: var(--accent);
         }
@@ -342,7 +340,6 @@
             color: var(--light);
             text-align: center;
             padding: 80px 10%;
-            margin-top: 0; /* Added to remove any extra space */
         }
 
         .cta-content {
@@ -546,7 +543,7 @@
             }
             
             .section {
-                padding: 40px 5%; /* Adjusted to match about.html mobile padding */
+                padding: 60px 5%;
             }
             
             .grid-section {
@@ -577,7 +574,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav scrolled">
+    <nav class="nav">
         <div class="nav-content">
             <a href="/" class="nav-logo">AUREUM ATELIER</a>
             <div class="nav-links">
@@ -905,9 +902,6 @@
                 duration: 1000,
                 once: true
             });
-            
-            // Set active navigation link
-            document.querySelector('.technology-link').classList.add('active');
         });
 
         // Sticky navigation
