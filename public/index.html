@@ -8,80 +8,363 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
     <style>
+        /* Home-specific styles */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                        url('/images/hero-bg.jpg');
+            background: linear-gradient(rgba(10, 25, 48, 0.6), rgba(10, 25, 48, 0.6)),
+                        url('/images/hero-home.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             padding: 0 10%;
-            color: var(--light);
+            position: relative;
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 650px;
+            color: var(--light);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 300;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             line-height: 1.2;
         }
 
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+
         .hero-content p {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--light);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 1px solid var(--light);
+        }
+
+        .btn-primary:hover {
+            background: var(--light);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .section {
+            padding: 120px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 60px;
+            line-height: 1.6;
+        }
+
+        .intro-section {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .intro-item {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .intro-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .intro-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 400;
+        }
+
+        .feature-section {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-content h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .feature-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .feature-image {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .process-section {
+            background: var(--light);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -15px;
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .cta-section {
+            background: linear-gradient(rgba(10, 25, 48, 0.9), rgba(10, 25, 48, 0.9)),
+                        url('/images/cta-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--light);
+            text-align: center;
+            padding: 100px 10%;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
             margin-bottom: 30px;
-            opacity: 0.9;
+            color: var(--accent);
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .intro-grid,
+            .feature-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .section {
+                padding: 80px 5%;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
             <a href="/" class="nav-logo">AUREUM ATELIER</a>
             <div class="nav-links">
+                <a href="/">Home</a>
                 <a href="/about.html">About</a>
                 <a href="/building-science.html">Building Science</a>
-                <a href="#technology">Technology</a>
-                <a href="#contact">Connect</a>
+                <a href="#contact" onclick="openConsultationForm(); return false;">Contact</a>
             </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content" data-aos="fade-up">
-            <h1>Modern Luxury Living, Redefined</h1>
-            <p>Creating exceptional contemporary homes where innovative design meets intelligent living.</p>
-            <a href="#" onclick="openConsultationForm(); return false;" class="button">Begin Your Journey</a>
-        </div>
-    </section>
-
-    <section id="approach" class="section">
-        <h2 class="section-title" data-aos="fade-up">Our Approach</h2>
-        <div class="grid">
-            <div class="card" data-aos="fade-up">
-                <h3>Design Excellence</h3>
-                <p>Every home we create is a unique masterpiece, tailored to your lifestyle and vision while incorporating cutting-edge building science.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <h3>Smart Integration</h3>
-                <p>Advanced home automation seamlessly integrated with sophisticated building systems for unparalleled comfort and efficiency.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <h3>Building Science</h3>
-                <p>Industry-leading construction techniques ensure superior performance, durability, and energy efficiency in every home.</p>
+            <h1>Crafting <span>Extraordinary</span> Custom Homes</h1>
+            <p>Where innovative design, uncompromising craftsmanship, and advanced building science converge to create exceptional living environments.</p>
+            <div>
+                <a href="#" onclick="openConsultationForm(); return false;" class="btn-primary">Begin Your Journey</a>
+                <a href="/building-science.html" class="btn-secondary">Our Approach</a>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section" style="background: var(--primary); color: var(--light);">
-        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <h2 class="section-title" style="color: var(--light);" data-aos="fade-up">Begin Your Journey</h2>
-            <p style="margin-bottom: 30px;">Let's discuss your vision for the perfect home.</p>
-            <a href="#" onclick="openConsultationForm(); return false;" class="button" style="background: var(--accent);">Schedule a Consultation</a>
+    <!-- Introduction Section -->
+    <section class="section intro-section">
+        <h2 class="section-title" data-aos="fade-up">Redefining Luxury Home Building</h2>
+        <p class="section-subtitle" data-aos="fade-up">At Aureum Atelier, we believe that a truly extraordinary home must excel in three dimensions: aesthetic beauty that inspires, functional performance that enhances daily life, and structural integrity that stands the test of time.</p>
+        
+        <div class="intro-grid">
+            <div class="intro-item" data-aos="fade-up">
+                <div class="intro-icon">
+                    <img src="/images/icon-design.svg" alt="Design Icon">
+                </div>
+                <h3 class="intro-title">Design Excellence</h3>
+                <p>Architectural vision tailored to your lifestyle, preferences, and site, creating a home that is uniquely yours.</p>
+            </div>
+            <div class="intro-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="intro-icon">
+                    <img src="/images/icon-technology.svg" alt="Technology Icon">
+                </div>
+                <h3 class="intro-title">Smart Integration</h3>
+                <p>Seamless technology that anticipates your needs, creating an effortless living experience through sophisticated automation.</p>
+            </div>
+            <div class="intro-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="intro-icon">
+                    <img src="/images/icon-science.svg" alt="Building Science Icon">
+                </div>
+                <h3 class="intro-title">Building Science</h3>
+                <p>Advanced construction methods ensuring superior comfort, health, efficiency, and longevity in every home we build.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="section feature-section">
+        <div class="feature-grid">
+            <div class="feature-content" data-aos="fade-right">
+                <h3>Beyond Conventional Luxury</h3>
+                <p>What distinguishes an Aureum Atelier residence begins long before construction. Our integrated approach brings together architects, engineers, building scientists, and craftspeople from the earliest design phases.</p>
+                <p>Unlike typical builders who focus primarily on finishes and fixtures, we understand that true luxury lies as much in what you don't see as what you do. The meticulously sealed building envelope, the perfectly balanced ventilation system, the whisper-quiet mechanical operation — these invisible elements are the true mark of exceptional quality.</p>
+                <a href="/about.html" class="btn-secondary">Learn More About Us</a>
+            </div>
+            <div class="feature-image" data-aos="fade-left">
+                <img src="/images/feature-craftsmanship.jpg" alt="Luxury Craftsmanship">
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process-section">
+        <h2 class="section-title" data-aos="fade-up">Our Process</h2>
+        <p class="section-subtitle" data-aos="fade-up">We intentionally limit the number of projects we undertake each year to ensure that every home receives the full attention and resources it deserves. Our comprehensive process ensures exceptional results at every stage.</p>
+        
+        <div class="process-steps">
+            <div class="process-step" data-aos="fade-up">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Vision & Planning</h3>
+                <p>We begin with understanding your vision and developing a comprehensive plan.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Design Development</h3>
+                <p>Our team creates detailed architectural plans with technical precision.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Construction</h3>
+                <p>Expert craftsmen execute your vision with meticulous attention to detail.</p>
+            </div>
+            <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Delivery & Support</h3>
+                <p>We ensure a smooth transition into your new home with ongoing support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content" data-aos="fade-up">
+            <h2>Let's Create Something Extraordinary</h2>
+            <p>Begin a conversation about your vision for modern luxury living.</p>
+            <a href="#" onclick="openConsultationForm(); return false;" class="btn-primary">Schedule a Consultation</a>
         </div>
     </section>
 
