@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
     <style>
-        /* Page-specific styles that can be moved to main.css later */
+        /* Page-specific styles */
         .hero-banner {
             height: 50vh;
             background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                url('/api/placeholder/1920/1080');
+                url('/images/building-science/hero-banner.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             padding: 0 10%;
             color: var(--light);
-            margin-bottom: 60px;
+            margin-bottom: 0;
         }
         
         .hero-content {
@@ -27,25 +27,34 @@
         }
         
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 300;
             margin-bottom: 20px;
             color: var(--accent);
+            line-height: 1.2;
         }
         
         .section-separator {
             height: 2px;
             width: 60px;
             background: var(--accent);
-            margin: 40px 0;
+            margin: 30px 0;
+        }
+        
+        .container.section {
+            padding: 40px 10%;
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
         }
         
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin: 60px 0;
-            align-items: center;
+            gap: 40px;
+            margin: 30px 0;
+            align-items: flex-start;
         }
         
         .image-container {
@@ -56,6 +65,8 @@
             width: 100%;
             height: auto;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            max-height: 400px;
+            object-fit: cover;
         }
         
         .caption {
@@ -65,8 +76,50 @@
             font-style: italic;
         }
         
+        /* Performance Metrics Section */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .metric-value:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            transform: translateX(-50%);
+        }
+        
         .accordions {
-            margin: 60px 0;
+            margin: 30px 0;
         }
         
         .accordion-item {
@@ -106,7 +159,7 @@
         }
         
         .tabs-container {
-            margin: 60px 0;
+            margin: 30px 0;
         }
         
         .tabs-nav {
@@ -140,10 +193,10 @@
         .wall-diagram {
             position: relative;
             height: 400px;
-            width: 95%; /* Make sure it's using full available width */
+            width: 95%;
             background: #f5f5f5;
             border: 1px solid #eee;
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .wall-layer {
@@ -230,7 +283,8 @@
             background: var(--primary);
             color: white;
             padding: 40px;
-            margin: 60px 0;
+            margin: 30px 0;
+            border-radius: 4px;
         }
         
         .highlight-box h3 {
@@ -243,7 +297,7 @@
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 40px 0;
+            margin: 30px 0;
         }
         
         .comparison-table th,
@@ -268,7 +322,7 @@
         }
         
         .faq-section {
-            margin: 60px 0;
+            margin: 30px 0;
         }
 
         .legend {
@@ -299,6 +353,15 @@
             font-size: 0.75rem;
         }
         
+        .page-content {
+            padding-top: 0;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 60px 0 30px;
+        }
+        
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -308,15 +371,25 @@
                 grid-template-columns: 1fr;
             }
             
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
             .wall-diagram {
                 height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav scrolled">
         <div class="nav-content">
             <a href="/" class="nav-logo">AUREUM ATELIER</a>
             <div class="nav-links">
@@ -329,666 +402,643 @@
         </div>
     </nav>
     
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Building Science Excellence</h1>
+            <p>The intersection of advanced technology, architectural innovation, and scientific principles that elevates your living experience beyond the ordinary.</p>
+        </div>
+    </div>
+    
     <!-- Page content -->
-    <div class="page-content">
-        <!-- Hero Banner -->
-        <div class="hero-banner">
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Building Science Excellence</h1>
-                <p>The intersection of advanced technology, architectural innovation, and scientific principles that elevates your living experience beyond the ordinary.</p>
+    <div class="container section">
+        <!-- Introduction -->
+        <h2 class="section-title" data-aos="fade-up">Why Building Science Matters</h2>
+        
+        <p class="intro-text" data-aos="fade-up">At Aureum Atelier, we believe that true luxury isn't just what you can see—it's what you experience every day through comfort, health, and efficiency. Our approach to building science transforms how your home performs, creating living environments that are as exceptional in their function as they are in their form.</p>
+        
+        <div class="two-column">
+            <div data-aos="fade-right">
+                <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; font-weight: 400;">The Science of Comfort</h3>
+                <p>Modern luxury demands more than aesthetic beauty—it requires environments that respond intuitively to human needs. Our building science approach addresses the fundamental physics that govern how buildings interact with their environment and occupants.</p>
+                <p style="margin-top: 20px;">Through precise control of temperature, humidity, air quality, and sound, we create homes that maintain perfect comfort conditions regardless of external weather extremes—whether it's a scorching summer day or the coldest winter night.</p>
+            </div>
+            <div class="image-container" data-aos="fade-left">
+                <img src="/images/building-science/thermal-imaging.jpg" alt="Thermal Imaging of Home">
+                <div class="caption">Thermal imaging reveals the superior performance of our building envelope systems</div>
             </div>
         </div>
         
-        <div class="container section">
-            <!-- Introduction -->
-            <h2 class="section-title">Why Building Science Matters</h2>
-            
-            <p class="intro-text">At Aureum Atelier, we believe that true luxury isn't just what you can see—it's what you experience every day through comfort, health, and efficiency. Our approach to building science transforms how your home performs, creating living environments that are as exceptional in their function as they are in their form.</p>
-            
-            <div class="two-column">
-                <div data-aos="fade-right">
-                    <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; font-weight: 400;">The Science of Comfort</h3>
-                    <p>Modern luxury demands more than aesthetic beauty—it requires environments that respond intuitively to human needs. Our building science approach addresses the fundamental physics that govern how buildings interact with their environment and occupants.</p>
-                    <p style="margin-top: 20px;">Through precise control of temperature, humidity, air quality, and sound, we create homes that maintain perfect comfort conditions regardless of external weather extremes—whether it's a scorching summer day or the coldest winter night.</p>
-                </div>
-                <div class="image-container" data-aos="fade-left">
-                    <img src="/images/building-science/thermal-imaging.jpg" alt="Thermal Imaging of Home">
-                    <div class="caption">Thermal imaging reveals the superior performance of our building envelope systems</div>
+        <div class="section-separator"></div>
+        
+        <!-- Performance Metrics -->
+        <h2 class="section-title" data-aos="fade-up">Performance Beyond Standards</h2>
+        <p data-aos="fade-up">Every Aureum Atelier home exceeds conventional building standards by significant margins. We measure success through quantifiable metrics that demonstrate how our homes outperform even the most stringent industry benchmarks.</p>
+        
+        <div class="metrics-grid">
+            <div class="metric-card" data-aos="fade-up">
+                <div class="metric-value">0.6-2.5</div>
+                <div>ACH50<br>(Air Changes per Hour)</div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Industry average: 3.0-7.0 ACH50</p>
+            </div>
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="metric-value">R-23+</div>
+                <div>Wall Assembly<br>Thermal Value</div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Code minimum: R-13 to R-20</p>
+            </div>
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="metric-value">±2°F</div>
+                <div>Temperature<br>Consistency</div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Industry average: ±4-7°F</p>
+            </div>
+            <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="metric-value">MERV 13+</div>
+                <div>Air Filtration<br>Standard</div>
+                <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Standard homes: MERV 8</p>
+            </div>
+        </div>
+        
+        <div class="highlight-box" data-aos="fade-up">
+            <h3>What These Numbers Mean For You</h3>
+            <p>These aren't just technical specifications—they translate directly to your daily living experience:</p>
+            <ul style="margin: 20px 0; padding-left: 20px;">
+                <li style="margin-bottom: 10px;">Consistent temperatures throughout your home with no cold spots or drafts</li>
+                <li style="margin-bottom: 10px;">Allergen and pollutant levels comparable to hospital clean room standards</li>
+                <li style="margin-bottom: 10px;">Dramatic reduction in energy costs despite the home's luxury size</li>
+                <li style="margin-bottom: 10px;">Whisper-quiet interior environments protected from external noise</li>
+                <li>Superior moisture control that protects your investment long-term</li>
+            </ul>
+        </div>
+        
+        <!-- The Four Controls -->
+        <h2 class="section-title" data-aos="fade-up">The Four Controls of Building Science</h2>
+        <p data-aos="fade-up">All high-performance homes must manage four critical factors. At Aureum Atelier, we've perfected each of these controls through innovative design and meticulous implementation.</p>
+        
+        <div class="accordions">
+            <div class="accordion-item" data-aos="fade-up">
+                <div class="accordion-header">Water Control</div>
+                <div class="accordion-content">
+                    <div class="two-column">
+                        <div>
+                            <p>Water is the most significant threat to building durability. Our comprehensive water management strategy includes:</p>
+                            <ul style="margin: 20px 0; padding-left: 20px;">
+                                <li>Advanced drainage planes with redundant water barriers</li>
+                                <li>Sophisticated flashing details at all penetrations and transitions</li>
+                                <li>Ventilated rain screen systems that promote drainage and drying</li>
+                                <li>Strategic material selection for appropriate climate response</li>
+                            </ul>
+                            <p>These systems work together to direct water away from the building envelope, ensuring long-term protection against moisture damage, mold growth, and structural deterioration.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/building-science/water-management.jpg" alt="Water Management System">
+                            <div class="caption">Advanced flashing details protect against water intrusion</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="section-separator"></div>
-            
-            <!-- Performance Metrics -->
-            <h2 class="section-title">Performance Beyond Standards</h2>
-            <p>Every Aureum Atelier home exceeds conventional building standards by significant margins. We measure success through quantifiable metrics that demonstrate how our homes outperform even the most stringent industry benchmarks.</p>
-            
-            <div class="metrics-grid">
-                <div class="metric-card" data-aos="fade-up">
-                    <div class="metric-value">0.6-2.5</div>
-                    <div>ACH50<br>(Air Changes per Hour)</div>
-                    <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Industry average: 3.0-7.0 ACH50</p>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="metric-value">R-23+</div>
-                    <div>Wall Assembly<br>Thermal Value</div>
-                    <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Code minimum: R-13 to R-20</p>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="metric-value">±2°F</div>
-                    <div>Temperature<br>Consistency</div>
-                    <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Industry average: ±4-7°F</p>
-                </div>
-                <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="metric-value">MERV 13+</div>
-                    <div>Air Filtration<br>Standard</div>
-                    <p style="margin-top: 15px; font-size: 0.85rem; color: #666;">Standard homes: MERV 8</p>
+            <div class="accordion-item" data-aos="fade-up">
+                <div class="accordion-header">Air Control</div>
+                <div class="accordion-content">
+                    <div class="two-column">
+                        <div>
+                            <p>Controlling airflow is essential for energy efficiency, comfort, and protecting the building envelope. Our air control strategy includes:</p>
+                            <ul style="margin: 20px 0; padding-left: 20px;">
+                                <li>Continuous air barrier systems meticulously detailed at all transitions</li>
+                                <li>Rigorous air sealing at every penetration and junction</li>
+                                <li>Blower door testing at multiple construction phases</li>
+                                <li>Balanced ventilation systems for optimal air exchange</li>
+                            </ul>
+                            <p>Our homes achieve air tightness levels that meet or exceed Passive House standards, resulting in exceptional energy performance and indoor air quality control.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/building-science/air-sealing.jpg" alt="Air Barrier System">
+                            <div class="caption">Continuous air barrier installation with verified performance</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="highlight-box" data-aos="fade-up">
-                <h3>What These Numbers Mean For You</h3>
-                <p>These aren't just technical specifications—they translate directly to your daily living experience:</p>
+            <div class="accordion-item" data-aos="fade-up">
+                <div class="accordion-header">Vapor Control</div>
+                <div class="accordion-content">
+                    <div class="two-column">
+                        <div>
+                            <p>Managing water vapor movement is critical to preventing condensation and moisture damage within assemblies. Our vapor control strategy includes:</p>
+                            <ul style="margin: 20px 0; padding-left: 20px;">
+                                <li>Climate-specific vapor control layer placement and permeance</li>
+                                <li>Intelligent material selection based on hygrothermal modeling</li>
+                                <li>Strategic temperature gradient management</li>
+                                <li>Dynamic vapor control systems that adapt to seasonal changes</li>
+                            </ul>
+                            <p>This approach prevents condensation within wall and roof assemblies, protecting the structure and insulation from moisture damage and ensuring longevity.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/building-science/vapor-control.jpg" alt="Vapor Control Layers">
+                            <div class="caption">Vapor-intelligent assemblies prevent condensation risk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item" data-aos="fade-up">
+                <div class="accordion-header">Thermal Control</div>
+                <div class="accordion-content">
+                    <div class="two-column">
+                        <div>
+                            <p>Effective thermal control creates comfort, efficiency, and protects building assemblies. Our thermal control strategy includes:</p>
+                            <ul style="margin: 20px 0; padding-left: 20px;">
+                                <li>Continuous insulation that minimizes thermal bridging</li>
+                                <li>Strategic R-value optimization for each assembly</li>
+                                <li>High-performance windows and doors with thermal breaks</li>
+                                <li>Thermal bridge-free detailing at all transitions</li>
+                            </ul>
+                            <p>Our thermal control systems not only reduce energy consumption but also contribute to thermal comfort by eliminating cold surfaces and temperature stratification throughout the home.</p>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/building-science/thermal-control.jpg" alt="Thermal Control System">
+                            <div class="caption">Thermal imaging shows elimination of thermal bridging</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wall Assembly Options -->
+        <h2 class="section-title" data-aos="fade-up">Wall Assembly Options</h2>
+        <p data-aos="fade-up">We offer multiple high-performance wall assembly options, each designed to achieve specific performance goals while maintaining architectural flexibility.</p>
+        
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-button active">Standard Assembly</button>
+                <button class="tab-button">Hybrid Assembly</button>
+                <button class="tab-button">Premium Assembly</button>
+            </div>
+            
+            <div class="tab-content active">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Rock Wool Performance Assembly</h3>
+                
+                <div class="two-column">
+                    <div>
+                        <p>Our standard wall assembly combines proven materials with exceptional implementation to deliver reliable performance:</p>
+                        <ul style="margin: 20px 0; padding-left: 20px;">
+                            <li>5/8" Interior Gypsum Board (R-0.56)</li>
+                            <li>2x6 Stud Wall with Rock Wool Batts (R-22)</li>
+                            <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
+                            <li>3/4" Ventilated Rain Screen Cavity</li>
+                            <li>Exterior Cladding of Choice</li>
+                        </ul>
+                        <p><strong>Total Assembly Value: ~R-23.18</strong></p>
+                        <p style="margin-top: 20px;">This assembly offers excellent fire resistance, superior sound attenuation, and vapor-open performance that promotes drying in both directions—ideal for most climate zones.</p>
+                    </div>
+                    <div>
+                    <!-- Standard Assembly -->
+                    <div class="wall-diagram">
+                        <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
+                        <div class="wall-layer wall-layer-2" style="width: 40%; left: 5%;">2</div>
+                        <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">3</div>
+                        <div class="wall-layer wall-layer-6" style="width: 30%; left: 50%;">4</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
+                        <div class="legend-item"><span class="legend-number">2</span> Rock Wool Insulation</div>
+                        <div class="legend-item"><span class="legend-number">3</span> Exterior Sheathing</div>
+                        <div class="legend-item"><span class="legend-number">4</span> Exterior Cladding</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Hybrid Spray Foam + Rock Wool Assembly</h3>
+                
+                <div class="two-column">
+                    <div>
+                        <p>Our hybrid assembly combines the best properties of closed-cell spray foam and mineral wool:</p>
+                        <ul style="margin: 20px 0; padding-left: 20px;">
+                            <li>5/8" Interior Gypsum Board (R-0.56)</li>
+                            <li>2x6 Stud Wall with:</li>
+                            <li>- 2" Closed Cell Spray Foam (R-14)</li>
+                            <li>- 3.5" Rock Wool (R-14)</li>
+                            <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
+                            <li>3/4" Ventilated Rain Screen Cavity</li>
+                            <li>Exterior Cladding of Choice</li>
+                        </ul>
+                        <p><strong>Total Assembly Value: ~R-29.18</strong></p>
+                        <p style="margin-top: 20px;">This assembly delivers superior air sealing, integrated vapor control, and exceptional thermal performance while maintaining good sound attenuation properties.</p>
+                    </div>
+                    <div>
+                    <!-- Hybrid Assembly -->
+                    <div class="wall-diagram">
+                        <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
+                        <div class="wall-layer wall-layer-2" style="background: #5f9ea0; width: 18%; left: 5%;">2</div>
+                        <div class="wall-layer wall-layer-2" style="width: 22%; left: 23%;">3</div>
+                        <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">4</div>
+                        <div class="wall-layer wall-layer-6" style="width: 30%; left: 50%;">5</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
+                        <div class="legend-item"><span class="legend-number">2</span> Closed Cell Spray Foam</div>
+                        <div class="legend-item"><span class="legend-number">3</span> Rock Wool Insulation</div>
+                        <div class="legend-item"><span class="legend-number">4</span> Exterior Sheathing</div>
+                        <div class="legend-item"><span class="legend-number">5</span> Exterior Cladding</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Premium Wall Assembly</h3>
+                
+                <div class="two-column">
+                    <div>
+                        <p>Our premium assembly combines interior and exterior insulation for maximum performance:</p>
+                        <ul style="margin: 20px 0; padding-left: 20px;">
+                            <li>5/8" Interior Gypsum Board (R-0.56)</li>
+                            <li>2x6 Stud Wall with:</li>
+                            <li>- 2" Closed Cell Spray Foam (R-14)</li>
+                            <li>- 3.5" Rock Wool (R-14)</li>
+                            <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
+                            <li>2" Continuous Exterior Insulation (R-8)</li>
+                            <li>3/4" Ventilated Rain Screen Cavity</li>
+                            <li>Exterior Cladding of Choice</li>
+                        </ul>
+                        <p><strong>Total Assembly Value: ~R-37.18</strong></p>
+                        <p style="margin-top: 20px;">This assembly represents the pinnacle of building science implementation, with thermal bridge mitigation, superior moisture management, and maximum thermal performance.</p>
+                    </div>
+                    <div>
+                    <!-- Premium Assembly -->
+                    <div class="wall-diagram">
+                        <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
+                        <div class="wall-layer wall-layer-2" style="background: #5f9ea0; width: 18%; left: 5%;">2</div>
+                        <div class="wall-layer wall-layer-2" style="width: 22%; left: 23%;">3</div>
+                        <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">4</div>
+                        <div class="wall-layer wall-layer-4" style="width: 15%; left: 50%;">5</div>
+                        <div class="wall-layer wall-layer-5" style="width: 5%; left: 65%;">6</div>
+                        <div class="wall-layer wall-layer-6" style="width: 25%; left: 70%;">7</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
+                        <div class="legend-item"><span class="legend-number">2</span> Closed Cell Spray Foam</div>
+                        <div class="legend-item"><span class="legend-number">3</span> Rock Wool Insulation</div>
+                        <div class="legend-item"><span class="legend-number">4</span> Exterior Sheathing</div>
+                        <div class="legend-item"><span class="legend-number">5</span> Exterior Insulation</div>
+                        <div class="legend-item"><span class="legend-number">6</span> Ventilated Rainscreen</div>
+                        <div class="legend-item"><span class="legend-number">7</span> Exterior Cladding</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Performance Comparison -->
+        <h2 class="section-title" data-aos="fade-up">Performance Comparison</h2>
+        <p data-aos="fade-up">See how our homes compare to standard luxury construction across key performance metrics:</p>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>Performance Metric</th>
+                <th>Standard Luxury Home</th>
+                <th>Aureum Atelier Home</th>
+            </tr>
+            <tr>
+                <td>Air Tightness (ACH50)</td>
+                <td>3.0 - 7.0</td>
+                <td>0.6 - 2.5</td>
+            </tr>
+            <tr>
+                <td>Wall R-Value</td>
+                <td>R-13 to R-19</td>
+                <td>R-23 to R-37</td>
+            </tr>
+            <tr>
+                <td>Air Filtration</td>
+                <td>MERV 8</td>
+                <td>MERV 13-16</td>
+            </tr>
+            <tr>
+                <td>Fresh Air Exchange</td>
+                <td>Building leakage only</td>
+                <td>Balanced ERV/HRV</td>
+            </tr>
+            <tr>
+                <td>Temperature Consistency</td>
+                <td>±5-7°F between rooms</td>
+                <td>±1-2°F throughout</td>
+            </tr>
+            <tr>
+                <td>Energy Consumption</td>
+                <td>Baseline</td>
+                <td>30-40% reduction</td>
+            </tr>
+            <tr>
+                <td>Sound Transmission</td>
+                <td>Standard (STC 35-40)</td>
+                <td>Enhanced (STC 45-55)</td>
+            </tr>
+        </table>
+        
+        <!-- Verification and Testing -->
+        <div class="two-column">
+            <div data-aos="fade-right">
+                <h2 class="section-title">Verification & Testing</h2>
+                <p>We don't just claim superior performance—we verify it at every step of construction:</p>
                 <ul style="margin: 20px 0; padding-left: 20px;">
-                    <li style="margin-bottom: 10px;">Consistent temperatures throughout your home with no cold spots or drafts</li>
-                    <li style="margin-bottom: 10px;">Allergen and pollutant levels comparable to hospital clean room standards</li>
-                    <li style="margin-bottom: 10px;">Dramatic reduction in energy costs despite the home's luxury size</li>
-                    <li style="margin-bottom: 10px;">Whisper-quiet interior environments protected from external noise</li>
-                    <li>Superior moisture control that protects your investment long-term</li>
+                    <li>Multiple blower door tests during construction</li>
+                    <li>Thermal imaging at critical junctures</li>
+                    <li>HVAC commissioning and flow balancing</li>
+                    <li>Indoor air quality testing</li>
+                    <li>Acoustical performance verification</li>
                 </ul>
+                <p>Every Aureum Atelier home receives comprehensive performance documentation, giving you confidence that your home will perform as designed.</p>
             </div>
-            
-            <!-- The Four Controls -->
-            <h2 class="section-title" data-aos="fade-up">The Four Controls of Building Science</h2>
-            <p>All high-performance homes must manage four critical factors. At Aureum Atelier, we've perfected each of these controls through innovative design and meticulous implementation.</p>
+            <div class="image-container" data-aos="fade-left">
+                <img src="/images/building-science/blower-door-test.jpg" alt="Blower Door Testing">
+                <div class="caption">Blower door testing verifies air barrier performance</div>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="section-title" data-aos="fade-up">Building Science FAQ</h2>
             
             <div class="accordions">
                 <div class="accordion-item" data-aos="fade-up">
-                    <div class="accordion-header">Water Control</div>
+                    <div class="accordion-header">What does ACH50 mean and why is it important?</div>
                     <div class="accordion-content">
-                        <div class="two-column">
-                            <div>
-                                <p>Water is the most significant threat to building durability. Our comprehensive water management strategy includes:</p>
-                                <ul style="margin: 20px 0; padding-left: 20px;">
-                                    <li>Advanced drainage planes with redundant water barriers</li>
-                                    <li>Sophisticated flashing details at all penetrations and transitions</li>
-                                    <li>Ventilated rain screen systems that promote drainage and drying</li>
-                                    <li>Strategic material selection for appropriate climate response</li>
-                                </ul>
-                                <p>These systems work together to direct water away from the building envelope, ensuring long-term protection against moisture damage, mold growth, and structural deterioration.</p>
-                            </div>
-                            <div class="image-container">
-                                <img src="/api/placeholder/500/300" alt="Water Management System">
-                                <div class="caption">Advanced flashing details protect against water intrusion</div>
-                            </div>
-                        </div>
+                        <p>ACH50 stands for Air Changes per Hour at 50 Pascals pressure difference, measuring how many times the entire volume of air in a home is replaced in one hour under test conditions. This metric is the industry standard for measuring a home's air tightness.</p>
+                        <p style="margin-top: 15px;">Lower ACH50 values indicate a tighter building envelope, which means:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Less uncontrolled air leakage, resulting in better energy efficiency</li>
+                            <li>Improved moisture control within wall assemblies</li>
+                            <li>Enhanced comfort with fewer drafts and temperature variations</li>
+                            <li>Better sound isolation from outside noise</li>
+                            <li>Improved indoor air quality through controlled ventilation</li>
+                        </ul>
+                        <p>Standard homes typically range from 3-7 ACH50, while our homes achieve 0.6-2.5 ACH50, approaching or meeting Passive House standards.</p>
                     </div>
                 </div>
                 
                 <div class="accordion-item" data-aos="fade-up">
-                    <div class="accordion-header">Air Control</div>
+                    <div class="accordion-header">Won't such a tight house feel stuffy or have air quality issues?</div>
                     <div class="accordion-content">
-                        <div class="two-column">
-                            <div>
-                                <p>Controlling airflow is essential for energy efficiency, comfort, and protecting the building envelope. Our air control strategy includes:</p>
-                                <ul style="margin: 20px 0; padding-left: 20px;">
-                                    <li>Continuous air barrier systems meticulously detailed at all transitions</li>
-                                    <li>Rigorous air sealing at every penetration and junction</li>
-                                    <li>Blower door testing at multiple construction phases</li>
-                                    <li>Balanced ventilation systems for optimal air exchange</li>
-                                </ul>
-                                <p>Our homes achieve air tightness levels that meet or exceed Passive House standards, resulting in exceptional energy performance and indoor air quality control.</p>
-                            </div>
-                            <div class="image-container">
-                                <img src="/api/placeholder/500/300" alt="Air Barrier System">
-                                <div class="caption">Continuous air barrier installation with verified performance</div>
-                            </div>
-                        </div>
+                       <p>This is a common misconception. In reality, a tightly sealed home with proper mechanical ventilation provides superior air quality compared to leaky homes.</p>
+                        <p style="margin-top: 15px;">All our homes include balanced ventilation systems (ERV or HRV) that continuously provide filtered fresh air while exhausting stale air. This approach offers several advantages:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Filtered fresh air removes pollutants, allergens, and particulates</li>
+                            <li>Heat recovery maintains energy efficiency</li>
+                            <li>Balanced airflow prevents pressure issues</li>
+                            <li>Continuous operation ensures consistent air quality</li>
+                            <li>Controlled humidity levels prevent mustiness</li>
+                        </ul>
+                        <p>Our homes actually have significantly better air quality than conventional homes, where air enters unpredictably through random leaks in the building envelope, bringing in unfiltered outdoor air and potential moisture issues.</p>
                     </div>
                 </div>
                 
                 <div class="accordion-item" data-aos="fade-up">
-                    <div class="accordion-header">Vapor Control</div>
+                    <div class="accordion-header">How do these building science principles affect maintenance and longevity?</div>
                     <div class="accordion-content">
-                        <div class="two-column">
-                            <div>
-                                <p>Managing water vapor movement is critical to preventing condensation and moisture damage within assemblies. Our vapor control strategy includes:</p>
-                                <ul style="margin: 20px 0; padding-left: 20px;">
-                                    <li>Climate-specific vapor control layer placement and permeance</li>
-                                    <li>Intelligent material selection based on hygrothermal modeling</li>
-                                    <li>Strategic temperature gradient management</li>
-                                    <li>Dynamic vapor control systems that adapt to seasonal changes</li>
-                                </ul>
-                                <p>This approach prevents condensation within wall and roof assemblies, protecting the structure and insulation from moisture damage and ensuring longevity.</p>
-                            </div>
-                            <div class="image-container">
-                                <img src="/api/placeholder/500/300" alt="Vapor Control Layers">
-                                <div class="caption">Vapor-intelligent assemblies prevent condensation risk</div>
-                            </div>
-                        </div>
+                        <p>Our building science-driven approach significantly extends the lifespan of your home while reducing maintenance requirements.</p>
+                        <p style="margin-top: 15px;">Conventional luxury homes often suffer from hidden moisture issues, premature material degradation, and system inefficiencies that lead to costly repairs. Our homes are designed to avoid these problems through:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Superior moisture management that prevents mold and rot</li>
+                            <li>Proper temperature gradients that prevent condensation</li>
+                            <li>Ventilated assemblies that promote drying</li>
+                            <li>Reduced thermal stress on materials</li>
+                            <li>Protected mechanical systems that operate within optimal ranges</li>
+                        </ul>
+                        <p>The result is a home that maintains its structural integrity, finish quality, and system performance for decades longer than conventional construction. This translates to lower maintenance costs and preserved property value over time.</p>
                     </div>
                 </div>
                 
                 <div class="accordion-item" data-aos="fade-up">
-                    <div class="accordion-header">Thermal Control</div>
+                    <div class="accordion-header">Is it worth investing in the premium wall assembly?</div>
                     <div class="accordion-content">
-                        <div class="two-column">
-                            <div>
-                                <p>Effective thermal control creates comfort, efficiency, and protects building assemblies. Our thermal control strategy includes:</p>
-                                <ul style="margin: 20px 0; padding-left: 20px;">
-                                    <li>Continuous insulation that minimizes thermal bridging</li>
-                                    <li>Strategic R-value optimization for each assembly</li>
-                                    <li>High-performance windows and doors with thermal breaks</li>
-                                    <li>Thermal bridge-free detailing at all transitions</li>
-                                </ul>
-                                <p>Our thermal control systems not only reduce energy consumption but also contribute to thermal comfort by eliminating cold surfaces and temperature stratification throughout the home.</p>
-                            </div>
-                            <div class="image-container">
-                                <img src="/api/placeholder/500/300" alt="Thermal Control System">
-                                <div class="caption">Thermal imaging shows elimination of thermal bridging</div>
-                            </div>
-                        </div>
+                        <p>The decision between our standard, hybrid, and premium wall assemblies depends on several factors including climate, design requirements, and performance goals.</p>
+                        <p style="margin-top: 15px;">For many clients, the hybrid assembly represents an optimal balance of performance and value. However, the premium assembly offers significant advantages in certain scenarios:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Extreme climate conditions (hot or cold)</li>
+                            <li>Homes with architectural features creating significant thermal bridges</li>
+                            <li>Projects with the highest performance targets</li>
+                            <li>Clients seeking maximum sound isolation</li>
+                            <li>Designs with large glazing areas requiring thermal compensation</li>
+                        </ul>
+                        <p>Our team can provide detailed energy modeling and performance projections to help you evaluate the return on investment for each assembly option based on your specific project requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">How do these building science features integrate with architectural design?</div>
+                    <div class="accordion-content">
+                        <p>Our building science principles enhance rather than restrict architectural design. We believe that performance and aesthetics must work in harmony to create truly exceptional homes.</p>
+                        <p style="margin-top: 15px;">Our approach includes:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Early collaboration between architects and building science specialists</li>
+                            <li>Performance-optimized details for architectural features</li>
+                            <li>Thermal analysis of design elements</li>
+                            <li>Custom solutions for unique design challenges</li>
+                            <li>Material selections that balance performance and aesthetics</li>
+                        </ul>
+                        <p>This integrated design process allows us to achieve your architectural vision while ensuring that every detail contributes to the home's overall performance. The result is a residence that appears conventional in its beauty but performs extraordinarily in its function.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Wall Assembly Options -->
-            <h2 class="section-title" data-aos="fade-up">Wall Assembly Options</h2>
-            <p>We offer multiple high-performance wall assembly options, each designed to achieve specific performance goals while maintaining architectural flexibility.</p>
-            
-            <div class="tabs-container">
-                <div class="tabs-nav">
-                    <button class="tab-button active">Standard Assembly</button>
-                    <button class="tab-button">Hybrid Assembly</button>
-                    <button class="tab-button">Premium Assembly</button>
-                </div>
-                
-                <div class="tab-content active">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">Rock Wool Performance Assembly</h3>
-                    
-                    <div class="two-column">
-                        <div>
-                            <p>Our standard wall assembly combines proven materials with exceptional implementation to deliver reliable performance:</p>
-                            <ul style="margin: 20px 0; padding-left: 20px;">
-                                <li>5/8" Interior Gypsum Board (R-0.56)</li>
-                                <li>2x6 Stud Wall with Rock Wool Batts (R-22)</li>
-                                <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
-                                <li>3/4" Ventilated Rain Screen Cavity</li>
-                                <li>Exterior Cladding of Choice</li>
-                            </ul>
-                            <p><strong>Total Assembly Value: ~R-23.18</strong></p>
-                            <p style="margin-top: 20px;">This assembly offers excellent fire resistance, superior sound attenuation, and vapor-open performance that promotes drying in both directions—ideal for most climate zones.</p>
-                        </div>
-                        <div>
-                        <!-- Standard Assembly -->
-                        <div class="wall-diagram">
-                            <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
-                            <div class="wall-layer wall-layer-2" style="width: 40%; left: 5%;">2</div>
-                            <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">3</div>
-                            <div class="wall-layer wall-layer-6" style="width: 30%; left: 50%;">4</div>
-                        </div>
-                        <div class="legend">
-                            <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
-                            <div class="legend-item"><span class="legend-number">2</span> Rock Wool Insulation</div>
-                            <div class="legend-item"><span class="legend-number">3</span> Exterior Sheathing</div>
-                            <div class="legend-item"><span class="legend-number">4</span> Exterior Cladding</div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">Hybrid Spray Foam + Rock Wool Assembly</h3>
-                    
-                    <div class="two-column">
-                        <div>
-                            <p>Our hybrid assembly combines the best properties of closed-cell spray foam and mineral wool:</p>
-                            <ul style="margin: 20px 0; padding-left: 20px;">
-                                <li>5/8" Interior Gypsum Board (R-0.56)</li>
-                                <li>2x6 Stud Wall with:</li>
-                                <li>- 2" Closed Cell Spray Foam (R-14)</li>
-                                <li>- 3.5" Rock Wool (R-14)</li>
-                                <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
-                                <li>3/4" Ventilated Rain Screen Cavity</li>
-                                <li>Exterior Cladding of Choice</li>
-                            </ul>
-                            <p><strong>Total Assembly Value: ~R-29.18</strong></p>
-                            <p style="margin-top: 20px;">This assembly delivers superior air sealing, integrated vapor control, and exceptional thermal performance while maintaining good sound attenuation properties.</p>
-                        </div>
-                        <div>
-                        <!-- Hybrid Assembly -->
-                        <div class="wall-diagram">
-                            <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
-                            <div class="wall-layer wall-layer-2" style="background: #5f9ea0; width: 18%; left: 5%;">2</div>
-                            <div class="wall-layer wall-layer-2" style="width: 22%; left: 23%;">3</div>
-                            <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">4</div>
-                            <div class="wall-layer wall-layer-6" style="width: 30%; left: 50%;">5</div>
-                        </div>
-                        <div class="legend">
-                            <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
-                            <div class="legend-item"><span class="legend-number">2</span> Closed Cell Spray Foam</div>
-                            <div class="legend-item"><span class="legend-number">3</span> Rock Wool Insulation</div>
-                            <div class="legend-item"><span class="legend-number">4</span> Exterior Sheathing</div>
-                            <div class="legend-item"><span class="legend-number">5</span> Exterior Cladding</div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">Premium Wall Assembly</h3>
-                    
-                    <div class="two-column">
-                        <div>
-                            <p>Our premium assembly combines interior and exterior insulation for maximum performance:</p>
-                            <ul style="margin: 20px 0; padding-left: 20px;">
-                                <li>5/8" Interior Gypsum Board (R-0.56)</li>
-                                <li>2x6 Stud Wall with:</li>
-                                <li>- 2" Closed Cell Spray Foam (R-14)</li>
-                                <li>- 3.5" Rock Wool (R-14)</li>
-                                <li>Exterior Sheathing with Integrated WRB (R-0.62)</li>
-                                <li>2" Continuous Exterior Insulation (R-8)</li>
-                                <li>3/4" Ventilated Rain Screen Cavity</li>
-                                <li>Exterior Cladding of Choice</li>
-                            </ul>
-                            <p><strong>Total Assembly Value: ~R-37.18</strong></p>
-                            <p style="margin-top: 20px;">This assembly represents the pinnacle of building science implementation, with thermal bridge mitigation, superior moisture management, and maximum thermal performance.</p>
-                        </div>
-                        <div>
-                        <!-- Premium Assembly -->
-                        <div class="wall-diagram">
-                            <div class="wall-layer wall-layer-1" style="width: 5%;">1</div>
-                            <div class="wall-layer wall-layer-2" style="background: #5f9ea0; width: 18%; left: 5%;">2</div>
-                            <div class="wall-layer wall-layer-2" style="width: 22%; left: 23%;">3</div>
-                            <div class="wall-layer wall-layer-3" style="width: 5%; left: 45%;">4</div>
-                            <div class="wall-layer wall-layer-4" style="width: 15%; left: 50%;">5</div>
-                            <div class="wall-layer wall-layer-5" style="width: 5%; left: 65%;">6</div>
-                            <div class="wall-layer wall-layer-6" style="width: 25%; left: 70%;">7</div>
-                        </div>
-                        <div class="legend">
-                            <div class="legend-item"><span class="legend-number">1</span> Interior Gypsum Board</div>
-                            <div class="legend-item"><span class="legend-number">2</span> Closed Cell Spray Foam</div>
-                            <div class="legend-item"><span class="legend-number">3</span> Rock Wool Insulation</div>
-                            <div class="legend-item"><span class="legend-number">4</span> Exterior Sheathing</div>
-                            <div class="legend-item"><span class="legend-number">5</span> Exterior Insulation</div>
-                            <div class="legend-item"><span class="legend-number">6</span> Ventilated Rainscreen</div>
-                            <div class="legend-item"><span class="legend-number">7</span> Exterior Cladding</div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Performance Comparison -->
-            <h2 class="section-title" data-aos="fade-up">Performance Comparison</h2>
-            <p>See how our homes compare to standard luxury construction across key performance metrics:</p>
-            
-            <table class="comparison-table">
-                <tr>
-                    <th>Performance Metric</th>
-                    <th>Standard Luxury Home</th>
-                    <th>Aureum Atelier Home</th>
-                </tr>
-                <tr>
-                    <td>Air Tightness (ACH50)</td>
-                    <td>3.0 - 7.0</td>
-                    <td>0.6 - 2.5</td>
-                </tr>
-                <tr>
-                    <td>Wall R-Value</td>
-                    <td>R-13 to R-19</td>
-                    <td>R-23 to R-37</td>
-                </tr>
-                <tr>
-                    <td>Air Filtration</td>
-                    <td>MERV 8</td>
-                    <td>MERV 13-16</td>
-                </tr>
-                <tr>
-                    <td>Fresh Air Exchange</td>
-                    <td>Building leakage only</td>
-                    <td>Balanced ERV/HRV</td>
-                </tr>
-                <tr>
-                    <td>Temperature Consistency</td>
-                    <td>±5-7°F between rooms</td>
-                    <td>±1-2°F throughout</td>
-                </tr>
-                <tr>
-                    <td>Energy Consumption</td>
-                    <td>Baseline</td>
-                    <td>30-40% reduction</td>
-                </tr>
-                <tr>
-                    <td>Sound Transmission</td>
-                    <td>Standard (STC 35-40)</td>
-                    <td>Enhanced (STC 45-55)</td>
-                </tr>
-            </table>
-            
-            <!-- Verification and Testing -->
-            <div class="two-column">
-                <div data-aos="fade-right">
-                    <h2 class="section-title">Verification & Testing</h2>
-                    <p>We don't just claim superior performance—we verify it at every step of construction:</p>
-                    <ul style="margin: 20px 0; padding-left: 20px;">
-                        <li>Multiple blower door tests during construction</li>
-                        <li>Thermal imaging at critical junctures</li>
-                        <li>HVAC commissioning and flow balancing</li>
-                        <li>Indoor air quality testing</li>
-                        <li>Acoustical performance verification</li>
+        </div>
+        
+        <!-- Client Benefits Section -->
+        <div class="highlight-box" data-aos="fade-up">
+            <h3>The Aureum Atelier Building Science Advantage</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 30px;">
+                <div>
+                    <h4 style="color: white; margin-bottom: 15px; font-size: 1.2rem;">For Homeowners</h4>
+                    <ul style="padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">Exceptional comfort with no temperature variations</li>
+                        <li style="margin-bottom: 10px;">Dramatically reduced energy costs despite luxury size</li>
+                        <li style="margin-bottom: 10px;">Hospital-grade indoor air quality</li>
+                        <li style="margin-bottom: 10px;">Whisper-quiet interior environments</li>
+                        <li>Higher resale value and market differentiation</li>
                     </ul>
-                    <p>Every Aureum Atelier home receives comprehensive performance documentation, giving you confidence that your home will perform as designed.</p>
                 </div>
-                <div class="image-container" data-aos="fade-left">
-                    <img src="/images/building-science/blower-door-test.jpg" alt="Blower Door Testing">
-                    <div class="caption">Blower door testing verifies air barrier performance</div>
+                <div>
+                    <h4 style="color: white; margin-bottom: 15px; font-size: 1.2rem;">For Architects</h4>
+                    <ul style="padding-left: 20px;">
+                        <li style="margin-bottom: 10px;">Technical support for performance-optimized details</li>
+                        <li style="margin-bottom: 10px;">Advanced thermal and hygrothermal modeling</li>
+                        <li style="margin-bottom: 10px;">Construction administration with quality verification</li>
+                        <li style="margin-bottom: 10px;">Collaborative approach to challenging design elements</li>
+                        <li>Evidence-based performance documentation</li>
+                    </ul>
                 </div>
             </div>
+        </div>
+        
+        <!-- Resources Section -->
+        <h2 class="section-title" data-aos="fade-up">Further Resources</h2>
+        <div>
+            <p data-aos="fade-up">We believe in educating our clients about building science principles that affect their investment:</p>
+            <ul style="margin: 20px 0; padding-left: 20px;" data-aos="fade-up">
+                <li>Detailed project-specific performance documentation</li>
+                <li>Building science primers for homeowners</li>
+                <li>Maintenance and operation guidelines</li>
+                <li>Educational sessions during the design process</li>
+            </ul>
+            <p data-aos="fade-up">Our transparent approach ensures you understand exactly how your home functions and the value of every performance feature we implement.</p>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="cta-section" data-aos="fade-up">
+            <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; color: var(--primary);">Ready to Experience the Difference?</h2>
+            <p style="max-width: 700px; margin: 0 auto 30px;">Schedule a consultation to discuss how our building science approach can transform your vision for a luxury home into a reality that performs as beautifully as it looks.</p>
+            <a href="#" onclick="openConsultationForm(); return false;" class="button">Schedule a Consultation</a>
+        </div>
+    </div>
+
+    <!-- Consultation Form Modal -->
+    <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
+            <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
             
-            <!-- FAQ Section -->
-            <div class="faq-section">
-                <h2 class="section-title" data-aos="fade-up">Building Science FAQ</h2>
+            <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Consultation</h3>
+            <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal consultation.</p>
+            
+            <form id="consultation-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Name *</label>
+                    <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
+                </div>
                 
-                <div class="accordions">
-                    <div class="accordion-item" data-aos="fade-up">
-                        <div class="accordion-header">What does ACH50 mean and why is it important?</div>
-                        <div class="accordion-content">
-                            <p>ACH50 stands for Air Changes per Hour at 50 Pascals pressure difference, measuring how many times the entire volume of air in a home is replaced in one hour under test conditions. This metric is the industry standard for measuring a home's air tightness.</p>
-                            <p style="margin-top: 15px;">Lower ACH50 values indicate a tighter building envelope, which means:</p>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>Less uncontrolled air leakage, resulting in better energy efficiency</li>
-                                <li>Improved moisture control within wall assemblies</li>
-                                <li>Enhanced comfort with fewer drafts and temperature variations</li>
-                                <li>Better sound isolation from outside noise</li>
-                                <li>Improved indoor air quality through controlled ventilation</li>
-                            </ul>
-                            <p>Standard homes typically range from 3-7 ACH50, while our homes achieve 0.6-2.5 ACH50, approaching or meeting Passive House standards.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item" data-aos="fade-up">
-                        <div class="accordion-header">Won't such a tight house feel stuffy or have air quality issues?</div>
-                        <div class="accordion-content">
-                           <p>This is a common misconception. In reality, a tightly sealed home with proper mechanical ventilation provides superior air quality compared to leaky homes.</p>
-                            <p style="margin-top: 15px;">All our homes include balanced ventilation systems (ERV or HRV) that continuously provide filtered fresh air while exhausting stale air. This approach offers several advantages:</p>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>Filtered fresh air removes pollutants, allergens, and particulates</li>
-                                <li>Heat recovery maintains energy efficiency</li>
-                                <li>Balanced airflow prevents pressure issues</li>
-                                <li>Continuous operation ensures consistent air quality</li>
-                                <li>Controlled humidity levels prevent mustiness</li>
-                            </ul>
-                            <p>Our homes actually have significantly better air quality than conventional homes, where air enters unpredictably through random leaks in the building envelope, bringing in unfiltered outdoor air and potential moisture issues.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item" data-aos="fade-up">
-                        <div class="accordion-header">How do these building science principles affect maintenance and longevity?</div>
-                        <div class="accordion-content">
-                            <p>Our building science-driven approach significantly extends the lifespan of your home while reducing maintenance requirements.</p>
-                            <p style="margin-top: 15px;">Conventional luxury homes often suffer from hidden moisture issues, premature material degradation, and system inefficiencies that lead to costly repairs. Our homes are designed to avoid these problems through:</p>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>Superior moisture management that prevents mold and rot</li>
-                                <li>Proper temperature gradients that prevent condensation</li>
-                                <li>Ventilated assemblies that promote drying</li>
-                                <li>Reduced thermal stress on materials</li>
-                                <li>Protected mechanical systems that operate within optimal ranges</li>
-                            </ul>
-                            <p>The result is a home that maintains its structural integrity, finish quality, and system performance for decades longer than conventional construction. This translates to lower maintenance costs and preserved property value over time.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item" data-aos="fade-up">
-                        <div class="accordion-header">Is it worth investing in the premium wall assembly?</div>
-                        <div class="accordion-content">
-                            <p>The decision between our standard, hybrid, and premium wall assemblies depends on several factors including climate, design requirements, and performance goals.</p>
-                            <p style="margin-top: 15px;">For many clients, the hybrid assembly represents an optimal balance of performance and value. However, the premium assembly offers significant advantages in certain scenarios:</p>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>Extreme climate conditions (hot or cold)</li>
-                                <li>Homes with architectural features creating significant thermal bridges</li>
-                                <li>Projects with the highest performance targets</li>
-                                <li>Clients seeking maximum sound isolation</li>
-                                <li>Designs with large glazing areas requiring thermal compensation</li>
-                            </ul>
-                            <p>Our team can provide detailed energy modeling and performance projections to help you evaluate the return on investment for each assembly option based on your specific project requirements.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item" data-aos="fade-up">
-                        <div class="accordion-header">How do these building science features integrate with architectural design?</div>
-                        <div class="accordion-content">
-                            <p>Our building science principles enhance rather than restrict architectural design. We believe that performance and aesthetics must work in harmony to create truly exceptional homes.</p>
-                            <p style="margin-top: 15px;">Our approach includes:</p>
-                            <ul style="margin: 15px 0; padding-left: 20px;">
-                                <li>Early collaboration between architects and building science specialists</li>
-                                <li>Performance-optimized details for architectural features</li>
-                                <li>Thermal analysis of design elements</li>
-                                <li>Custom solutions for unique design challenges</li>
-                                <li>Material selections that balance performance and aesthetics</li>
-                            </ul>
-                            <p>This integrated design process allows us to achieve your architectural vision while ensuring that every detail contributes to the home's overall performance. The result is a residence that appears conventional in its beauty but performs extraordinarily in its function.</p>
-                        </div>
-                    </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Email *</label>
+                    <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
                 </div>
-            </div>
-            
-            <!-- Client Benefits Section -->
-            <div class="highlight-box" data-aos="fade-up">
-                <h3>The Aureum Atelier Building Science Advantage</h3>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 30px;">
-                    <div>
-                        <h4 style="color: white; margin-bottom: 15px; font-size: 1.2rem;">For Homeowners</h4>
-                        <ul style="padding-left: 20px;">
-                            <li style="margin-bottom: 10px;">Exceptional comfort with no temperature variations</li>
-                            <li style="margin-bottom: 10px;">Dramatically reduced energy costs despite luxury size</li>
-                            <li style="margin-bottom: 10px;">Hospital-grade indoor air quality</li>
-                            <li style="margin-bottom: 10px;">Whisper-quiet interior environments</li>
-                            <li>Higher resale value and market differentiation</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 style="color: white; margin-bottom: 15px; font-size: 1.2rem;">For Architects</h4>
-                        <ul style="padding-left: 20px;">
-                            <li style="margin-bottom: 10px;">Technical support for performance-optimized details</li>
-                            <li style="margin-bottom: 10px;">Advanced thermal and hygrothermal modeling</li>
-                            <li style="margin-bottom: 10px;">Construction administration with quality verification</li>
-                            <li style="margin-bottom: 10px;">Collaborative approach to challenging design elements</li>
-                            <li>Evidence-based performance documentation</li>
-                        </ul>
-                    </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Phone</label>
+                    <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
                 </div>
-            </div>
-            <!-- Simplified Resources Section -->
-            <h2 class="section-title" data-aos="fade-up">Further Resources</h2>
-            <div>
-                <p>We believe in educating our clients about building science principles that affect their investment:</p>
-                <ul style="margin: 20px 0; padding-left: 20px;">
-                    <li>Detailed project-specific performance documentation</li>
-                    <li>Building science primers for homeowners</li>
-                    <li>Maintenance and operation guidelines</li>
-                    <li>Educational sessions during the design process</li>
-                </ul>
-                <p>Our transparent approach ensures you understand exactly how your home functions and the value of every performance feature we implement.</p>
-            </div>
-            
-            <!-- Call to Action -->
-            <div style="text-align: center; margin: 80px 0 40px;" data-aos="fade-up">
-                <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; color: var(--primary);">Ready to Experience the Difference?</h2>
-                <p style="max-width: 700px; margin: 0 auto 30px;">Schedule a consultation to discuss how our building science approach can transform your vision for a luxury home into a reality that performs as beautifully as it looks.</p>
-                <a href="#" onclick="openConsultationForm(); return false;" style="display: inline-block; padding: 15px 40px; background: var(--primary); color: white; text-decoration: none; font-size: 1.1rem;">Schedule a Consultation</a>
-            </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px;">Message</label>
+                    <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
+                </div>
+                
+                <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
+            </form>
         </div>
     </div>
 
     <script>
-        // Accordion functionality
-        const accordionItems = document.querySelectorAll('.accordion-item');
-        
-        accordionItems.forEach(item => {
-            const header = item.querySelector('.accordion-header');
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
             
-            header.addEventListener('click', () => {
-                // Toggle active class on the clicked item
-                item.classList.toggle('active');
+            // Set active navigation link
+            document.querySelector('.building-science-link').classList.add('active');
+            
+            // Accordion functionality
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
                 
-                // Close other accordion items
-                accordionItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+                header.addEventListener('click', () => {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other accordion items
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    tabContents[index].classList.add('active');
                 });
             });
         });
         
-        // Tab functionality
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
+        // Consultation Form Functions
+        function openConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
         
-        tabButtons.forEach((button, index) => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding content
-                button.classList.add('active');
-                tabContents[index].classList.add('active');
+        function closeConsultationForm() {
+            document.getElementById('consultation-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close when clicking outside form
+        document.getElementById('consultation-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConsultationForm();
+            }
+        });
+        
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Get form data
+            const formData = {
+                name: form.elements.name.value,
+                email: form.elements.email.value,
+                phone: form.elements.phone.value || '',
+                message: form.elements.message.value || ''
+            };
+            
+            // Send to API
+            fetch('/api/contact-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success message
+                const modalContent = document.querySelector('#consultation-modal > div');
+                modalContent.innerHTML = `
+                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                        <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // Show error message
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                alert('There was an error sending your message. Please try again later.');
             });
         });
-        
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-    
     </script>
-
-
-    <!-- Consultation Form Modal -->
-    <div id="consultation-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
-      <div style="background: white; padding: 40px; max-width: 500px; width: 90%; position: relative;">
-        <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-        
-        <h3 style="margin-bottom: 20px; color: var(--primary);">Schedule a Consultation</h3>
-        <p style="margin-bottom: 20px;">Complete the form below, and we'll reach out to arrange a personal consultation.</p>
-        
-        <form id="consultation-form">
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Name *</label>
-            <input type="text" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Email *</label>
-            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Phone</label>
-            <input type="tel" name="phone" style="width: 100%; padding: 10px; border: 1px solid #ddd;">
-          </div>
-          
-          <div style="margin-bottom: 15px;">
-            <label style="display: block; margin-bottom: 5px;">Message</label>
-            <textarea name="message" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd;"></textarea>
-          </div>
-          
-          <button type="submit" style="display: inline-block; padding: 12px 30px; background: var(--primary); color: white; border: none; cursor: pointer;">Submit Request</button>
-        </form>
-      </div>
-    </div> 
-
-
-<script>
-  // Open and close modal functions
-  function openConsultationForm() {
-    document.getElementById('consultation-modal').style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
-  }
-  
-  function closeConsultationForm() {
-    document.getElementById('consultation-modal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
-  }
-  
-  // Close when clicking outside form
-  document.getElementById('consultation-modal').addEventListener('click', function(e) {
-    if (e.target === this) {
-      closeConsultationForm();
-    }
-  });
-  
-  // Form submission handler
-  document.getElementById('consultation-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const form = this;
-    const submitButton = form.querySelector('button[type="submit"]');
-    
-    // Disable button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = 'Sending...';
-    
-    // Get form data
-    const formData = {
-      name: form.elements.name.value,
-      email: form.elements.email.value,
-      phone: form.elements.phone.value || '',
-      message: form.elements.message.value || ''
-    };
-    
-    console.log('Submitting form data:', formData);
-    
-    // Send data to our working API endpoint
-    fetch('/api/contact-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => {
-      console.log('Form submission response status:', response.status);
-      return response.json().catch(err => {
-        console.error('Error parsing response:', err);
-        return { success: false, error: 'Invalid response' };
-      });
-    })
-    .then(data => {
-      console.log('Form submission result:', data);
-      
-      // Show success message
-      const modalContent = document.querySelector('#consultation-modal > div');
-      modalContent.innerHTML = `
-        <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-        <div style="text-align: center; padding: 20px;">
-          <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
-          <p style="margin-bottom: 20px;">Your consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
-          <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">
-            ${data.email && data.email.success 
-              ? 'Your message has been sent to our team.' 
-              : 'Your information has been recorded. Our team will reach out soon.'}
-          </p>
-          <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
-        </div>
-      `;
-    })
-    .catch(error => {
-      console.error('Form submission error:', error);
-      
-      // Show error message
-      submitButton.disabled = false;
-      submitButton.innerHTML = 'Submit Request';
-      alert('There was an error sending your message. Please try again later.');
-    });
-  });
-</script>
-
- 
-</div>
-
 </body>
 </html>
