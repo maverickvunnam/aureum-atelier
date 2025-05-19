@@ -717,7 +717,55 @@
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
+            
+        // Form submission handler
+        document.getElementById('consultation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+            // Get form data
+            const formData = {
+                name: form.elements.name.value,
+                email: form.elements.email.value,
+                phone: form.elements.phone.value || '',
+                interest: form.elements.interest.value,
+                message: form.elements.message.value || ''
+            };
+            
+            // Send to API
+            fetch('/api/contact-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success message
+                const modalContent = document.querySelector('#consultation-modal > div');
+                modalContent.innerHTML = `
+                    <button onclick="closeConsultationForm()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                    <div style="text-align: center; padding: 20px;">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);">Thank You!</h3>
+                        <p style="margin-bottom: 20px;">Your technology consultation request has been received. We'll contact you within 1-2 business days to schedule your personal consultation.</p>
+                        <button onclick="closeConsultationForm()" style="padding: 10px 20px; background: var(--primary); color: white; border: none; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                // Show error message
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Request';
+                alert('There was an error sending your message. Please try again later.');
             });
+        });
     </script>
     
     <!-- Footer would go here -->
