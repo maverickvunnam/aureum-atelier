@@ -398,7 +398,7 @@
             color: var(--accent); /* This uses your gold color */
         }
 
-       /* Slim navigation styles with larger logo */
+       /* Updated navigation styles with larger logo */
         .nav {
             position: fixed;
             width: 100%;
@@ -417,47 +417,59 @@
         .nav-content {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* This ensures logo left, links right */
+            justify-content: space-between;
             padding: 0 4%;
-            height: 80px; /* Increased to accommodate larger logo */
+            height: 70px; /* Narrower height */
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
             height: 100%;
-            margin: 0; /* No margin */
-            padding: 0; /* No padding */
+            margin: 0;
+            padding: 0;
         }
 
         .logo-img {
-            height: 76px; /* Much larger logo */
+            height: 90px; /* Much larger logo */
             width: auto;
             transition: all 0.3s ease;
-            margin: 2px 0; /* Minimal vertical margin */
+            margin: 0; /* No margin */
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* Explicitly right-align links */
+            justify-content: flex-end;
             height: 100%;
+            margin-left: auto; /* Force right alignment */
         }
 
         .nav-links a {
             margin-left: 24px;
             font-size: 0.95rem;
             letter-spacing: 0.5px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
         }
 
         /* Adjust logo size when navbar is scrolled */
         .nav.scrolled .logo-img {
-            height: 55px;
+            height: 65px;
         }
 
         .nav.scrolled .nav-content {
-            height: 60px;
+            height: 55px;
         }
+
         .mobile-nav a.active {
             color: var(--accent); /* This uses your gold color */
         }
@@ -494,7 +506,7 @@
             }
 
             .logo-img {
-                height: 60px;
+                height: 65px;
             }
 
             .nav-links {
@@ -507,7 +519,7 @@
 
             .nav-content {
                 padding: 0 4%;
-                height: 64px;
+                height: 60px;
             }
             
             body.nav-open {
