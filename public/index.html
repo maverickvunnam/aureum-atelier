@@ -394,7 +394,23 @@
             transform: rotate(-135deg);
         }
 
+        .nav-links a.active {
+            color: var(--accent); /* This uses your gold color */
+        }
 
+        .nav-links a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent); /* Gold underline */
+        }
+
+        .mobile-nav a.active {
+            color: var(--accent); /* This uses your gold color */
+        }
 
         @media (max-width: 768px) {
             .hero-content h1 {
@@ -784,6 +800,18 @@
                 alert('There was an error sending your message. Please try again later.');
             });
         });
+
+        // Set active class based on current page
+        const currentPage = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage || 
+                (currentPage.includes(link.getAttribute('href')) && link.getAttribute('href') !== '/')) {
+                link.classList.add('active');
+            }
+        });
+
     </script>
 </body>
 </html>
