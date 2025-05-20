@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
     <style>
-        /* Hero styles - matched with about.html */
+        /* Page-specific styles */
         .hero-banner {
             height: 50vh;
             background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
-                        url('/images/building-science/hero-banner.jpg');
+                url('/images/building-science/hero-banner.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -23,7 +23,7 @@
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 700px;
         }
         
         .hero-content h1 {
@@ -34,22 +34,6 @@
             line-height: 1.2;
         }
         
-        /* Section styles - matched with about.html */
-        .building-section {
-            padding: 40px 10%;
-        }
-        
-        .building-section:last-of-type {
-            padding-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            color: var(--primary);
-        }
-        
         .section-separator {
             height: 2px;
             width: 60px;
@@ -57,7 +41,15 @@
             margin: 30px 0;
         }
         
-        .building-grid {
+        .container.section {
+            padding: 40px 10%;
+        }
+        
+        .section-title {
+            margin-bottom: 30px;
+        }
+        
+        .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
@@ -65,26 +57,14 @@
             align-items: flex-start;
         }
         
-        .building-content h3 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: 400;
-        }
-        
-        .building-content p {
-            margin-bottom: 25px;
-            line-height: 1.8;
-        }
-        
-        .building-content p:last-child {
-            margin-bottom: 0;
+        .image-container {
+            position: relative;
         }
         
         .image-container img {
             width: 100%;
             height: auto;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             max-height: 400px;
             object-fit: cover;
         }
@@ -95,7 +75,7 @@
             margin-top: 10px;
             font-style: italic;
         }
-
+        
         /* Performance Metrics Section */
         .metrics-grid {
             display: grid;
@@ -138,23 +118,6 @@
             transform: translateX(-50%);
         }
         
-        /* Highlight box - similar to tech-vision in tech page */
-        .highlight-box {
-            background: var(--primary);
-            color: white;
-            padding: 40px;
-            margin: 30px 0;
-            border-radius: 4px;
-        }
-        
-        .highlight-box h3 {
-            color: var(--accent);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            font-weight: 400;
-        }
-        
-        /* Accordion Styles */
         .accordions {
             margin: 30px 0;
         }
@@ -195,7 +158,6 @@
             max-height: 1000px;
         }
         
-        /* Tabs Styles */
         .tabs-container {
             margin: 30px 0;
         }
@@ -228,7 +190,6 @@
             display: block;
         }
         
-        /* Wall Diagram Styles */
         .wall-diagram {
             position: relative;
             height: 400px;
@@ -291,6 +252,79 @@
             background: #c19a6b;
         }
         
+        .wall-labels {
+            display: grid;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* Standard Assembly Labels */
+        .standard-labels {
+            grid-template-columns: 5% 40% 5% 30% auto;
+        }
+
+        /* Hybrid Assembly Labels */
+        .hybrid-labels {
+            grid-template-columns: 5% 18% 22% 5% 30% auto;
+        }
+
+        /* Premium Assembly Labels */
+        .premium-labels {
+            grid-template-columns: 5% 18% 22% 5% 15% 5% 25% auto;
+        }
+
+        .wall-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .highlight-box {
+            background: var(--primary);
+            color: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table th {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .comparison-table td:last-child {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .faq-section {
+            margin: 30px 0;
+        }
+
         .legend {
             display: flex;
             flex-wrap: wrap;
@@ -319,146 +353,31 @@
             font-size: 0.75rem;
         }
         
-        /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
+        .page-content {
+            padding-top: 0;
         }
         
-        .comparison-table th,
-        .comparison-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .comparison-table th {
-            font-weight: 500;
-            color: var(--primary);
-        }
-        
-        .comparison-table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-        
-        .comparison-table td:last-child {
-            color: var(--accent);
-            font-weight: 500;
-        }
-        
-        /* CTA section - matched with tech-vision */
-        .building-vision {
-            background: var(--primary);
-            color: var(--light);
+        .cta-section {
             text-align: center;
-            padding: 80px 10%;
+            margin: 0;
         }
         
-        .building-vision h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--accent);
-        }
-        
-        .building-vision p {
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-        
-        /* Button styles - matched with about.html */
-        .button {
-            display: inline-block;
-            padding: 15px 40px;
+        .cta-section .button {
             background: var(--accent);
             color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s;
             font-weight: 500;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
         }
         
-        .button:hover {
+        .cta-section .button:hover {
             background: var(--light);
         }
         
-        /* Consultation Modal - matched with about.html */
-        #consultation-modal {
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.7); 
-            z-index: 1000; 
-            align-items: center; 
-            justify-content: center;
-        }
-        
-        #consultation-modal > div {
-            background: white; 
-            padding: 40px; 
-            max-width: 500px; 
-            width: 90%; 
-            position: relative;
-        }
-        
-        #consultation-modal button.close-button {
-            position: absolute; 
-            top: 10px; 
-            right: 10px; 
-            background: none; 
-            border: none; 
-            font-size: 1.5rem; 
-            cursor: pointer;
-        }
-        
-        #consultation-modal h3 {
-            margin-bottom: 20px; 
-            color: var(--primary);
-        }
-        
-        #consultation-modal p {
-            margin-bottom: 20px;
-        }
-        
-        #consultation-form div {
-            margin-bottom: 15px;
-        }
-        
-        #consultation-form label {
-            display: block; 
-            margin-bottom: 5px;
-        }
-        
-        #consultation-form input,
-        #consultation-form textarea {
-            width: 100%; 
-            padding: 10px; 
-            border: 1px solid #ddd;
-        }
-        
-        #consultation-form button {
-            display: inline-block; 
-            padding: 12px 30px; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            cursor: pointer;
-        }
-        
-        /* Responsive Styles */
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
             }
             
-            .building-grid {
+            .two-column {
                 grid-template-columns: 1fr;
             }
             
@@ -468,10 +387,6 @@
             
             .wall-diagram {
                 height: 300px;
-            }
-            
-            .building-section {
-                padding: 40px 5%;
             }
         }
         
@@ -484,7 +399,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav scrolled">
         <div class="nav-content">
             <a href="/" class="nav-logo">AUREUM ATELIER</a>
             <div class="nav-links">
@@ -506,17 +421,17 @@
     </div>
     
     <!-- Page content -->
-    <div class="building-section">
+    <div class="container section">
         <!-- Introduction -->
         <h2 class="section-title" data-aos="fade-up">Why Building Science Matters</h2>
         
-        <p data-aos="fade-up">At Aureum Atelier, we believe that true luxury isn't just what you can see—it's what you experience every day through comfort, health, and efficiency. Our approach to building science transforms how your home performs, creating living environments that are as exceptional in their function as they are in their form.</p>
+        <p class="intro-text" data-aos="fade-up">At Aureum Atelier, we believe that true luxury isn't just what you can see—it's what you experience every day through comfort, health, and efficiency. Our approach to building science transforms how your home performs, creating living environments that are as exceptional in their function as they are in their form.</p>
         
-        <div class="building-grid">
-            <div class="building-content" data-aos="fade-right">
-                <h3>The Science of Comfort</h3>
+        <div class="two-column">
+            <div data-aos="fade-right">
+                <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.8rem; font-weight: 400;">The Science of Comfort</h3>
                 <p>Modern luxury demands more than aesthetic beauty—it requires environments that respond intuitively to human needs. Our building science approach addresses the fundamental physics that govern how buildings interact with their environment and occupants.</p>
-                <p>Through precise control of temperature, humidity, air quality, and sound, we create homes that maintain perfect comfort conditions regardless of external weather extremes—whether it's a scorching summer day or the coldest winter night.</p>
+                <p style="margin-top: 20px;">Through precise control of temperature, humidity, air quality, and sound, we create homes that maintain perfect comfort conditions regardless of external weather extremes—whether it's a scorching summer day or the coldest winter night.</p>
             </div>
             <div class="image-container" data-aos="fade-left">
                 <img src="/images/building-science/thermal-imaging.jpg" alt="Thermal Imaging of Home">
@@ -525,10 +440,8 @@
         </div>
         
         <div class="section-separator"></div>
-    </div>
         
-    <!-- Performance Metrics -->
-    <div class="building-section">
+        <!-- Performance Metrics -->
         <h2 class="section-title" data-aos="fade-up">Performance Beyond Standards</h2>
         <p data-aos="fade-up">Every Aureum Atelier home exceeds conventional building standards by significant margins. We measure success through quantifiable metrics that demonstrate how our homes outperform even the most stringent industry benchmarks.</p>
         
@@ -566,10 +479,8 @@
                 <li>Superior moisture control that protects your investment long-term</li>
             </ul>
         </div>
-    </div>
         
-    <!-- The Four Controls -->
-    <div class="building-section">
+        <!-- The Four Controls -->
         <h2 class="section-title" data-aos="fade-up">The Four Controls of Building Science</h2>
         <p data-aos="fade-up">All high-performance homes must manage four critical factors. At Aureum Atelier, we've perfected each of these controls through innovative design and meticulous implementation.</p>
         
@@ -577,8 +488,8 @@
             <div class="accordion-item" data-aos="fade-up">
                 <div class="accordion-header">Water Control</div>
                 <div class="accordion-content">
-                    <div class="building-grid">
-                        <div class="building-content">
+                    <div class="two-column">
+                        <div>
                             <p>Water is the most significant threat to building durability. Our comprehensive water management strategy includes:</p>
                             <ul style="margin: 20px 0; padding-left: 20px;">
                                 <li>Advanced drainage planes with redundant water barriers</li>
@@ -599,8 +510,8 @@
             <div class="accordion-item" data-aos="fade-up">
                 <div class="accordion-header">Air Control</div>
                 <div class="accordion-content">
-                    <div class="building-grid">
-                        <div class="building-content">
+                    <div class="two-column">
+                        <div>
                             <p>Controlling airflow is essential for energy efficiency, comfort, and protecting the building envelope. Our air control strategy includes:</p>
                             <ul style="margin: 20px 0; padding-left: 20px;">
                                 <li>Continuous air barrier systems meticulously detailed at all transitions</li>
@@ -621,8 +532,8 @@
             <div class="accordion-item" data-aos="fade-up">
                 <div class="accordion-header">Vapor Control</div>
                 <div class="accordion-content">
-                    <div class="building-grid">
-                        <div class="building-content">
+                    <div class="two-column">
+                        <div>
                             <p>Managing water vapor movement is critical to preventing condensation and moisture damage within assemblies. Our vapor control strategy includes:</p>
                             <ul style="margin: 20px 0; padding-left: 20px;">
                                 <li>Climate-specific vapor control layer placement and permeance</li>
@@ -643,8 +554,8 @@
             <div class="accordion-item" data-aos="fade-up">
                 <div class="accordion-header">Thermal Control</div>
                 <div class="accordion-content">
-                    <div class="building-grid">
-                        <div class="building-content">
+                    <div class="two-column">
+                        <div>
                             <p>Effective thermal control creates comfort, efficiency, and protects building assemblies. Our thermal control strategy includes:</p>
                             <ul style="margin: 20px 0; padding-left: 20px;">
                                 <li>Continuous insulation that minimizes thermal bridging</li>
@@ -662,10 +573,8 @@
                 </div>
             </div>
         </div>
-    </div>
         
-    <!-- Wall Assembly Options -->
-    <div class="building-section">
+        <!-- Wall Assembly Options -->
         <h2 class="section-title" data-aos="fade-up">Wall Assembly Options</h2>
         <p data-aos="fade-up">We offer multiple high-performance wall assembly options, each designed to achieve specific performance goals while maintaining architectural flexibility.</p>
         
@@ -679,8 +588,8 @@
             <div class="tab-content active">
                 <h3 style="color: var(--primary); margin-bottom: 20px;">Rock Wool Performance Assembly</h3>
                 
-                <div class="building-grid">
-                    <div class="building-content">
+                <div class="two-column">
+                    <div>
                         <p>Our standard wall assembly combines proven materials with exceptional implementation to deliver reliable performance:</p>
                         <ul style="margin: 20px 0; padding-left: 20px;">
                             <li>5/8" Interior Gypsum Board (R-0.56)</li>
@@ -713,8 +622,8 @@
             <div class="tab-content">
                 <h3 style="color: var(--primary); margin-bottom: 20px;">Hybrid Spray Foam + Rock Wool Assembly</h3>
                 
-                <div class="building-grid">
-                    <div class="building-content">
+                <div class="two-column">
+                    <div>
                         <p>Our hybrid assembly combines the best properties of closed-cell spray foam and mineral wool:</p>
                         <ul style="margin: 20px 0; padding-left: 20px;">
                             <li>5/8" Interior Gypsum Board (R-0.56)</li>
@@ -751,8 +660,8 @@
             <div class="tab-content">
                 <h3 style="color: var(--primary); margin-bottom: 20px;">Premium Wall Assembly</h3>
                 
-                <div class="building-grid">
-                    <div class="building-content">
+                <div class="two-column">
+                    <div>
                         <p>Our premium assembly combines interior and exterior insulation for maximum performance:</p>
                         <ul style="margin: 20px 0; padding-left: 20px;">
                             <li>5/8" Interior Gypsum Board (R-0.56)</li>
@@ -791,10 +700,8 @@
                 </div>
             </div>
         </div>
-    </div>
         
-    <!-- Performance Comparison -->
-    <div class="building-section">
+        <!-- Performance Comparison -->
         <h2 class="section-title" data-aos="fade-up">Performance Comparison</h2>
         <p data-aos="fade-up">See how our homes compare to standard luxury construction across key performance metrics:</p>
         
@@ -842,8 +749,8 @@
         </table>
         
         <!-- Verification and Testing -->
-        <div class="building-grid">
-            <div class="building-content" data-aos="fade-right">
+        <div class="two-column">
+            <div data-aos="fade-right">
                 <h2 class="section-title">Verification & Testing</h2>
                 <p>We don't just claim superior performance—we verify it at every step of construction:</p>
                 <ul style="margin: 20px 0; padding-left: 20px;">
@@ -860,97 +767,95 @@
                 <div class="caption">Blower door testing verifies air barrier performance</div>
             </div>
         </div>
-    </div>
         
-    <!-- FAQ Section -->
-    <div class="building-section">
-        <h2 class="section-title" data-aos="fade-up">Building Science FAQ</h2>
-        
-        <div class="accordions">
-            <div class="accordion-item" data-aos="fade-up">
-                <div class="accordion-header">What does ACH50 mean and why is it important?</div>
-                <div class="accordion-content">
-                    <p>ACH50 stands for Air Changes per Hour at 50 Pascals pressure difference, measuring how many times the entire volume of air in a home is replaced in one hour under test conditions. This metric is the industry standard for measuring a home's air tightness.</p>
-                    <p style="margin-top: 15px;">Lower ACH50 values indicate a tighter building envelope, which means:</p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>Less uncontrolled air leakage, resulting in better energy efficiency</li>
-                        <li>Improved moisture control within wall assemblies</li>
-                        <li>Enhanced comfort with fewer drafts and temperature variations</li>
-                        <li>Better sound isolation from outside noise</li>
-                        <li>Improved indoor air quality through controlled ventilation</li>
-                    </ul>
-                    <p>Standard homes typically range from 3-7 ACH50, while our homes achieve 0.6-2.5 ACH50, approaching or meeting Passive House standards.</p>
-                </div>
-            </div>
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="section-title" data-aos="fade-up">Building Science FAQ</h2>
             
-            <div class="accordion-item" data-aos="fade-up">
-                <div class="accordion-header">Won't such a tight house feel stuffy or have air quality issues?</div>
-                <div class="accordion-content">
-                   <p>This is a common misconception. In reality, a tightly sealed home with proper mechanical ventilation provides superior air quality compared to leaky homes.</p>
-                    <p style="margin-top: 15px;">All our homes include balanced ventilation systems (ERV or HRV) that continuously provide filtered fresh air while exhausting stale air. This approach offers several advantages:</p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>Filtered fresh air removes pollutants, allergens, and particulates</li>
-                        <li>Heat recovery maintains energy efficiency</li>
-                        <li>Balanced airflow prevents pressure issues</li>
-                        <li>Continuous operation ensures consistent air quality</li>
-                        <li>Controlled humidity levels prevent mustiness</li>
-                    </ul>
-                    <p>Our homes actually have significantly better air quality than conventional homes, where air enters unpredictably through random leaks in the building envelope, bringing in unfiltered outdoor air and potential moisture issues.</p>
+            <div class="accordions">
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">What does ACH50 mean and why is it important?</div>
+                    <div class="accordion-content">
+                        <p>ACH50 stands for Air Changes per Hour at 50 Pascals pressure difference, measuring how many times the entire volume of air in a home is replaced in one hour under test conditions. This metric is the industry standard for measuring a home's air tightness.</p>
+                        <p style="margin-top: 15px;">Lower ACH50 values indicate a tighter building envelope, which means:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Less uncontrolled air leakage, resulting in better energy efficiency</li>
+                            <li>Improved moisture control within wall assemblies</li>
+                            <li>Enhanced comfort with fewer drafts and temperature variations</li>
+                            <li>Better sound isolation from outside noise</li>
+                            <li>Improved indoor air quality through controlled ventilation</li>
+                        </ul>
+                        <p>Standard homes typically range from 3-7 ACH50, while our homes achieve 0.6-2.5 ACH50, approaching or meeting Passive House standards.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="accordion-item" data-aos="fade-up">
-                <div class="accordion-header">How do these building science principles affect maintenance and longevity?</div>
-                <div class="accordion-content">
-                    <p>Our building science-driven approach significantly extends the lifespan of your home while reducing maintenance requirements.</p>
-                    <p style="margin-top: 15px;">Conventional luxury homes often suffer from hidden moisture issues, premature material degradation, and system inefficiencies that lead to costly repairs. Our homes are designed to avoid these problems through:</p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>Superior moisture management that prevents mold and rot</li>
-                        <li>Proper temperature gradients that prevent condensation</li>
-                        <li>Ventilated assemblies that promote drying</li>
-                        <li>Reduced thermal stress on materials</li>
-                        <li>Protected mechanical systems that operate within optimal ranges</li>
-                    </ul>
-                    <p>The result is a home that maintains its structural integrity, finish quality, and system performance for decades longer than conventional construction. This translates to lower maintenance costs and preserved property value over time.</p>
+                
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">Won't such a tight house feel stuffy or have air quality issues?</div>
+                    <div class="accordion-content">
+                       <p>This is a common misconception. In reality, a tightly sealed home with proper mechanical ventilation provides superior air quality compared to leaky homes.</p>
+                        <p style="margin-top: 15px;">All our homes include balanced ventilation systems (ERV or HRV) that continuously provide filtered fresh air while exhausting stale air. This approach offers several advantages:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Filtered fresh air removes pollutants, allergens, and particulates</li>
+                            <li>Heat recovery maintains energy efficiency</li>
+                            <li>Balanced airflow prevents pressure issues</li>
+                            <li>Continuous operation ensures consistent air quality</li>
+                            <li>Controlled humidity levels prevent mustiness</li>
+                        </ul>
+                        <p>Our homes actually have significantly better air quality than conventional homes, where air enters unpredictably through random leaks in the building envelope, bringing in unfiltered outdoor air and potential moisture issues.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="accordion-item" data-aos="fade-up">
-                <div class="accordion-header">Is it worth investing in the premium wall assembly?</div>
-                <div class="accordion-content">
-                    <p>The decision between our standard, hybrid, and premium wall assemblies depends on several factors including climate, design requirements, and performance goals.</p>
-                    <p style="margin-top: 15px;">For many clients, the hybrid assembly represents an optimal balance of performance and value. However, the premium assembly offers significant advantages in certain scenarios:</p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>Extreme climate conditions (hot or cold)</li>
-                        <li>Homes with architectural features creating significant thermal bridges</li>
-                        <li>Projects with the highest performance targets</li>
-                        <li>Clients seeking maximum sound isolation</li>
-                        <li>Designs with large glazing areas requiring thermal compensation</li>
-                    </ul>
-                    <p>Our team can provide detailed energy modeling and performance projections to help you evaluate the return on investment for each assembly option based on your specific project requirements.</p>
+                
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">How do these building science principles affect maintenance and longevity?</div>
+                    <div class="accordion-content">
+                        <p>Our building science-driven approach significantly extends the lifespan of your home while reducing maintenance requirements.</p>
+                        <p style="margin-top: 15px;">Conventional luxury homes often suffer from hidden moisture issues, premature material degradation, and system inefficiencies that lead to costly repairs. Our homes are designed to avoid these problems through:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Superior moisture management that prevents mold and rot</li>
+                            <li>Proper temperature gradients that prevent condensation</li>
+                            <li>Ventilated assemblies that promote drying</li>
+                            <li>Reduced thermal stress on materials</li>
+                            <li>Protected mechanical systems that operate within optimal ranges</li>
+                        </ul>
+                        <p>The result is a home that maintains its structural integrity, finish quality, and system performance for decades longer than conventional construction. This translates to lower maintenance costs and preserved property value over time.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="accordion-item" data-aos="fade-up">
-                <div class="accordion-header">How do these building science features integrate with architectural design?</div>
-                <div class="accordion-content">
-                    <p>Our building science principles enhance rather than restrict architectural design. We believe that performance and aesthetics must work in harmony to create truly exceptional homes.</p>
-                    <p style="margin-top: 15px;">Our approach includes:</p>
-                    <ul style="margin: 15px 0; padding-left: 20px;">
-                        <li>Early collaboration between architects and building science specialists</li>
-                        <li>Performance-optimized details for architectural features</li>
-                        <li>Thermal analysis of design elements</li>
-                        <li>Custom solutions for unique design challenges</li>
-                        <li>Material selections that balance performance and aesthetics</li>
-                    </ul>
-                    <p>This integrated design process allows us to achieve your architectural vision while ensuring that every detail contributes to the home's overall performance. The result is a residence that appears conventional in its beauty but performs extraordinarily in its function.</p>
+                
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">Is it worth investing in the premium wall assembly?</div>
+                    <div class="accordion-content">
+                        <p>The decision between our standard, hybrid, and premium wall assemblies depends on several factors including climate, design requirements, and performance goals.</p>
+                        <p style="margin-top: 15px;">For many clients, the hybrid assembly represents an optimal balance of performance and value. However, the premium assembly offers significant advantages in certain scenarios:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Extreme climate conditions (hot or cold)</li>
+                            <li>Homes with architectural features creating significant thermal bridges</li>
+                            <li>Projects with the highest performance targets</li>
+                            <li>Clients seeking maximum sound isolation</li>
+                            <li>Designs with large glazing areas requiring thermal compensation</li>
+                        </ul>
+                        <p>Our team can provide detailed energy modeling and performance projections to help you evaluate the return on investment for each assembly option based on your specific project requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">How do these building science features integrate with architectural design?</div>
+                    <div class="accordion-content">
+                        <p>Our building science principles enhance rather than restrict architectural design. We believe that performance and aesthetics must work in harmony to create truly exceptional homes.</p>
+                        <p style="margin-top: 15px;">Our approach includes:</p>
+                        <ul style="margin: 15px 0; padding-left: 20px;">
+                            <li>Early collaboration between architects and building science specialists</li>
+                            <li>Performance-optimized details for architectural features</li>
+                            <li>Thermal analysis of design elements</li>
+                            <li>Custom solutions for unique design challenges</li>
+                            <li>Material selections that balance performance and aesthetics</li>
+                        </ul>
+                        <p>This integrated design process allows us to achieve your architectural vision while ensuring that every detail contributes to the home's overall performance. The result is a residence that appears conventional in its beauty but performs extraordinarily in its function.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         
-    <!-- Client Benefits Section -->
-    <div class="building-section">
+        <!-- Client Benefits Section -->
         <div class="highlight-box" data-aos="fade-up">
             <h3>The Aureum Atelier Building Science Advantage</h3>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 30px;">
@@ -989,14 +894,14 @@
             </ul>
             <p data-aos="fade-up">Our transparent approach ensures you understand exactly how your home functions and the value of every performance feature we implement.</p>
         </div>
-    </div>
         
-    <!-- Call to Action -->
-    <div class="building-vision">
-        <div data-aos="fade-up">
-            <h2>Ready to Experience the Difference?</h2>
-            <p>Schedule a consultation to discuss how our building science approach can transform your vision for a luxury home into a reality that performs as beautifully as it looks.</p>
-            <a href="#" onclick="openConsultationForm(); return false;" class="button">Schedule a Consultation</a>
+        <!-- Call to Action -->
+        <div class="cta-section" style="background: linear-gradient(rgba(10, 25, 48, 0.9), rgba(10, 25, 48, 0.9)), url('/images/building-science/cta-background.jpg'); background-size: cover; background-position: center; color: var(--light); text-align: center; padding: 80px 10%; margin: 60px 0 0;">
+            <div data-aos="fade-up">
+                <h2 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 20px; color: var(--accent);">Ready to Experience the Difference?</h2>
+                <p style="max-width: 700px; margin: 0 auto 30px; color: var(--light);">Schedule a consultation to discuss how our building science approach can transform your vision for a luxury home into a reality that performs as beautifully as it looks.</p>
+                <a href="#" onclick="openConsultationForm(); return false;" class="button" style="background: var(--accent); color: var(--primary);">Schedule a Consultation</a>
+            </div>
         </div>
     </div>
 
@@ -1044,16 +949,6 @@
             
             // Set active navigation link
             document.querySelector('.building-science-link').classList.add('active');
-            
-            // Sticky navigation
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('.nav');
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
             
             // Accordion functionality
             const accordionItems = document.querySelectorAll('.accordion-item');
