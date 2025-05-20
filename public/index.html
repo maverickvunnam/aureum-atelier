@@ -398,7 +398,7 @@
             color: var(--accent); /* This uses your gold color */
         }
 
-       /* Updated navigation styles with larger logo */
+       /* Ultra-slim navigation with extended logo */
         .nav {
             position: fixed;
             width: 100%;
@@ -419,7 +419,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 4%;
-            height: 70px; /* Narrower height */
+            height: 45px; /* Ultra-slim height */
             max-width: 100%;
             width: 100%;
             margin: 0 auto;
@@ -431,13 +431,16 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            position: relative; /* For logo positioning */
         }
 
         .logo-img {
-            height: 90px; /* Much larger logo */
+            height: 100px; /* Even larger logo that extends beyond nav bar */
             width: auto;
             transition: all 0.3s ease;
-            margin: 0; /* No margin */
+            margin: 0;
+            position: relative; /* Allow logo to break out of container */
+            top: 8px; /* Adjust to control how much the logo extends below the navbar */
         }
 
         .nav-links {
@@ -463,11 +466,12 @@
 
         /* Adjust logo size when navbar is scrolled */
         .nav.scrolled .logo-img {
-            height: 65px;
+            height: 70px;
+            top: 5px;
         }
 
         .nav.scrolled .nav-content {
-            height: 55px;
+            height: 40px;
         }
 
         .mobile-nav a.active {
