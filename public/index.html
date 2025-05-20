@@ -402,24 +402,6 @@
             color: var(--accent); /* This uses your gold color */
         }
 
-        /* Logo styles */
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        .logo-img {
-            height: 120px;
-            width: auto;
-            transition: all 0.3s ease;
-        }
-
-        /* Adjust logo size when navbar is scrolled */
-        .nav.scrolled .logo-img {
-            height: 40px;
-        }         
-
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -458,11 +440,7 @@
             .mobile-menu-button {
                 display: block;
             }
-
-            .logo-img {
-                height: 120px;
-            }
-
+            
             body.nav-open {
                 overflow: hidden;
             }
