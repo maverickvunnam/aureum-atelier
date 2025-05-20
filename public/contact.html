@@ -6,328 +6,92 @@
     <title>Contact & Consultation | Aureum Atelier</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <style>
-        /* Base styles */
-        :root {
-            --primary: #0a1930;
-            --accent: #d4af37;
-            --light: #ffffff;
-            --dark: #333333;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            padding: 20px 10%;
-            background-color: transparent;
-        }
-        
-        .nav.scrolled {
-            background-color: var(--primary);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 12px 10%;
-        }
-        
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-logo {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            font-weight: 400;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a:hover, 
-        .nav-links a.active {
-            color: var(--accent);
-        }
-        
-        .nav-links a.active:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        /* Contact page-specific styles */
-        .hero {
-            height: 60vh;
-            background: linear-gradient(rgba(10, 25, 48, 0.8), rgba(10, 25, 48, 0.8)),
+        /* Hero styles - matched with about.html */
+        .hero-banner {
+            height: 50vh;
+            background: linear-gradient(rgba(10, 25, 48, 0.7), rgba(10, 25, 48, 0.7)),
                         url('/images/contact-hero.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
             padding: 0 10%;
-            position: relative;
-            margin-top: 0;
-        }
-
-        .hero-content {
-            max-width: 650px;
             color: var(--light);
-            position: relative;
-            z-index: 2;
+            margin-bottom: 0;
         }
-
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
         .hero-content h1 {
             font-size: 3.5rem;
             font-weight: 300;
             margin-bottom: 20px;
+            color: var(--accent);
             line-height: 1.2;
         }
 
         .hero-content h1 span {
             color: var(--accent);
         }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .section {
+        
+        /* Section styles - matched with about.html */
+        .contact-section {
             padding: 40px 10%;
         }
-
+        
+        .contact-section:last-of-type {
+            padding-bottom: 40px;
+        }
+        
         .section-title {
             font-size: 2.5rem;
             font-weight: 300;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            color: var(--primary);
         }
-
+        
         .section-subtitle {
             font-size: 1.2rem;
             max-width: 800px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
-        .contact-section {
-            background: var(--light);
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-
-        .contact-method {
-            margin-bottom: 25px;
-        }
-
-        .contact-method h4 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-
-        .contact-method p {
-            line-height: 1.6;
-            margin-bottom: 5px;
-        }
-
-        .contact-method a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-method a:hover {
-            color: var(--accent);
-        }
-
-        .contact-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary);
-            color: var(--light);
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .social-icon:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .contact-form-container {
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px;
-        }
-
-        .form-title {
-            font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--primary);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .checkbox-group {
-            margin-bottom: 5px;
-        }
-
-        .checkbox-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .checkbox-container input[type="checkbox"],
-        .checkbox-container input[type="radio"] {
-            margin-right: 10px;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--accent);
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary);
-            color: var(--light);
-        }
-
+        /* Process section - styled like tech-vision or building-vision */
         .process-section {
             background: var(--primary);
             color: var(--light);
-            padding-top: 60px;
-            padding-bottom: 60px;
+            padding: 40px 10%;
         }
-
-        .process-section .section-title,
-        .process-section .section-subtitle {
+        
+        .process-section .section-title {
             color: var(--light);
             text-align: center;
         }
-
+        
         .process-section .section-subtitle {
+            color: var(--light);
+            text-align: center;
             margin-left: auto;
             margin-right: auto;
         }
-
+        
         .process-steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-top: 40px;
         }
-
+        
         .process-step {
             text-align: center;
             position: relative;
         }
-
+        
         .process-step:not(:last-child)::after {
             content: '';
             position: absolute;
@@ -337,7 +101,7 @@
             height: 1px;
             background: var(--accent);
         }
-
+        
         .step-number {
             width: 80px;
             height: 80px;
@@ -350,55 +114,202 @@
             font-size: 1.8rem;
             margin: 0 auto 20px;
         }
-
+        
         .step-title {
             font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--accent);
             font-weight: 400;
         }
-
+        
         .step-description {
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
+        /* Contact grid styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+            align-items: flex-start;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .contact-method {
+            margin-bottom: 25px;
+        }
+        
+        .contact-method h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .contact-method p {
+            line-height: 1.8;
+            margin-bottom: 5px;
+        }
+        
+        .contact-method a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-method a:hover {
+            color: var(--accent);
+        }
+        
+        .contact-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Form styles - matched with consultation forms from other pages */
+        .contact-form-container {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .checkbox-group {
+            margin-bottom: 5px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-container input[type="checkbox"],
+        .checkbox-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        /* Button styles - matched with about.html button */
+        .button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .button:hover {
+            background: var(--light);
+        }
+        
+        /* Form message styles */
         .form-message {
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 4px;
             display: none;
         }
-
+        
         .form-message.success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-
+        
         .form-message.error {
             background-color: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
         
-        .faq-section {
-            background: var(--light);
-            padding-top: 60px;
-            padding-bottom: 60px;
-        }
-
+        /* FAQ section - matched with building-science.html */
         .faq-container {
             max-width: 900px;
             margin: 0 auto;
         }
-
+        
         .faq-item {
             margin-bottom: 25px;
             border-bottom: 1px solid rgba(0,0,0,0.1);
             padding-bottom: 25px;
         }
-
+        
         .faq-question {
             font-size: 1.3rem;
             font-weight: 400;
@@ -408,7 +319,7 @@
             position: relative;
             padding-right: 30px;
         }
-
+        
         .faq-question:after {
             content: '+';
             position: absolute;
@@ -417,28 +328,24 @@
             font-size: 1.5rem;
             transition: transform 0.3s ease;
         }
-
+        
         .faq-item.active .faq-question:after {
             transform: rotate(45deg);
         }
-
+        
         .faq-answer {
             display: none;
             line-height: 1.7;
         }
-
+        
         .faq-item.active .faq-answer {
             display: block;
         }
         
-        /* Responsive styles */
+        /* Responsive styles - matched with about.html */
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.1rem;
             }
             
             .contact-grid {
@@ -458,14 +365,17 @@
                 display: none;
             }
             
-            .section {
-                padding: 60px 5%;
+            .contact-section {
+                padding: 40px 5%;
+            }
+            
+            .process-section {
+                padding: 40px 5%;
             }
         }
     </style>
 </head>
 <body>
-
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
@@ -480,16 +390,16 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Banner -->
+    <div class="hero-banner">
         <div class="hero-content" data-aos="fade-up">
             <h1>Begin Your <span>Journey</span></h1>
             <p>Let's start a conversation about creating your extraordinary custom home.</p>
         </div>
-    </section>
+    </div>
 
     <!-- Consultation Process Section -->
-    <section class="section process-section">
+    <div class="process-section">
         <h2 class="section-title" data-aos="fade-up">Our Consultation Process</h2>
         <p class="section-subtitle" data-aos="fade-up">We've designed a thoughtful process to understand your vision and determine how we can best bring it to life.</p>
         
@@ -515,10 +425,10 @@
                 <p class="step-description">Detailed proposal outlining scope, approach, timeline, and investment for your custom home.</p>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Contact Section -->
-    <section class="section contact-section">
+    <div class="contact-section">
         <div class="contact-grid">
             <div class="contact-info" data-aos="fade-right">
                 <h3>Get in Touch</h3>
@@ -672,14 +582,14 @@
                         </select>
                     </div>
                     
-                    <button type="submit" class="btn-primary">Submit Request</button>
+                    <button type="submit" class="button">Submit Request</button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- FAQ Section -->
-    <section class="section faq-section">
+    <div class="contact-section">
         <h2 class="section-title" data-aos="fade-up">Frequently Asked Questions</h2>
         
         <div class="faq-container">
@@ -687,7 +597,7 @@
                 <div class="faq-question">What information should I prepare for the initial consultation?</div>
                 <div class="faq-answer">
                     <p>To make the most of our initial consultation, we recommend gathering the following information beforehand:</p>
-                    <ul>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
                         <li>Property information (address, survey if available)</li>
                         <li>Images or examples of homes or styles you admire</li>
                         <li>A list of your must-have features and spaces</li>
@@ -702,7 +612,7 @@
                 <div class="faq-question">How long does the custom home process typically take?</div>
                 <div class="faq-answer">
                     <p>The timeline for a custom home project varies based on complexity, size, and site conditions, but generally follows this pattern:</p>
-                    <ul>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
                         <li>Design and Planning: 3-6 months</li>
                         <li>Permitting: 1-3 months</li>
                         <li>Construction: 12-18 months</li>
@@ -722,7 +632,7 @@
                 <div class="faq-question">What makes Aureum Atelier different from other luxury builders?</div>
                 <div class="faq-answer">
                     <p>Aureum Atelier distinguishes itself through:</p>
-                    <ul>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
                         <li>Our integrated approach to design, building science, and technology</li>
                         <li>Commitment to both aesthetic excellence and technical performance</li>
                         <li>Limited project volume to ensure exceptional attention to detail</li>
@@ -740,17 +650,22 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
         // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+            
+            // Set active navigation link
+            document.querySelector('.contact-link').classList.add('active');
         });
 
         // Sticky navigation
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', function() {
             const nav = document.querySelector('.nav');
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
@@ -760,20 +675,22 @@
         });
         
         // FAQ Toggles
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close all other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', function() {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
                 });
-                
-                // Toggle current item
-                item.classList.toggle('active');
             });
         });
         
@@ -803,8 +720,6 @@
                 message: form.elements.message.value || ''
             };
             
-            console.log('Submitting form data:', formData);
-            
             // Simplified message to include in request body for email
             const messageWithDetails = `
 Project Details:
@@ -827,9 +742,7 @@ ${formData.message}
                 message: messageWithDetails
             };
             
-            console.log('API request data:', apiRequestData);
-            
-            // Send to API with simplified data object
+            // Send to API
             fetch('/api/contact-email', {
                 method: 'POST',
                 headers: {
@@ -838,7 +751,6 @@ ${formData.message}
                 body: JSON.stringify(apiRequestData)
             })
             .then(response => {
-                console.log('Form submission response status:', response.status);
                 // Consider any HTTP status in the 200 range a success
                 if (response.ok) {
                     return response.json().catch(() => {
@@ -849,8 +761,6 @@ ${formData.message}
                 throw new Error('Network response was not ok.');
             })
             .then(data => {
-                console.log('Form submission result:', data);
-                
                 // Show success message
                 formMessage.className = 'form-message success';
                 formMessage.style.display = 'block';
@@ -867,9 +777,7 @@ ${formData.message}
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
             })
             .catch(error => {
-                console.error('Form submission error:', error);
-                
-                // Show error message - simplify this for users
+                // Show error message
                 formMessage.className = 'form-message error';
                 formMessage.style.display = 'block';
                 formMessage.innerHTML = `
@@ -886,8 +794,5 @@ ${formData.message}
             });
         });
     </script>
-    
-    <!-- Footer would go here -->
-    
 </body>
 </html>
