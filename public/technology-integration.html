@@ -8,6 +8,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="/styles/main.css">
     <style>
+        /* Navigation styles */
+        .nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Scrolled state styles */
+        .nav.scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: var(--primary);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            height: 50px; 
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative; /* For logo positioning */
+        }
+
+        .logo-img {
+            height: 85px; /* Larger logo that extends beyond nav bar */
+            width: auto;
+            transition: all 0.3s ease;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 100%;
+            margin-left: auto; /* Force right alignment */
+        }
+
+        .nav-links a {
+            margin-left: 24px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Adjust logo size when navbar is scrolled */
+        .nav.scrolled .logo-img {
+            height: 55px;
+        }
+
+        .nav.scrolled .nav-content {
+            height: 35px;
+        }
+        
         /* Styles synchronized with about.html */
         .hero-banner {
             height: 50vh;
@@ -561,6 +634,11 @@
                 font-size: 1rem;
             }
 
+            .logo-img {
+                height: 65px;
+                transition: all 0.3s ease;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -569,10 +647,19 @@
                 display: block;
             }
             
+            .mobile-menu-button span {
+                transition: all 0.25s ease-in-out;
+            }
+
+            .nav-content {
+                padding: 0 4%;
+                height: 40px;
+                transition: all 0.3s ease;
+            }
+            
             body.nav-open {
                 overflow: hidden;
             }
-
         }
     </style>
 </head>
@@ -580,7 +667,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
-            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <a href="/" class="nav-logo"><img src="/images/aureum-logo_transparent.png" alt="Aureum Atelier" class="logo-img"></a>
             <div class="nav-links">
                 <a href="/" class="home-link">Home</a>
                 <a href="/about.html" class="about-link">About</a>
@@ -933,6 +1020,16 @@
             
             // Set active navigation link
             document.querySelector('.technology-link').classList.add('active');
+            
+            // Sticky navigation
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('.nav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
         });
 
         // FAQ Toggles
@@ -972,19 +1069,8 @@
                     body.classList.remove('nav-open');
                 });
             });
-            
-            // Set active class based on current page
-            const currentPage = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
-            
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPage || 
-                    (currentPage.includes(link.getAttribute('href')) && link.getAttribute('href') !== '/')) {
-                    link.classList.add('active');
-                }
-            });
         });
-
+        
         // Consultation Form Functions
         function openConsultationForm() {
             document.getElementById('consultation-modal').style.display = 'flex';
@@ -1051,18 +1137,6 @@
                 alert('There was an error sending your message. Please try again later.');
             });
         });
-
-        // Set active class based on current page
-        const currentPage = window.location.pathname;
-        const navLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
-
-        navLinks.forEach(link => {
-            if (link.getAttribute('href') === currentPage || 
-                (currentPage.includes(link.getAttribute('href')) && link.getAttribute('href') !== '/')) {
-                link.classList.add('active');
-            }
-        });
-
     </script>
 </body>
 </html>
