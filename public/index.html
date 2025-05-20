@@ -402,6 +402,24 @@
             color: var(--accent); /* This uses your gold color */
         }
 
+        /* Logo styles */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        /* Adjust logo size when navbar is scrolled */
+        .nav.scrolled .logo-img {
+            height: 32px;
+        }         
+
         @media (max-width: 768px) {
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -440,7 +458,11 @@
             .mobile-menu-button {
                 display: block;
             }
-            
+
+            .logo-img {
+                height: 32px;
+            }
+
             body.nav-open {
                 overflow: hidden;
             }
@@ -451,7 +473,9 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
-            <a href="/" class="nav-logo">AUREUM ATELIER</a>
+            <a href="/" class="nav-logo">
+                <img src="/images/aureum-logo.png" alt="Aureum Atelier" class="logo-img">
+            </a>
             <div class="nav-links">
                 <a href="/" class="home-link">Home</a>
                 <a href="/about.html" class="about-link">About</a>
