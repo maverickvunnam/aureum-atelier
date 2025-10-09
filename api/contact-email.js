@@ -53,9 +53,7 @@ export default async function handler(req, res) {
               <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
               <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
               <p><strong>Message:</strong></p>
-              <div style="white-space: pre-wrap; font-family: Arial, sans-serif; line-height: 1.6;">
-                ${htmlMessage}
-              </div>
+              <div style="white-space: pre-wrap; font-family: Arial, sans-serif; line-height: 1.6;">${htmlMessage}</div>
             `,
             replyTo: email
           };
