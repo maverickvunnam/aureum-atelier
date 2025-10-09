@@ -33,18 +33,27 @@ export default async function handler(req, res) {
             }
           });
           
+          // Format message for HTML (convert line breaks to <br> tags)
+          const htmlMessage = (message || 'No message provided')
+            .replace(/\n/g, '<br>')
+            .replace(/\r/g, '');
+          
           // Define email content
           const mailOptions = {
             from: `"Aureum Atelier Website" <${process.env.GMAIL_USER}>`,
             to: process.env.GMAIL_USER,
-            subject: `New Consultation Request from ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\nMessage: ${message || 'No message provided'}`,
+            subject: `Aureum Atelier: New Consultation Request from ${name}`,
+            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message || 'No message provided'}`,
             html: `
               <h2>New Consultation Request</h2>
               <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
               <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-              <p><strong>Message:</strong> ${message || 'No message provided'}</p>
+              <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+              <p><strong>Message:</strong></p>
+              <div style="white-space: pre-wrap; font-family: Arial, sans-serif; line-height: 1.6;">
+                ${htmlMessage}
+              </div>
             `,
             replyTo: email
           };
