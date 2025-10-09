@@ -34,7 +34,9 @@ export default async function handler(req, res) {
           });
           
           // Format message for HTML (convert line breaks to <br> tags)
-          const htmlMessage = (message || 'No message provided')
+          // Trim whitespace to remove leading/trailing spaces
+          const cleanMessage = (message || 'No message provided').trim();
+          const htmlMessage = cleanMessage
             .replace(/\n/g, '<br>')
             .replace(/\r/g, '');
           
@@ -43,7 +45,7 @@ export default async function handler(req, res) {
             from: `"Aureum Atelier Website" <${process.env.GMAIL_USER}>`,
             to: process.env.GMAIL_USER,
             subject: `Aureum Atelier: New Consultation Request from ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message || 'No message provided'}`,
+            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${cleanMessage}`,
             html: `
               <h2>New Consultation Request</h2>
               <p><strong>Name:</strong> ${name}</p>
