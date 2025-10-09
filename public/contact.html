@@ -777,6 +777,11 @@
                         </select>
                     </div>
                     
+                    <div class="form-group" id="referralOtherContainer" style="display: none;">
+                        <label for="referralOther">Please specify</label>
+                        <input type="text" id="referralOther" name="referralOther" class="form-control" placeholder="Please tell us how you heard about us">
+                    </div>
+                    
                     <button type="submit" class="button">Submit Request</button>
                 </form>
             </div>
@@ -799,7 +804,7 @@
                         <li>Preliminary budget considerations</li>
                         <li>Your anticipated timeline</li>
                     </ul>
-                    <p>Don't worry if you don't have everything prepared—the consultation is designed to help clarify your vision and requirements.</p>
+                    <p>Don't worry if you don't have everything preparedâ€"the consultation is designed to help clarify your vision and requirements.</p>
                 </div>
             </div>
             
@@ -907,6 +912,17 @@
             });
         });
         
+        // Show/hide "Other" text field for referral source
+        document.getElementById('referralSource').addEventListener('change', function() {
+            const otherContainer = document.getElementById('referralOtherContainer');
+            if (this.value === 'Other') {
+                otherContainer.style.display = 'block';
+            } else {
+                otherContainer.style.display = 'none';
+                document.getElementById('referralOther').value = ''; // Clear the field
+            }
+        });
+        
         // Form submission handler
         document.getElementById('consultation-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -929,13 +945,14 @@
                 interests: Array.from(form.querySelectorAll('input[name="interests[]"]:checked')).map(el => el.value),
                 projectTimeline: form.elements.projectTimeline.value || '',
                 budgetRange: form.elements.budgetRange.value || '',
-                referralSource: form.elements.referralSource.value || '',
+                referralSource: form.elements.referralSource.value === 'Other' 
+                    ? `Other: ${form.elements.referralOther.value}` 
+                    : form.elements.referralSource.value || '',
                 message: form.elements.message.value || ''
             };
             
             // Simplified message to include in request body for email
-            const messageWithDetails = `
-Project Details:
+            const messageWithDetails = `Project Details:
 - Type: ${formData.projectType}
 - Location: ${formData.projectLocation}
 - Timeline: ${formData.projectTimeline}
@@ -944,8 +961,7 @@ Project Details:
 - Referral Source: ${formData.referralSource}
 
 Message:
-${formData.message}
-            `;
+${formData.message}`;
             
             // Create the actual API request data object
             const apiRequestData = {
@@ -983,6 +999,8 @@ ${formData.message}
                 
                 // Reset form
                 form.reset();
+                // Hide the "Other" field after reset
+                document.getElementById('referralOtherContainer').style.display = 'none';
                 submitButton.disabled = false;
                 submitButton.innerHTML = 'Submit Request';
                 
@@ -995,7 +1013,7 @@ ${formData.message}
                 formMessage.style.display = 'block';
                 formMessage.innerHTML = `
                     <strong>We're sorry!</strong> There was a problem submitting the form. Please call us directly at 
-                    <a href="tel:+12035550123">(203) 555-0123</a> or email us at
+                    <a href="tel:+19082298414">(908) 229-8414</a> or email us at
                     <a href="mailto:inquiries@theaureumatelier.com">inquiries@theaureumatelier.com</a>.
                 `;
                 
